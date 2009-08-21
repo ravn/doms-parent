@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset1" name="My Fileset" removed="false">
+          <file>file://$MODULE_DIR$/src/net/sourceforge/ecm/webservice/cxf.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="apache-cxf" level="project" />
+    <orderEntry type="module" module-name="ecm" />
+    <orderEntry type="library" name="spring-security" level="project" />
+    <orderEntry type="library" name="Fedora Client" level="project" />
+    <orderEntry type="module" module-name="templates" />
+    <orderEntry type="module" module-name="validator" />
+    <orderEntry type="module" module-name="view" />
+  </component>
+</module>
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<foxml:digitalObject
+        VERSION="1.1"
+        PID="ecm:B1"
+        xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation=
+                "info:fedora/fedora-system:def/foxml#
+                http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+
+    <foxml:objectProperties>
+        <foxml:property
+                NAME="info:fedora/fedora-system:def/model#state" VALUE="I"/>
+        <foxml:property
+                NAME="info:fedora/fedora-system:def/model#label" VALUE="The Sample Enhanced Content Model"/>
+    </foxml:objectProperties>
+
+
+
+
+    <foxml:datastream CONTROL_GROUP="X" ID="DC" STATE="A" VERSIONABLE="true">
+        <foxml:datastreamVersion  ID="DC1.0" LABEL="Dublin Core Metadata"
+                                  MIMETYPE="text/xml" >
+            <foxml:contentDigest DIGEST="none" TYPE="DISABLED"/>
+            <foxml:xmlContent>
+                <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/"
+                           xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/">
+                    <dc:title>Enhanced Content Model</dc:title>
+                </oai_dc:dc>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+
+
+    <foxml:datastream CONTROL_GROUP="X" ID="RELS-EXT" STATE="A" VERSIONABLE="false">
+        <foxml:datastreamVersion  ID="RELS-EXT.1" LABEL="Relationships"
+                                  MIMETYPE="application/rdf+xml" >
+            <foxml:contentDigest DIGEST="none" TYPE="DISABLED"/>
+            <foxml:xmlContent>
+                <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        >
+                    <rdf:Description rdf:about="info:fedora/ecm:B1">
+                        <hasModel rdf:resource="info:fedora/fedora-system:ContentModel-3.0"
+                                  xmlns="info:fedora/fedora-system:def/model#"/>
+
+
+                    </rdf:Description>
+                </rdf:RDF>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+
+    <foxml:datastream CONTROL_GROUP="X" ID="ONTOLOGY" STATE="A" VERSIONABLE="true">
+        <foxml:datastreamVersion
+                ID="ONTOLOGY.0"
+                LABEL="Local ontology"
+                MIMETYPE="text/xml">
+            <foxml:xmlContent>
+
+                <rdf:RDF
+                        xmlns:owl="http://www.w3.org/2002/07/owl#"
+                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+                        xml:base="http://ecm.sourceforge.net/relations/0/2/#">
+
+                    <owl:Class rdf:about="info:fedora/ecm:B1">
+
+
+                    </owl:Class>
+                </rdf:RDF>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+    <foxml:datastream CONTROL_GROUP="X" ID="VIEW" STATE="A" VERSIONABLE="true">
+        <foxml:datastreamVersion  ID="VIEW.0" LABEL="Generic views" MIMETYPE="text/xml">
+            <foxml:xmlContent>
+                <view:views xmlns:view="http://ecm.sourceforge.net/types/view/0/2/#"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <view:viewangle name="DEMO">
+                    </view:viewangle>
+                </view:views>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+
+
+
+
+    <foxml:datastream CONTROL_GROUP="X" ID="DS-COMPOSITE-MODEL" STATE="A" VERSIONABLE="true">
+        <foxml:datastreamVersion  ID="DS-COMPOSITE-MODEL.0" LABEL="DS Composite Model"
+                                  MIMETYPE="text/xml" >
+            <foxml:contentDigest DIGEST="none" TYPE="DISABLED"/>
+            <foxml:xmlContent>
+                <dsCompositeModel
+                        xmlns="info:fedora/fedora-system:def/dsCompositeModel#"
+                        xmlns:schema="http://ecm.sourceforge.net/types/dscompositeschema/0/2/#" >
+                    <dsTypeModel ID="B_DATASTREAM">
+                        <extensions name="SCHEMA">
+                            <schema:schema type="xsd" datastream="B_DATASTREAM_SCHEMA" />
+                        </extensions>
+                    </dsTypeModel>
+                </dsCompositeModel>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+
+
+
+    <foxml:datastream CONTROL_GROUP="X" ID="B_DATASTREAM_SCHEMA" STATE="A" VERSIONABLE="false">
+        <foxml:datastreamVersion ID="SCHEMA.0" LABEL="Schema" MIMETYPE="text/xml">
+            <foxml:xmlContent>
+                <schema targetNamespace="http://ecm.sourceforge.net/namespace/B"
+                        xmlns="http://www.w3.org/2001/XMLSchema"
+                        xmlns:this="http://ecm.sourceforge.net/namespace/B"
+                        elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+                    <element name="demo" type="this:oai_dcType"/>
+
+                    <complexType name="oai_dcType">
+                        <sequence>
+                            <element name="title"/>
+                            <element name="other"/>
+                        </sequence>
+                    </complexType>
+
+                </schema>
+            </foxml:xmlContent>
+        </foxml:datastreamVersion>
+    </foxml:datastream>
+
+
+
+
+
+</foxml:digitalObject>

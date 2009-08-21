@@ -1,0 +1,23 @@
+== Release 1.0.0 ==
+
+This is the first official release. It should not be used for any production system
+without throughout testing yet.
+
+All the methods described on http://ecm.wiki.sourceforge.net/User+guide have
+been implemented and somewhat tested.
+
+The webservice is configured through the web.xml
+
+== Release 0.8.0 ==
+
+This is an beta release. It should not be used for any production system.
+
+All the methods described on http://ecm.wiki.sourceforge.net/User+guide have
+been implemented and somewhat tested.
+
+It is based on a little older version of the design, and as such all namespaces
+are from http://doms.statsbiblioteket.dk/ rather than http://ecm.sourceforge.net
+This is a legacy due to the test server. It will be fixed in version 0.8.1
+
+The webservice always expect to find the fedora installation on
+http://localhost:7910/fedora This will be fixed in version 0.8.1

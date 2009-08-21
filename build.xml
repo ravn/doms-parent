@@ -1,0 +1,160 @@
+<project name="ecm"  basedir=".">
+
+        <property name="global.path" value="${basedir}"/>
+    <!--
+       Module specific properties
+    -->
+
+
+    <property file="${global.path}/build.properties" />
+
+
+    <property name="warfilename" value="${ant.project.name}"/>
+
+    <property name="srcpack.zip" value="${ant.project.name}-${version}-src.zip"/>
+
+        <property name="release.zip" value="${ant.project.name}-${version}-release.zip"/>
+
+
+    <!-- Global- and module specific libs -->
+
+
+    <fileset id="build.libs" dir="${global.path}/lib" >
+                <include name="**/*.jar"/>
+
+    </fileset>
+
+
+    <fileset  id="run.libs" dir="${global.path}/lib" >
+        <!--<exclude name="**/*servlet*.jar"/>-->
+        <include name="**/*.jar"/>
+    </fileset>
+
+    <path id="build.classpath">
+    <fileset refid="build.libs"/>
+    </path>
+
+
+    <target name="compile"
+            description="Compile all production classes, and copy properties to class dir">
+
+        <mkdir dir="classes"/>
+
+        <javac source="1.6" destdir="classes" debug="on"
+               encoding="UTF-8">
+            <src path="modules/repository/src"/>
+            <src path="modules/view/src"/>
+            <src path="modules/templates/src"/>
+            <src path="modules/validator/src"/>
+            <src path="modules/webservice/src"/>
+            <src path="modules/FedoraSoapConnector/src"/>
+
+            <classpath refid="build.classpath"/>
+        </javac>
+        <copy todir="classes" >
+            <fileset dir="modules/webservice/src" includes="**/*.xml"/>
+
+        </copy>
+
+    </target>
+
+
+
+    <target name="warfile" depends="compile"
+            description="Pack the webdirectory into a warfile ready for deployment">
+        <mkdir dir="dist"/>
+        <mkdir dir="libtemp"/>
+
+        <copy  todir="libtemp" flatten="true" >
+
+            <fileset refid="run.libs"/>
+        </copy>
+
+        <war destfile="dist/${warfilename}.war"
+             webxml="modules/webservice/web/WEB-INF/web.xml"
+            >
+            <classes dir="classes"/>
+
+            <lib dir="libtemp"/>
+
+            <webinf dir="modules/webservice/web/WEB-INF" excludes="web.xml"/>
+        </war>
+        <delete dir="libtemp"/>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="dist"/>
+        <delete dir="classes"/>
+        <delete dir="dependencies"/>
+        <delete dir="libtemp"/>
+        <delete dir="server/build"/>
+
+        <mkdir dir="server/build"/>
+
+    </target>
+
+
+    <target name="src" depends="clean">
+        <mkdir dir="dist"/>
+
+        <zip destfile="dist/${srcpack.zip}">
+            <zipfileset prefix="lib" dir="${basedir}/lib"/>
+
+            <zipfileset prefix="src" dir="${basedir}/modules/templates/src"/>
+            <zipfileset prefix="src" dir="${basedir}/modules/validator/src"/>
+            <zipfileset prefix="src" dir="${basedir}/modules/view/src"/>
+            <zipfileset prefix="src" dir="${basedir}/modules/repository/src"/>
+            <zipfileset prefix="src" dir="${basedir}/modules/webservice/src"/>
+            <zipfileset prefix="src" dir="${basedir}/modules/FedoraSoapConnector/src"/>
+
+            <zipfileset dir="${basedir}">
+                <include name="*.xml"/>
+                <include name="*.properties"/>
+                <include name="*NOTES*"/>
+                <include name="*INSTALL*"/>
+                <include name="*LICENSE*"/>
+            </zipfileset>
+        </zip>
+
+
+
+    </target>
+
+
+    <target name="deploy" depends="warfile">
+
+        <copy todir="${webapps}">
+            <fileset file="dist/${warfilename}.war"/>
+        </copy>
+
+        <delete dir="${webapps}/${warfilename}"/>
+    </target>
+
+
+    <target name="release" depends="warfile">
+        <mkdir  dir="release"/>
+
+        <zip destfile="release/${release.zip}">
+            <zipfileset dir="${basedir}">
+                <include name="*NOTICE*"/>
+                <include name="*INSTALL*"/>
+                <include name="*LICENSE*"/>
+            </zipfileset>
+            <zipfileset prefix="webservice" file="${basedir}/dist/${warfilename}.war"/>
+            <zipfileset prefix="foxml" dir="${basedir}/foxml"/>
+        </zip>
+
+    </target>
+
+
+</project>
+
+
+
+
+
+
+
+
+

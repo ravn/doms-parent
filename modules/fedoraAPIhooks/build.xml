@@ -1,0 +1,53 @@
+<project name="FedoraApiHooks"  basedir=".">
+
+    <!--
+       Module specific properties
+    -->
+
+
+    <property file="build.properties" />
+
+
+
+
+
+
+    <target name="compile" depends="clean"
+            description="Compile all production classes, and copy properties to class dir">
+
+        <mkdir dir="classes"/>
+
+        <javac  destdir="classes" debug="on"
+                encoding="UTF-8">
+            <src path="src"/>
+
+
+            <classpath>
+                <pathelement path="${basedir}/lib/fedora/classes" />
+                <pathelement location="${basedir}/lib/commons-logging.jar"/>
+                <pathelement location="${basedir}/lib/log4j-1.2.15.jar"/>
+            </classpath>
+
+        </javac>
+        <copy todir="classes" >
+            <fileset dir="src" includes="**/*.properties"/>
+        </copy>
+
+    </target>
+
+
+
+    <target name="jarfile" depends="compile" description="Pack the webdirectory into a jarfile ready for deployment">
+        <mkdir dir="dist"/>
+        <jar destfile="dist/fedoraApiHooks.jar"
+             basedir="classes"/>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="dist"/>
+        <delete dir="classes"/>
+
+    </target>
+
+</project>

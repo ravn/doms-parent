@@ -1,0 +1,51 @@
+<Policy PolicyId="deny-modify-object-unless-to-inactive"
+        RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable"
+        xmlns="urn:oasis:names:tc:xacml:1.0:policy"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <Description>This policy will DENY modify object calls for active objects,
+        if they do not change the state to inactive</Description>
+
+    <Target>
+
+        <Subjects>
+            <AnySubject/>
+        </Subjects>
+
+        <Resources>
+            <Resource>
+                <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">A</AttributeValue>
+                    <ResourceAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:resource:object:state"
+                                                 MustBePresent="false"
+                                                 DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ResourceMatch>
+            </Resource>
+        </Resources>
+
+        <Actions>
+
+            <Action>
+                <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string"
+                            >urn:fedora:names:fedora:2.1:action:id-modifyObject</AttributeValue>
+                    <ActionAttributeDesignator
+                            AttributeId="urn:fedora:names:fedora:2.1:action:id"
+                            DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                </ActionMatch>
+            </Action>
+        </Actions>
+
+    </Target>
+
+    <Rule RuleId="denyChange" Effect="Deny">
+        <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
+            <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-is-in">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">I</AttributeValue>
+                <ResourceAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:resource:object:newState"
+                                             DataType="http://www.w3.org/2001/XMLSchema#string"/>
+            </Apply>
+        </Condition>
+    </Rule>
+
+</Policy>

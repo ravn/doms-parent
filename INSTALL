@@ -1,0 +1,10 @@
+== Installation procedure ==
+
+The webservice is just a war file. Deploy it in a tomcat.
+
+Read the RELEASE text file for stuff to be aware of.
+
+Read the user guide on http://ecm.wiki.sourceforge.net
+
+Contact us on http://apps.sourceforge.net/phpbb/ecm/
+
