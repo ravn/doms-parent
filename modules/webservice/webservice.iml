@@ -20,9 +20,6 @@
     <orderEntry type="module" module-name="ecm" />
     <orderEntry type="library" name="spring-security" level="project" />
     <orderEntry type="library" name="Fedora Client" level="project" />
-    <orderEntry type="module" module-name="templates" />
-    <orderEntry type="module" module-name="validator" />
-    <orderEntry type="module" module-name="view" />
   </component>
 </module>
 

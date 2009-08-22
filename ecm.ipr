@@ -322,22 +322,22 @@
     </group>
   </component>
   <component name="ProjectDetails">
-    <option name="projectName" value="ecm-newone" />
+    <option name="projectName" value="ecm" />
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
-    <option name="state" value="https://ecm.svn.sourceforge.net/svnroot/ecm/trunk/ecm.ipr" />
+    <option name="state" value="https://doms.svn.sourceforge.net/svnroot/doms/ecm/trunk/ecm.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/modules/FedoraSoapConnector/FedoraSoapConnector.iml" filepath="$PROJECT_DIR$/modules/FedoraSoapConnector/FedoraSoapConnector.iml" group="fedoraconnectors" />
-      <module fileurl="file://$PROJECT_DIR$/modules/FedoraTestConnector/FedoraTestConnector.iml" filepath="$PROJECT_DIR$/modules/FedoraTestConnector/FedoraTestConnector.iml" group="fedoraconnectors" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/FedoraSoapConnector.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/FedoraSoapConnector.iml" group="fedoraconnectors" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/FedoraTestConnector.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/FedoraTestConnector.iml" group="fedoraconnectors" />
       <module fileurl="file://$PROJECT_DIR$/ecm.iml" filepath="$PROJECT_DIR$/ecm.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/fedoraAPIhooks/fedoraAPIhooks.iml" filepath="$PROJECT_DIR$/modules/fedoraAPIhooks/fedoraAPIhooks.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/repository/repository.iml" filepath="$PROJECT_DIR$/modules/repository/repository.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/templates/templates.iml" filepath="$PROJECT_DIR$/modules/templates/templates.iml" group="services" />
-      <module fileurl="file://$PROJECT_DIR$/modules/validator/validator.iml" filepath="$PROJECT_DIR$/modules/validator/validator.iml" group="services" />
-      <module fileurl="file://$PROJECT_DIR$/modules/view/view.iml" filepath="$PROJECT_DIR$/modules/view/view.iml" group="services" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/templates/templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/templates.iml" group="services" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/validator/validator.iml" filepath="$PROJECT_DIR$/modules/services/validator/validator.iml" group="services" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/view/view.iml" filepath="$PROJECT_DIR$/modules/services/view/view.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/webservice/webservice.iml" filepath="$PROJECT_DIR$/modules/webservice/webservice.iml" />
     </modules>
   </component>
@@ -377,6 +377,7 @@
       </map>
     </option>
     <option name="myVersion" value="124" />
+    <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
