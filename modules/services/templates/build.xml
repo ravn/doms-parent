@@ -1,4 +1,4 @@
-<project name="FedoraSoapConnector"  basedir=".">
+<project name="templates"  basedir=".">
 
     <property name="global.dir" value="${basedir}/../../../"/>
 
@@ -7,6 +7,11 @@
     -->
     <property file="${basedir}/build.properties" />
     
+    <fileset id="project.libs" dir="${global.dir}/lib">
+        <include name="log4j-1.2.15/**/*.jar"/>
+    </fileset>
+
+
     <fileset id="module.dependencies" dir="${global.dir}/modules">
         <include name="repository/dist/*.jar"/>
     </fileset>

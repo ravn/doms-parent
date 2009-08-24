@@ -1,0 +1,44 @@
+<project name="webservice"  basedir=".">
+
+        <property name="global.dir" value="${basedir}/../../"/>
+
+    <!--
+       Module specific properties
+    -->
+    <property file="${basedir}/build.properties" />
+
+    <property name="jarfilename" value="doms-${ant.project.name}-1.0.0.jar"/>
+
+    <fileset id="project.libs" dir="${global.dir}/lib">
+        <include name="log4j-1.2.15/**/*.jar"/>
+    </fileset>
+
+
+
+    <fileset id="module.dependencies" dir="${global.dir}/modules">
+        <include name="repository/dist/*.jar"/>
+        <include name="services/view/dist/*.jar"/>
+        <include name="services/validator/dist/*.jar"/>
+        <include name="services/templates/dist/*.jar"/>
+    </fileset>
+
+    <target  name="depends">
+        <ant dir="${global.dir}/modules/repository" inheritall="false" target="jar"/>
+        <ant dir="${global.dir}/modules/services/view" inheritall="false" target="jar"/>
+        <ant dir="${global.dir}/modules/services/validator" inheritall="false" target="jar"/>
+        <ant dir="${global.dir}/modules/services/templates" inheritall="false" target="jar"/>
+    </target>
+
+    <import file="${global.dir}/build-includes.xml"/>
+
+
+</project>
+
+
+
+
+
+
+
+
+

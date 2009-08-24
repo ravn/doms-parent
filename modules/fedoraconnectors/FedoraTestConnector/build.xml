@@ -1,4 +1,4 @@
-<project name="FedoraSoapConnector"  basedir=".">
+<project name="FedoraTestConnector"  basedir=".">
 
     <property name="global.dir" value="${basedir}/../../../"/>
 
@@ -6,13 +6,13 @@
        Module specific properties
     -->
     <property file="${basedir}/build.properties" />
-    
+
     <fileset id="module.dependencies" dir="${global.dir}/modules">
         <include name="repository/dist/*.jar"/>
     </fileset>
 
     <target  name="depends">
-        <ant dir="${global.dir}/modules/repository" inheritAll="false" target="jar"/>
+        <ant dir="${global.dir}/modules/repository" target="jar"/>
     </target>
 
     <import file="${global.dir}/build-includes.xml"/>

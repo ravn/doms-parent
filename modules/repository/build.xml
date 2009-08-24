@@ -1,72 +1,26 @@
 <project name="repository"  basedir=".">
 
-    <property name="module.path" value="${basedir}"/>
-
-    <property name="modules.dir" value="${basedir}/.."/>
-
-    <property name="globals.libs.dir" value="${modules.dir}/../lib"/>
-
-        <property name="jarfilename" value="${ant.project.name}.jar"/>
+        <property name="global.dir" value="${basedir}/../../"/>
 
     <!--
        Module specific properties
     -->
-    <property file="${module.path}/build.properties" />
+    <property file="${basedir}/build.properties" />
 
-
-
-    <!-- Global- and module specific libs -->
-    <fileset id="module.libs" dir="${module.path}/lib">
-        <include name="**/*.jar"/>
+    <fileset id="project.libs" dir="${global.dir}/lib">
+<!--        <include name="log4j-1.2.15/**/*.jar"/>-->
     </fileset>
 
-    <fileset id="project.libs" dir="${globals.libs.dir}">
+
+    <fileset id="module.dependencies" dir="${global.dir}/modules">
+<!--        <include name="repository/dist/*.jar"/>-->
     </fileset>
 
-    <fileset id="module.dependencies" dir="${modules.dir}">
-
-    </fileset>
-
-    <path id="build.classpath">
-        <fileset refid="module.libs"/>
-        <fileset refid="project.libs"/>
-        <fileset refid="module.dependencies"/>
-    </path>
-
-
-    <target  name="compile.depended.modules">
-
+    <target  name="depends">
+<!--        <ant dir="${global.dir}/modules/repository" target="jar"/>-->
     </target>
 
-    <target name="compile" depends="compile.depended.modules"
-            description="Compile all production classes, and copy properties to class dir">
-
-        <mkdir dir="classes"/>
-
-        <javac source="1.6" destdir="classes" debug="on"
-               encoding="UTF-8">
-            <src path="src"/>
-            <classpath refid="build.classpath"/>
-        </javac>
-
-    </target>
-
-
-
-    <target name="jar" depends="compile"
-            description="Pack the webdirectory into a warfile ready for deployment">
-        <mkdir dir="${basedir}/dist"/>
-
-        <jar destfile="${basedir}/dist/${jarfilename}"
-             basedir="${basedir}/classes" />
-    </target>
-
-
-    <target name="clean">
-        <delete dir="dist"/>
-        <delete dir="classes"/>
-
-    </target>
+    <import file="${global.dir}/build-includes.xml"/>
 
 
 </project>

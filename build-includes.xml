@@ -1,0 +1,67 @@
+<project name="Default build targets" basedir=".">
+
+    <!-- Global- and module specific libs -->
+    <fileset id="module.libs" dir="${basedir}/lib">
+        <include name="**/*.jar"/>
+        <exclude name="**/*src*"/>
+        <exclude name="**/*source*"/>
+    </fileset>
+
+    <property name="global.dir" value="${basedir}/../../../"/>
+
+    <fileset id="project.libs" dir="${global.dir}/lib">
+    </fileset>
+
+    <fileset id="module.dependencies" dir="${global.dir}/modules">
+    </fileset>
+
+
+    <path id="build.classpath">
+        <fileset refid="module.libs"/>
+        <fileset refid="project.libs"/>
+        <fileset refid="module.dependencies"/>
+    </path>
+
+    <target  name="depends">
+        <!--        <ant dir="${modules.dir}/repository" target="jar"/>-->
+    </target>
+
+    <target name="compile" depends="depends"
+            description="Compile all production classes, and copy properties to class dir">
+
+        <mkdir dir="classes"/>
+
+        <javac source="1.6" destdir="classes" debug="on"
+               encoding="UTF-8">
+            <src path="src"/>
+            <classpath refid="build.classpath"/>
+        </javac>
+        <copy todir="classes">
+          <fileset dir="src">
+            <include name="**/*.xml"/>
+          </fileset>
+        </copy>
+
+    </target>
+
+
+
+    <target name="jar" depends="compile"
+            description="Pack the webdirectory into a warfile ready for deployment">
+        <mkdir dir="dist"/>
+
+        <jar destfile="dist/${jarfilename}"
+             basedir="classes" />
+    </target>
+
+
+    <target name="clean">
+        <delete dir="classes"/>
+    </target>
+
+    <target name="distclean" depends="clean">
+        <delete dir="dist"/>
+    </target>
+
+
+</project>

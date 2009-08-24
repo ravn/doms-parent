@@ -8,8 +8,22 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="repository" />
-    <orderEntry type="library" name="log4j" level="project" />
-    <orderEntry type="library" name="Owlapi" level="project" />
+    <orderEntry type="module-library">
+      <library name="owlapi">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/owlapi-bin.jar!/" />
+          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/lib" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/javadoc" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/owlapi-src.jar!/" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/lib/owlapi-2.2.0/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="log4j-1.2.15" level="project" />
   </component>
 </module>
 

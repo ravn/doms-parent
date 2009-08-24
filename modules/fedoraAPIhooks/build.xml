@@ -1,53 +1,33 @@
-<project name="FedoraApiHooks"  basedir=".">
+<project name="fedoraApiHooks"  basedir=".">
+
+        <property name="global.dir" value="${basedir}/../../"/>
 
     <!--
        Module specific properties
     -->
+    <property file="${basedir}/build.properties" />
+
+    <fileset id="project.libs" dir="${global.dir}/lib">
+        <include name="log4j-1.2.15/**/*.jar"/>
+    </fileset>
 
 
-    <property file="build.properties" />
+    <fileset id="module.dependencies" dir="${global.dir}/modules">
+    </fileset>
 
-
-
-
-
-
-    <target name="compile" depends="clean"
-            description="Compile all production classes, and copy properties to class dir">
-
-        <mkdir dir="classes"/>
-
-        <javac  destdir="classes" debug="on"
-                encoding="UTF-8">
-            <src path="src"/>
-
-
-            <classpath>
-                <pathelement path="${basedir}/lib/fedora/classes" />
-                <pathelement location="${basedir}/lib/commons-logging.jar"/>
-                <pathelement location="${basedir}/lib/log4j-1.2.15.jar"/>
-            </classpath>
-
-        </javac>
-        <copy todir="classes" >
-            <fileset dir="src" includes="**/*.properties"/>
-        </copy>
-
+    <target  name="depends">
     </target>
 
+    <import file="${global.dir}/build-includes.xml"/>
 
-
-    <target name="jarfile" depends="compile" description="Pack the webdirectory into a jarfile ready for deployment">
-        <mkdir dir="dist"/>
-        <jar destfile="dist/fedoraApiHooks.jar"
-             basedir="classes"/>
-    </target>
-
-
-    <target name="clean">
-        <delete dir="dist"/>
-        <delete dir="classes"/>
-
-    </target>
 
 </project>
+
+
+
+
+
+
+
+
+

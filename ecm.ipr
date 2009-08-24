@@ -35,6 +35,22 @@
       <maximumStackSize value="32" />
       <properties />
     </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/modules/services/validator/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
+      <properties />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/modules/webservice/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
+      <properties />
+    </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
@@ -391,73 +407,21 @@
       </map>
     </option>
     <option name="myVersion" value="124" />
-    <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="apache-cxf">
+    <library name="log4j-1.2.15">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/jaxRS" />
-        <root url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/Required" />
-        <root url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/Spring" />
-        <root url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/modules/rest" />
+        <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15/commons-logging.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15/log4j-1.2.15.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/jaxRS" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/Required" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/lib/Spring" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/apache-cxf-2.2.1/modules/rest" recursive="false" />
     </library>
-    <library name="spring-security">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-tutorial-2.0.4.war!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-catalina-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-jboss-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-jetty-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-contacts-2.0.4.war!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-portlet-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-resin-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-ntlm-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-acl-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-tiger-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-openid-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-taglibs-2.0.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-cas-client-2.0.4.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-tiger-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-jetty-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-openid-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-ntlm-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-resin-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-portlet-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-jboss-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-catalina-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-contacts-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-tutorial-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-cas-client-2.0.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/spring-security-2.0.4/dist/spring-security-acl-2.0.4-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Owlapi">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/owlapi-2.2.0/owlapi-bin.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="file://$PROJECT_DIR$/lib/owlapi-2.2.0/javadoc" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/owlapi-2.2.0/owlapi-src.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Fedora Client">
+    <library name="FedoraClient">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.2/fedora-client-3.2r8084.jar!/" />
         <root url="file://$PROJECT_DIR$/lib/FedoraClient-3.2/lib" />
@@ -465,15 +429,6 @@
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/lib/FedoraClient-3.2/lib" recursive="false" />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/FedoraClient/lib" recursive="false" />
-    </library>
-    <library name="log4j">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient/lib/log4j-1.2.15.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient/lib/commons-logging.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
     </library>
   </component>
 </project>

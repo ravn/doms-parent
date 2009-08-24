@@ -103,7 +103,7 @@ public class Initializer
             //correct connector.
             // This call assumes that the methods set*Context have allready been
             //called
-            Repository.initialise(token,createConnector());
+            Repository.initialise(token, createConnector());
             Repository.setPidGenerator(pidgenerator);
             return newauth;
 
