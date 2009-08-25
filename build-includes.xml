@@ -2,9 +2,7 @@
 
     <!-- Global- and module specific libs -->
     <fileset id="module.libs" dir="${basedir}/lib">
-        <include name="**/*.jar"/>
-        <exclude name="**/*src*"/>
-        <exclude name="**/*source*"/>
+        <include name="**/jars/**/*.jar"/>
     </fileset>
 
     <property name="global.dir" value="${basedir}/../../../"/>

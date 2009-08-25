@@ -122,6 +122,7 @@
 
 
     <target name="release.bin" depends="distclean,war">
+        <mkdir dir="release"/>
         <zip destfile="release/${release.zip}">
             <zipfileset dir="${basedir}">
                 <include name="*NOTICE*"/>
