@@ -14,10 +14,10 @@
           <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/jars/owlapi-bin.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/apidocs" />
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/apidocs/apidocs.zip!/" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/src/owlapi-src.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/src/owlapi-src.zip!/" />
         </SOURCES>
       </library>
     </orderEntry>
