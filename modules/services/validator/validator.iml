@@ -11,16 +11,14 @@
     <orderEntry type="module-library">
       <library name="owlapi">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/owlapi-bin.jar!/" />
-          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/lib" />
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/jars/owlapi-bin.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/javadoc" />
+          <root url="file://$MODULE_DIR$/lib/owlapi-2.2.0/apidocs" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/owlapi-src.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/owlapi-2.2.0/src/owlapi-src.jar!/" />
         </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/lib/owlapi-2.2.0/lib" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="library" name="log4j-1.2.15" level="project" />
