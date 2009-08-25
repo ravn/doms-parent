@@ -19,22 +19,46 @@
     <orderEntry type="module-library">
       <library name="apache-cxf">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-rt-bindings-xml-2.2.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-common-utilities-2.2.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-rt-frontend-jaxrs-2.2.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-rt-transports-http-2.2.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-api-2.2.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1/modules/rest/cxf-rt-core-2.2.1.jar!/" />
-          <root url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/jaxRS" />
-          <root url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/Required" />
-          <root url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/Spring" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/axiom-impl-1.2.7.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/axiom-api-1.2.7.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/abdera-core-0.4.0-incubating.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-rt-transports-http-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/spring-beans-2.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/geronimo-javamail_1.4_spec-1.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/abdera-i18n-0.4.0-incubating.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-rt-bindings-xml-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-api-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/abdera-extensions-json-0.4.0-incubating.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/XmlSchema-1.4.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/spring-context-2.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/jettison-1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/jaxb-impl-2.1.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/wstx-asl-3.2.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-rt-frontend-jaxrs-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/geronimo-stax-api_1.0_spec-1.0.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-common-utilities-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/spring-context-support-2.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/geronimo-activation_1.1_spec-1.0.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/spring-core-2.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/geronimo-annotation_1.0_spec-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/jaxb-api-2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/aopalliance-1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/abdera-extensions-main-0.4.0-incubating.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/neethi-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/geronimo-servlet_2.5_spec-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/wsdl4j-1.6.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/jsr311-api-1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/FastInfoset-1.2.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/abdera-parser-0.4.0-incubating.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/cxf-rt-core-2.2.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/spring-web-2.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/jars/xmlbeans-2.4.0.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/docs/api" />
+          <root url="jar://$MODULE_DIR$/lib/apache-cxf-2.2.1-rest/apidocs/api.zip!/" />
         </JAVADOC>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/docs/api" />
-        </SOURCES>
+        <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/jaxRS" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/Required" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib/apache-cxf-2.2.1/lib/Spring" recursive="false" />
@@ -47,42 +71,41 @@
     <orderEntry type="module-library">
       <library name="spring-security">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-portlet-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-catalina-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-resin-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-resin-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-ntlm-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-cas-client-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-acl-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-tutorial-2.0.4.war!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-catalina-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-tiger-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-jetty-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-cas-client-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-contacts-2.0.4.war!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-contacts-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-tiger-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-core-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-acl-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-jboss-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-taglibs-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-ntlm-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-jboss-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-openid-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-portlet-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-samples-tutorial-2.0.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-jetty-2.0.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/dist/spring-security-openid-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-openid-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-acl-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-jetty-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-cas-client-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-taglibs-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-core-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-ntlm-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-jboss-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-catalina-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-portlet-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-resin-2.0.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/jars/spring-security-core-tiger-2.0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-samples-tutorial-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-jetty-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-samples-contacts-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-acl-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-openid-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-core-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-resin-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-catalina-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-ntlm-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-portlet-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-jboss-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-core-tiger-2.0.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-security-2.0.4/src/spring-security-cas-client-2.0.4-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="spring-aop">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/spring-aop-2.0.6/spring-aop.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/spring-aop-2.0.6/jars/spring-aop.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -10,13 +10,13 @@
     <orderEntry type="module-library">
       <library name="Fedora Server">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/lib/fedora/classes" />
+          <root url="jar://$MODULE_DIR$/lib/fedora-server-3.2/jars/classes.zip!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="log4j" level="project" />
+    <orderEntry type="library" name="log4j-1.2.15" level="project" />
   </component>
 </module>
 
