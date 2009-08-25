@@ -140,11 +140,11 @@
 
     <target name="distclean">
         <ant dir="modules/services/view" target="distclean"/>
-                <ant dir="modules/services/validator" target="distclean"/>
-                <ant dir="modules/services/templates" target="distclean"/>
-                <ant dir="modules/fedoraconnectors/FedoraSoapConnector" target="distclean"/>
-                <ant dir="modules/fedoraconnectors/FedoraTestConnector" target="distclean"/>
-                <ant dir="modules/repository" target="distclean"/>
+        <ant dir="modules/services/validator" target="distclean"/>
+        <ant dir="modules/services/templates" target="distclean"/>
+        <ant dir="modules/fedoraconnectors/FedoraSoapConnector" target="distclean"/>
+        <ant dir="modules/fedoraconnectors/FedoraTestConnector" target="distclean"/>
+        <ant dir="modules/repository" target="distclean"/>
         <ant dir="modules/webservice" target="distclean"/>
         <delete dir="libtemp"/>
         <delete dir="server"/>

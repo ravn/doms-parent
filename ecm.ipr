@@ -422,13 +422,9 @@
       <SOURCES />
     </library>
     <library name="FedoraClient">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.2/fedora-client-3.2r8084.jar!/" />
-        <root url="file://$PROJECT_DIR$/lib/FedoraClient-3.2/lib" />
-      </CLASSES>
+      <CLASSES />
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/lib/FedoraClient-3.2/lib" recursive="false" />
     </library>
   </component>
 </project>
