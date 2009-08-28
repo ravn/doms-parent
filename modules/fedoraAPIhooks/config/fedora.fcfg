@@ -168,7 +168,7 @@
             <param name="decorator2" value="dk.statsbiblioteket.doms.fedora.server.management.DomsForbiddenInvocationHandler"/>
             <param name="decorator3" value="dk.statsbiblioteket.doms.fedora.server.management.DomsStateInvocationHandler"/>
         -->
-        <param name="decorator4" value="net.sourceforge.ecm.validator.FedoraModifyObjectHook"/>
+        <param name="decorator4" value="dk.statsbiblioteket.doms.ecm.validator.FedoraModifyObjectHook"/>
         <param name="validator.webservice.location" value="http://localhost:7910/ecm/validate/">
             <comment>Specifies the location of the validator webservice invoked by Decorator 4 above.</comment>
         </param>
