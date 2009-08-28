@@ -1,6 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
-import dk.statsbiblioteket.doms.ecm.exceptions.PIDGeneratorException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
 
 /**
  * Pidgenerator factory class, and interface. Use the static #getPidGenerator() to

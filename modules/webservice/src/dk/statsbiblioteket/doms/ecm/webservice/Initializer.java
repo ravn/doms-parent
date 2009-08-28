@@ -1,25 +1,22 @@
 package dk.statsbiblioteket.doms.ecm.webservice;
 
 
-import fedora.client.FedoraClient;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
 import dk.statsbiblioteket.doms.ecm.repository.Repository;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.Authentication;
 import org.springframework.security.AuthenticationException;
+import org.springframework.security.AuthenticationServiceException;
 import org.springframework.security.BadCredentialsException;
 import org.springframework.security.GrantedAuthority;
-import org.springframework.security.AuthenticationServiceException;
 import org.springframework.security.providers.AuthenticationProvider;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.web.context.ServletContextAware;
 
 import javax.servlet.ServletContext;
-import javax.xml.rpc.ServiceException;
-import java.io.IOException;
-import java.rmi.RemoteException;
 
 /**
  * This class is the first custom class met when a webservice request is
@@ -64,23 +61,22 @@ public class Initializer
             String password = (String) authentication.getCredentials();
 
             FedoraUserToken token = new FedoraUserToken(server, username, password);
+            //Initialise the Repository with the user credentials, and the
+            //correct connector.
+            // This call assumes that the methods set*Context have allready been
+            //called
+            Repository.initialise(token, createConnector());
+            Repository.setPidGenerator(pidgenerator);
+
             try {
-                FedoraClient client = null;
-
-                client = new FedoraClient(
-                        token.getServerurl(),
-                        token.getUsername(),
-                        token.getPassword());
-
-                client.getAPIA().describeRepository();
-                //TODO logging
-            } catch (RemoteException e) {
+                boolean authenticated  = Repository.authenticate();
+                if (!authenticated){
+                    throw new BadCredentialsException("Fedora does not allow authentication call with the given credentials");
+                }
+            } catch (FedoraConnectionException e) {
                 throw new AuthenticationServiceException("Could not connect to fedora",e);
-            }  catch (IOException e) {
-                throw new AuthenticationServiceException("Could not connect to fedora",e);
-            } catch (ServiceException e) {
-                throw new BadCredentialsException("Fedora does not allow describeRepository call with the given credentials",e);
             }
+
 
             GrantedAuthority auth = new GrantedAuthority(){
                 String authority = "ROLE_ADMIN";
@@ -99,12 +95,6 @@ public class Initializer
             MyAuthentication newauth =
                     new MyAuthentication(username,password,new GrantedAuthority[]{auth});
 
-            //Initialise the Repository with the user credentials, and the
-            //correct connector.
-            // This call assumes that the methods set*Context have allready been
-            //called
-            Repository.initialise(token, createConnector());
-            Repository.setPidGenerator(pidgenerator);
             return newauth;
 
         } else{

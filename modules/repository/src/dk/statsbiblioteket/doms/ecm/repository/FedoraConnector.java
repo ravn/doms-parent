@@ -1,10 +1,10 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
-import dk.statsbiblioteket.doms.ecm.exceptions.DatastreamNotFoundException;
-import dk.statsbiblioteket.doms.ecm.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.exceptions.ObjectIsWrongTypeException;
-import dk.statsbiblioteket.doms.ecm.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import org.w3c.dom.Document;
 
 import java.util.List;

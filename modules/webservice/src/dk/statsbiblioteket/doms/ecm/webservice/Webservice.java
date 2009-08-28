@@ -1,14 +1,14 @@
 package dk.statsbiblioteket.doms.ecm.webservice;
 
-import dk.statsbiblioteket.doms.ecm.exceptions.EcmException;
-import dk.statsbiblioteket.doms.ecm.exceptions.FedoraIllegalContentException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.ValidationResult;
 import dk.statsbiblioteket.doms.ecm.repository.Repository;
-import dk.statsbiblioteket.doms.ecm.templates.TemplateSubsystem;
-import dk.statsbiblioteket.doms.ecm.utils.DocumentUtils;
-import dk.statsbiblioteket.doms.ecm.validator.ValidatorSubsystem;
-import dk.statsbiblioteket.doms.ecm.view.ViewSubsystem;
+import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
+import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.services.validator.ValidatorSubsystem;
+import dk.statsbiblioteket.doms.ecm.services.view.ViewSubsystem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;

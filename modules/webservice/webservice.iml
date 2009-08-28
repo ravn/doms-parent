@@ -111,7 +111,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="FedoraClient" level="project" />
   </component>
 </module>
 

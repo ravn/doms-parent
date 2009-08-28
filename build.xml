@@ -62,7 +62,7 @@
 
     <target name="modules">
         <ant dir="modules/webservice" target="jar"/>
-        <ant dir="modules/fedoraconnectors/FedoraSoapConnector" target="jar"/>
+        <ant dir="modules/fedoraconnectors/fedoraclient" target="jar"/>
     </target>
 
     <target name="war" depends="distclean,modules"
@@ -143,8 +143,8 @@
         <ant dir="modules/services/view" target="distclean"/>
         <ant dir="modules/services/validator" target="distclean"/>
         <ant dir="modules/services/templates" target="distclean"/>
-        <ant dir="modules/fedoraconnectors/FedoraSoapConnector" target="distclean"/>
-        <ant dir="modules/fedoraconnectors/FedoraTestConnector" target="distclean"/>
+        <ant dir="modules/fedoraconnectors/fedoraclient" target="distclean"/>
+        <ant dir="modules/fedoraconnectors/test" target="distclean"/>
         <ant dir="modules/repository" target="distclean"/>
         <ant dir="modules/webservice" target="distclean"/>
         <delete dir="libtemp"/>

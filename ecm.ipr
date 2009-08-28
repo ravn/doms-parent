@@ -11,15 +11,7 @@
       <properties />
       <executeOn event="beforeRun" target="deploy" />
     </buildFile>
-    <buildFile url="file://$PROJECT_DIR$/modules/fedoraAPIhooks/build.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
-      <maximumStackSize value="32" />
-      <properties />
-    </buildFile>
-    <buildFile url="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/build.xml">
+    <buildFile url="file://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/build.xml">
       <additionalClassPath />
       <antReference projectDefault="true" />
       <customJdkName value="" />
@@ -44,6 +36,14 @@
       <properties />
     </buildFile>
     <buildFile url="file://$PROJECT_DIR$/modules/webservice/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
+      <properties />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/modules/fedoravalidatorhook/build.xml">
       <additionalClassPath />
       <antReference projectDefault="true" />
       <customJdkName value="" />
@@ -360,12 +360,12 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/FedoraSoapConnector.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/FedoraSoapConnector.iml" group="fedoraconnectors" />
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/FedoraTestConnector.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/FedoraTestConnector.iml" group="fedoraconnectors" />
       <module fileurl="file://$PROJECT_DIR$/ecm.iml" filepath="$PROJECT_DIR$/ecm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoraAPIhooks/fedoraAPIhooks.iml" filepath="$PROJECT_DIR$/modules/fedoraAPIhooks/fedoraAPIhooks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/fedoraclient.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraSoapConnector/fedoraclient.iml" group="fedoraconnectors" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraAPIhooks/fedoravalidatorhook.iml" filepath="$PROJECT_DIR$/modules/fedoraAPIhooks/fedoravalidatorhook.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/repository/repository.iml" filepath="$PROJECT_DIR$/modules/repository/repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/templates/templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/templates.iml" group="services" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/test.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/FedoraTestConnector/test.iml" group="fedoraconnectors" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/validator/validator.iml" filepath="$PROJECT_DIR$/modules/services/validator/validator.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/view/view.iml" filepath="$PROJECT_DIR$/modules/services/view/view.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/webservice/webservice.iml" filepath="$PROJECT_DIR$/modules/webservice/webservice.iml" />

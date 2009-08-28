@@ -1,7 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.webservice;
 
-import dk.statsbiblioteket.doms.ecm.exceptions.EcmException;
-import dk.statsbiblioteket.doms.ecm.exceptions.FedoraConnectionException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
