@@ -205,8 +205,7 @@ public class Repository {
     }
 
     public static boolean authenticate() throws FedoraConnectionException{
+        return connector.authenticate();
 
-        //FIXME: Call the interfaces....
-        return false;  //To change body of created methods use File | Settings | File Templates.
     }
 }

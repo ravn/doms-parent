@@ -273,6 +273,18 @@ public class FedoraClientConnector
         return getInheritedContentModelsBreadthFirst(new PidList(cmpid));
     }
 
+    public boolean authenticate() throws FedoraConnectionException {
+
+        try {
+            getFedoraClient().getAPIA().describeRepository();
+        } catch (ServiceException e) {
+            return false;
+        } catch (IOException e) {
+            throw new FedoraConnectionException(e);
+        }
+        return true;
+    }
+
 
     public List<String> listDatastreams(String pid)
             throws FedoraConnectionException, ObjectNotFoundException,
@@ -493,7 +505,7 @@ public class FedoraClientConnector
      * initialised. Otherwise, the existing client is reused.
      *
      * @return The fedora client instance.
-     * @throws dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException
+     * @throws FedoraConnectionException
      *          on trouble connectng to Fedora.
      */
     private synchronized FedoraClient getFedoraClient()
@@ -526,7 +538,7 @@ public class FedoraClientConnector
      * Get the API-M interface to Fedora.
      *
      * @return The API-M interface to Fedora.
-     * @throws dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException
+     * @throws FedoraConnectionException
      *          on trouble connecting to Fedora.
      */
     private FedoraAPIM getAPIM() throws FedoraConnectionException {
@@ -545,7 +557,7 @@ public class FedoraClientConnector
      * Get the API-A interface to Fedora.
      *
      * @return The API-A interface to Fedora.
-     * @throws dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException
+     * @throws FedoraConnectionException
      *          on trouble connecting to Fedora.
      */
     private FedoraAPIA getAPIA() throws FedoraConnectionException {

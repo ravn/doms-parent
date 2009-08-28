@@ -265,7 +265,7 @@ public interface FedoraConnector {
             throws IllegalStateException, FedoraConnectionException,
                    ObjectNotFoundException, FedoraIllegalContentException;
 
-   
+
     /**
      * To implement inheritance, modify this method. All ECM functions use this
      * method when resolving inheritance.
@@ -316,6 +316,13 @@ public interface FedoraConnector {
                                                            ObjectIsWrongTypeException,
                                                            FedoraIllegalContentException;
 
+    /**
+     * Test if the credentials given in the constructor is sufficient for the
+     * connector to work
+     * @return true if the credentials are good
+     */
+    public boolean authenticate()
+            throws FedoraConnectionException;
 
     /**
      * The standard way to represent a relation

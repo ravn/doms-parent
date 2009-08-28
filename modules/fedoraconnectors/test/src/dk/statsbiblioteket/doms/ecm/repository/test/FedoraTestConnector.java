@@ -1,22 +1,25 @@
 package dk.statsbiblioteket.doms.ecm.repository.test;
 
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
+import dk.statsbiblioteket.doms.ecm.repository.PidList;
+import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.test.TestObject;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
-import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * TODO abr forgot to document this class
@@ -236,6 +239,10 @@ public class FedoraTestConnector
 
     public PidList getInheritedContentModels(String cmpid) throws FedoraConnectionException, ObjectNotFoundException {
         return new PidList();
+    }
+
+    public boolean authenticate() throws FedoraConnectionException {
+        return true;
     }
 
     public PidList getInheritingContentModels(String cmpid) throws FedoraConnectionException, ObjectNotFoundException {
