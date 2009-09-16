@@ -153,6 +153,12 @@
 
     </target>
 
+    
+    <target name="dist">
+
+    </target>
+
+
     <target name="release.src" depends="distclean">
 
             <mkdir dir="dist"/>
