@@ -154,7 +154,7 @@
     </target>
 
     
-    <target name="dist">
+    <target name="dist" depends="war">
 
     </target>
 
