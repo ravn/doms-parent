@@ -12,7 +12,8 @@
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/net/sourceforge/ecm/webservice/cxf.xml</param-value>
+        <!--param-value>classpath:/net/sourceforge/ecm/webservice/cxf.xml</param-value-->
+        <param-value>classpath:/dk/statsbiblioteket/doms/ecm/webservice/cxf.xml</param-value>
     </context-param>
     <context-param>
         <param-name>log4jConfigLocation</param-name>
