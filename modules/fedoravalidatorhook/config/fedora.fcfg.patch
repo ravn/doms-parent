@@ -1,0 +1,21 @@
+--- fedora.fcfg
++++ fedora.fcfg
+@@ -155,6 +155,18 @@
+                  - how bytestreams and java types might be marshalled/demarshalled over the wire
+                  - how the storage subsystem is implemented.</comment>
+     <param name="decorator1" value="fedora.server.messaging.NotificationInvocationHandler"/>
++    <param name="decorator2" value="dk.statsbiblioteket.doms.ecm.services.validator.FedoraModifyObjectHook"/>
++    <param name="validator.webservice.location" value="$ECMSERVER/ecm/validate/">
++       <comment>Specifies the location of the validator webservice invoked by Decorator 4 above.</comment>
++    </param>
++    <param name="validator.webservice.fedora.password" value="$FEDORAADMINPASS">
++        <comment>Specifies the password for the validator webservice</comment>
++    </param>
++    <param name="validator.webservice.fedora.username" value="$FEDORAADMIN">
++        <comment>Specifies the username</comment>
++    </param>
++
++
+     <param name="autoChecksum" value="false">
+       <comment>Controls whether a checksum is automatically computed for
+ 			every datastream as the datastream is added to the repository. This
