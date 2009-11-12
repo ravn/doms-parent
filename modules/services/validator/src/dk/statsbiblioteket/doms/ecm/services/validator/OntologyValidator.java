@@ -1,13 +1,13 @@
 package dk.statsbiblioteket.doms.ecm.services.validator;
 
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.ValidationResult;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.InvalidOntologyException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.semanticweb.owl.apibinding.OWLManager;
@@ -36,6 +36,7 @@ public class OntologyValidator implements Validator{
      * Validate the pid object against the ontology from the cm object
      * @param pid the object to validate
      * @param cm the content model with the specification to validate against
+     * @param fedoraConnector
      * @return a validation result
      * @throws FedoraConnectionException
      * @throws FedoraIllegalContentException
@@ -43,7 +44,7 @@ public class OntologyValidator implements Validator{
      */
     public ValidationResult validate(
             String pid,
-            CompoundContentModel cm)
+            CompoundContentModel cm, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, FedoraIllegalContentException, ObjectNotFoundException {
 
         //TODO how about a general check for relations to non-existant objects?
@@ -84,7 +85,7 @@ public class OntologyValidator implements Validator{
         for (String contentmodel: contentmodels){
             LOG.trace("Visiting the content model '" + contentmodel + "'");
 
-            URI classUri = URI.create(Repository.ensureURI(contentmodel));
+            URI classUri = URI.create(FedoraUtil.ensureURI(contentmodel));
             OWLClass owlClass = man.getOWLDataFactory().getOWLClass(classUri);
             for(OWLSubClassAxiom ax : ont.getSubClassAxiomsForLHS(owlClass)) {
                 //for all the subclass restrictions
@@ -97,11 +98,11 @@ public class OntologyValidator implements Validator{
         // Our RestrictionVisitor has now collected all of the properties that have been restricted
 
 
-        boolean valid1 = checkMinCardinality(pid, problems, restrictionVisitor);
-        boolean valid2 = checkMaxCardinality(pid, problems, restrictionVisitor);
-        boolean valid3 = checkCardinality(pid, problems, restrictionVisitor);
-        boolean valid4 = checkAllValuesFrom(pid, problems, restrictionVisitor);
-        boolean valid5 = checkSomeValuesFrom(pid, problems, restrictionVisitor);
+        boolean valid1 = checkMinCardinality(pid, problems, restrictionVisitor, fedoraConnector);
+        boolean valid2 = checkMaxCardinality(pid, problems, restrictionVisitor, fedoraConnector);
+        boolean valid3 = checkCardinality(pid, problems, restrictionVisitor, fedoraConnector);
+        boolean valid4 = checkAllValuesFrom(pid, problems, restrictionVisitor, fedoraConnector);
+        boolean valid5 = checkSomeValuesFrom(pid, problems, restrictionVisitor, fedoraConnector);
         valid = valid1 && valid2 && valid3 && valid4 && valid5;
 
         return new ValidationResult(valid, problems);
@@ -109,7 +110,7 @@ public class OntologyValidator implements Validator{
     }
 
     private boolean checkSomeValuesFrom(String pid, List<String> problems,
-                                        RestrictionVisitor restrictionVisitor)
+                                        RestrictionVisitor restrictionVisitor, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
         boolean valid = true;
@@ -119,8 +120,8 @@ public class OntologyValidator implements Validator{
                 valuerestrictedproperties.entrySet()) {
             String relation = prop.getKey().getURI().toString();
 
-            List<FedoraConnector.Relation> relations = Repository.getRelations(
-                    Repository.ensurePID(pid),
+            List<FedoraConnector.Relation> relations = fedoraConnector.getRelations(
+                    FedoraUtil.ensurePID(pid),
                     relation);
 
             if (relations.size() < 1) {
@@ -130,14 +131,14 @@ public class OntologyValidator implements Validator{
                 continue;
             }
 
-            String reqcm = Repository.ensureURI(prop.getValue().toString());
+            String reqcm = FedoraUtil.ensureURI(prop.getValue().toString());
             boolean foundObject = false;
             for (FedoraConnector.Relation rel: relations){
 
                 String target = rel.getTo();
                 List<String> targetType;
                 try {
-                    targetType = Repository.getContentModels(target);
+                    targetType = fedoraConnector.getContentModels(target);
                 } catch (ObjectNotFoundException e) {
                     valid = false;
                     problems.add("Object '" + pid + "' has a relation '" +
@@ -165,7 +166,7 @@ public class OntologyValidator implements Validator{
     }
 
     private boolean checkAllValuesFrom(String pid, List<String> problems,
-                                       RestrictionVisitor restrictionVisitor)
+                                       RestrictionVisitor restrictionVisitor, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
         boolean valid = true;
@@ -175,16 +176,16 @@ public class OntologyValidator implements Validator{
                 valuerestrictedproperties.entrySet()) {
             String relation = prop.getKey().getURI().toString();
 
-            List<FedoraConnector.Relation> relations = Repository.getRelations(
-                    Repository.ensurePID(pid), relation);
+            List<FedoraConnector.Relation> relations = fedoraConnector.getRelations(
+                    FedoraUtil.ensurePID(pid), relation);
 
-            String reqcm = Repository.ensureURI(prop.getValue().toString());
+            String reqcm = FedoraUtil.ensureURI(prop.getValue().toString());
 
             for (FedoraConnector.Relation relation_: relations){
                 String target = relation_.getTo();
                 List<String> targetType;
                 try {
-                    targetType = Repository.getContentModels(target);
+                    targetType = fedoraConnector.getContentModels(target);
                 } catch (ObjectNotFoundException e) {
                     valid = false;
                     problems.add("Object '" + pid + "' has a relation '" +
@@ -206,7 +207,7 @@ public class OntologyValidator implements Validator{
     }
 
     private boolean checkCardinality(String pid, List<String> problems,
-                                     RestrictionVisitor restrictionVisitor)
+                                     RestrictionVisitor restrictionVisitor, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
         boolean valid = true;
@@ -216,8 +217,8 @@ public class OntologyValidator implements Validator{
                 restrictedProperties.entrySet()) {
             String relation = prop.getKey().getURI().toString();
 
-            List<FedoraConnector.Relation> relations = Repository.getRelations(
-                    Repository.ensurePID(pid), relation);
+            List<FedoraConnector.Relation> relations = fedoraConnector.getRelations(
+                    FedoraUtil.ensurePID(pid), relation);
 
             if (relations.size() < prop.getValue()) {
                 int number = relations.size();
@@ -231,7 +232,7 @@ public class OntologyValidator implements Validator{
     }
 
     private boolean checkMaxCardinality(String pid, List<String> problems,
-                                        RestrictionVisitor restrictionVisitor)
+                                        RestrictionVisitor restrictionVisitor, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
         boolean valid = true;
@@ -242,8 +243,8 @@ public class OntologyValidator implements Validator{
             String relation = prop.getKey().getURI().toString();
 
             List<FedoraConnector.Relation> relations
-                    = Repository.getRelations(
-                    Repository.ensurePID(pid),
+                    = fedoraConnector.getRelations(
+                    FedoraUtil.ensurePID(pid),
                     relation);
 
             if (relations.size() < prop.getValue()) {
@@ -258,7 +259,7 @@ public class OntologyValidator implements Validator{
     }
 
     private boolean checkMinCardinality(String pid, List<String> problems,
-                                        RestrictionVisitor restrictionVisitor)
+                                        RestrictionVisitor restrictionVisitor, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
         boolean valid = true;
@@ -274,8 +275,8 @@ public class OntologyValidator implements Validator{
 
 
             List<FedoraConnector.Relation> relations
-                    = Repository.getRelations(
-                    Repository.ensurePID(pid),
+                    = fedoraConnector.getRelations(
+                    FedoraUtil.ensurePID(pid),
                     relation);
 
             if (relations.size() < prop.getValue()) {

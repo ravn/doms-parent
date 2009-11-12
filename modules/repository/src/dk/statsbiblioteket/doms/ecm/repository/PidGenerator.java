@@ -11,34 +11,6 @@ public abstract class PidGenerator {
 
     private static PidGenerator gen;
 
-    /**
-     * Get a implementation of this Class
-     * @return
-     * @throws PIDGeneratorException
-     */
-    public static PidGenerator getPIDGenerator() throws PIDGeneratorException{
-
-        if (gen == null){
-            String pidgenerator = Repository.getPidGenerator();
-
-            try {
-                Class<?> tor = Thread.currentThread().getContextClassLoader().loadClass(pidgenerator);
-                PidGenerator pidObj = (PidGenerator) tor.newInstance();
-                gen = pidObj;
-                //TODO LOGGING
-            } catch (ClassNotFoundException e) {
-                throw new Error("PidGenerator class not found",e);
-            } catch (IllegalAccessException e) {
-                throw new Error("Cannot access PidGenerator class",e);
-            } catch (InstantiationException e) {
-                throw new Error("Cannot instantiate PidGenerator class",e);
-            } catch (ClassCastException e){
-                throw new Error("PidGenerator is not of the PidGenerator Interface",e);
-
-            }
-        }
-        return gen;
-    }
 
     /**
      * Get the next available pid with the prefix s

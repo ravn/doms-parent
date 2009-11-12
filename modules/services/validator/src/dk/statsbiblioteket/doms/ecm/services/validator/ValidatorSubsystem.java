@@ -1,6 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.services.validator;
 
 import dk.statsbiblioteket.doms.ecm.repository.ValidationResult;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
@@ -18,12 +19,13 @@ public class ValidatorSubsystem {
     /**
      * Validate one object against it's content models
      * @param objpid the data object to validate
+     * @param fedoraConnector
      * @return a validation result of the validation
      * @throws ObjectNotFoundException if the objpid cannot be found
      */
     public ValidationResult validate(
-            String objpid
-    ) throws ObjectNotFoundException, FedoraIllegalContentException,
+            String objpid,
+            FedoraConnector fedoraConnector) throws ObjectNotFoundException, FedoraIllegalContentException,
              FedoraConnectionException, ObjectIsWrongTypeException {
 
         LOG.trace("Entering validate(), objpid='" + objpid + "'");
@@ -32,7 +34,7 @@ public class ValidatorSubsystem {
 
         CompoundContentModel compoundContentModel;
 
-        compoundContentModel = CompoundContentModel.loadFromDataObject(objpid);
+        compoundContentModel = CompoundContentModel.loadFromDataObject(objpid,fedoraConnector);
         LOG.trace("Compound content model created");
 
         Validator[] validators = {new OntologyValidator(),
@@ -45,7 +47,8 @@ public class ValidatorSubsystem {
             ValidationResult result = null;
             result = validator.validate(
                     objpid,
-                    compoundContentModel);
+                    compoundContentModel,
+                    fedoraConnector);
             LOG.trace("validator validated");
             globalResult = globalResult.combine(result);
         }
@@ -60,12 +63,13 @@ public class ValidatorSubsystem {
      * Validate the given object against a specific content model
      * @param objpid the given object
      * @param cmpid the specific content model
+     * @param fedoraConnector
      * @return a Validation result of the validation
      */
     public ValidationResult validateAgainst(
             String objpid,
-            String cmpid
-    ) throws ObjectNotFoundException, FedoraIllegalContentException,
+            String cmpid,
+            FedoraConnector fedoraConnector) throws ObjectNotFoundException, FedoraIllegalContentException,
              FedoraConnectionException, ObjectIsWrongTypeException {
 
         //Working
@@ -77,7 +81,7 @@ public class ValidatorSubsystem {
 
         CompoundContentModel compoundContentModel;
 
-        compoundContentModel = CompoundContentModel.loadFromContentModel(cmpid);
+        compoundContentModel = CompoundContentModel.loadFromContentModel(cmpid,fedoraConnector);
 
         LOG.trace("Compound content model created");
 
@@ -87,7 +91,7 @@ public class ValidatorSubsystem {
         ValidationResult global_result = new ValidationResult();
 
         for (Validator validator: validators){
-            ValidationResult result = validator.validate(objpid, compoundContentModel);
+            ValidationResult result = validator.validate(objpid, compoundContentModel, fedoraConnector);
             LOG.trace("validator validated");
             global_result = global_result.combine(result);
         }

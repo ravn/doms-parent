@@ -4,6 +4,7 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionExcept
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,10 +40,10 @@ public class CompoundContentModel {
      * @throws ObjectNotFoundException
      * @throws ObjectIsWrongTypeException
      */
-    public static CompoundContentModel loadFromDataObject(String pid)
+    public static CompoundContentModel loadFromDataObject(String pid, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException, ObjectIsWrongTypeException {
-        return ContentModelUtils.getCompoundContentModel(pid);
+        return ContentModelUtils.getCompoundContentModel(pid, fedoraConnector);
     }
 
     /**
@@ -55,10 +56,10 @@ public class CompoundContentModel {
      * @throws ObjectNotFoundException
      * @throws ObjectIsWrongTypeException
      */
-    public static CompoundContentModel loadFromContentModel(String pid)
+    public static CompoundContentModel loadFromContentModel(String pid, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException, ObjectIsWrongTypeException {
-        return ContentModelUtils.getAsCompoundContentModel(pid);
+        return ContentModelUtils.getAsCompoundContentModel(pid,fedoraConnector);
     }
     
 

@@ -6,9 +6,9 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeExcep
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -38,6 +38,7 @@ public class ViewSubsystem {
      * Get the data objects which are marked (in their content models) as entries
      * for the given angle
      * @param viewAngle The given view angle
+     * @param fedoraConnector
      * @return a lists of the data objects pids
      * @throws FedoraConnectionException if there
      * was a problem in communication with Fedora
@@ -45,7 +46,7 @@ public class ViewSubsystem {
      * could not be parsed
      */
     public PidList getEntryCMsForAngle(
-            String viewAngle) throws FedoraIllegalContentException,
+            String viewAngle, FedoraConnector fedoraConnector) throws FedoraIllegalContentException,
                                      FedoraConnectionException {
         viewAngle = sanitizeLiteral(viewAngle);
 
@@ -58,7 +59,7 @@ public class ViewSubsystem {
                        "and $object <"+ Constants.ENTRY_RELATION+"> '" +
                        viewAngle + "' \n";
 
-        return Repository.query(query);
+        return fedoraConnector.query(query);
     }
 
     /**
@@ -88,6 +89,7 @@ public class ViewSubsystem {
      * given status
      * @param cmpid the content model
      * @param status the given status, A, I or D
+     * @param fedoraConnector
      * @return a list of data objects
      * @throws ObjectNotFoundException if cmpid could not be found
      * @throws ObjectIsWrongTypeException if cmpid is not a content model
@@ -98,7 +100,7 @@ public class ViewSubsystem {
      */
     public PidList getObjectsForContentModel(
             String cmpid,
-            String status) throws ObjectNotFoundException,
+            String status, FedoraConnector fedoraConnector) throws ObjectNotFoundException,
                                   ObjectIsWrongTypeException,
                                   FedoraIllegalContentException,
                                   FedoraConnectionException {
@@ -111,17 +113,17 @@ public class ViewSubsystem {
 
 
 
-        if (!Repository.exist(cmpid)){
+        if (!fedoraConnector.exists(cmpid)){
             throw new ObjectNotFoundException("The pid '" + cmpid +
                                               "' is not in the repository");
         }
-        if (!Repository.isContentModel(cmpid)){
+        if (!fedoraConnector.isContentModel(cmpid)){
             throw new ObjectIsWrongTypeException("The pid '" + cmpid +
                                                  "' is not a content model");
         }
-        String contentModel = "<" + Repository.ensureURI(cmpid) + ">";
+        String contentModel = "<" + FedoraUtil.ensureURI(cmpid) + ">";
 
-        List<String> childcms = Repository.getInheritingContentModels(cmpid);
+        List<String> childcms = fedoraConnector.getInheritingContentModels(cmpid);
 
         String query = "select $object\n" +
                        "from <#ri>\n" +
@@ -135,12 +137,12 @@ public class ViewSubsystem {
         for (String childCm:childcms){
             query = query +
                     " or $object <" + Constants.HAS_MODEL + "> <" +
-                    Repository.ensureURI(childCm) + ">\n ";
+                    FedoraUtil.ensureURI(childCm) + ">\n ";
         }
         query = query + ")";
 
         LOG.debug("Using query \n'" + query + "'\n");
-        return Repository.query(query);
+        return fedoraConnector.query(query);
 
     }
 
@@ -150,20 +152,21 @@ public class ViewSubsystem {
      * with the given state
      * @param viewAngle the viewangle
      * @param state the required state
+     * @param fedoraConnector
      * @return a list of dataobjects
      * @throws FedoraConnectionException
      * @throws FedoraIllegalContentException
      */
     public PidList getEntriesForAngle(String viewAngle,
-                                      String state) throws
+                                      String state, FedoraConnector fedoraConnector) throws
                                                     FedoraConnectionException,
                                                     FedoraIllegalContentException{
 
         Set<String> collector = new HashSet<String>();
-        PidList list = getEntryCMsForAngle(viewAngle);
+        PidList list = getEntryCMsForAngle(viewAngle, fedoraConnector);
         for (String pid: list){
             try {
-                collector.addAll(getObjectsForContentModel(pid,state));
+                collector.addAll(getObjectsForContentModel(pid,state, fedoraConnector));
             } catch (ObjectNotFoundException e) {
                 throw new FedoraIllegalContentException(
                         "Content model '" +
@@ -188,6 +191,7 @@ public class ViewSubsystem {
      * Get a list of the objects in the view of a given object
      * @param objpid the object whose view we examine
      * @param viewAngle The view angle
+     * @param fedoraConnector
      * @return the list of the pids in the view of objpid
      * @throws ObjectNotFoundException
      * @throws FedoraConnectionException
@@ -195,7 +199,7 @@ public class ViewSubsystem {
      */
     public PidList getViewObjectsListForObject(
             String objpid,
-            String viewAngle)
+            String viewAngle, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraConnectionException,
                    FedoraIllegalContentException {
@@ -203,18 +207,18 @@ public class ViewSubsystem {
         LOG.trace("Entering getViewObjectsListForObject with params '" +
                   objpid + "' and '" + viewAngle + "'");
 
-        if (!Repository.exist(objpid)){
+        if (!fedoraConnector.exists(objpid)){
             throw new ObjectNotFoundException("The data object '" + objpid +
                                               "' does not exist");
         }
-        if (!Repository.isDataObject(objpid)){
+        if (!fedoraConnector.isDataObject(objpid)){
             throw new ObjectNotFoundException("The data object '" + objpid +
                                               "' is not a data object");
         }
 
         PidList includedPids = new PidList();
 
-        appendPids(viewAngle,includedPids,objpid);
+        appendPids(viewAngle,includedPids,objpid, fedoraConnector);
 
         return includedPids;
     }
@@ -225,22 +229,23 @@ public class ViewSubsystem {
      * dobundle:digitalObjectBundle, where dobundle is defined in Constants
      * @param objpid the object whose view we examine
      * @param viewAngle The view angle
+     * @param fedoraConnector
      * @return The objects bundled under the supertag
      * @throws ObjectNotFoundException
      * @throws FedoraIllegalContentException
      * @throws FedoraConnectionException
-     * @see #getViewObjectsListForObject(String, String)
+     * @see #getViewObjectsListForObject(String, String,dk.statsbiblioteket.doms.ecm.repository.FedoraConnector)
      * @see Constants#NAMESPACE_DIGITAL_OBJECT_BUNDLE
      */
     public Document getViewObjectBundleForObject(
             String objpid,
-            String viewAngle) throws
+            String viewAngle, FedoraConnector fedoraConnector) throws
                               ObjectNotFoundException,
                               FedoraIllegalContentException,
                               FedoraConnectionException {
 
 
-        PidList pidlist = getViewObjectsListForObject(objpid,viewAngle);
+        PidList pidlist = getViewObjectsListForObject(objpid,viewAngle, fedoraConnector);
 
         Document doc = DocumentUtils.DOCUMENT_BUILDER.newDocument();
 
@@ -257,7 +262,7 @@ public class ViewSubsystem {
 
         for (String pid: pidlist){
             //Get the object as a document
-            Document objectdoc = Repository.getObjectXml(pid);
+            Document objectdoc = fedoraConnector.getObjectXml(pid);
 
             //add it to the bundle we are creating
             Element objectdocelement = objectdoc.getDocumentElement();
@@ -271,8 +276,8 @@ public class ViewSubsystem {
 
 
     private void appendPids(String viewname,
-                            List<String> includedPids, String pid
-    )
+                            List<String> includedPids, String pid,
+                            FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraIllegalContentException,
                    FedoraConnectionException {
@@ -284,7 +289,7 @@ public class ViewSubsystem {
         // Check if PIDs is there
         // This is the reason why we need to thread the list through the
         // recursion. Without it we would end in cycles
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (includedPids.contains(pid)) {
             return;
         }
@@ -293,7 +298,7 @@ public class ViewSubsystem {
 
         // Find relations to follow
         // Get content model
-        CompoundView cm = CompoundView.getView(pid);
+        CompoundView cm = CompoundView.getView(pid, fedoraConnector);
         View view = cm.getView().get(viewname);
         if (view == null) {
             LOG.debug("View null, returning");
@@ -306,7 +311,7 @@ public class ViewSubsystem {
             // Find relations
             List<FedoraConnector.Relation> relations;
 
-            relations = Repository.
+            relations = fedoraConnector.
                     getRelations(pid, property);
 
 
@@ -316,7 +321,7 @@ public class ViewSubsystem {
                 String newpid = relation.getTo();
                 appendPids(
                         viewname, includedPids,
-                        newpid);
+                        newpid, fedoraConnector);
 
             }
 
@@ -327,16 +332,16 @@ public class ViewSubsystem {
         for (String inverseProperty : inverseProperties) {
             String query = "select $object\n" + "from <#ri>\n"
                            + "where $object <" + inverseProperty + "> <"
-                           + Repository.ensureURI(pid) + ">";
+                           + FedoraUtil.ensureURI(pid) + ">";
             // Find relations
 
 
-            PidList objects = Repository.query(query);
+            PidList objects = fedoraConnector.query(query);
             // Recursively add
             for (String newpid: objects){
                 appendPids(
                         viewname, includedPids,
-                        newpid);
+                        newpid, fedoraConnector);
             }
 
 

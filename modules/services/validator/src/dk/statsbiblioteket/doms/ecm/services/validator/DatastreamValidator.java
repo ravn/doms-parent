@@ -1,7 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.services.validator;
 
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.ValidationResult;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
@@ -27,12 +27,13 @@ public class DatastreamValidator implements Validator{
      * and their schemas in content model cm
      * @param pid the object to validate
      * @param cm the merged content models with the schemas
+     * @param fedoraConnector
      * @return a validationResult
      * @throws FedoraConnectionException
      * @throws FedoraIllegalContentException
      * @throws ObjectNotFoundException
      */
-    public ValidationResult validate(String pid, CompoundContentModel cm)
+    public ValidationResult validate(String pid, CompoundContentModel cm, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException {
 
@@ -44,7 +45,7 @@ public class DatastreamValidator implements Validator{
 
                 Document dsContents;
                 try {
-                    dsContents = Repository
+                    dsContents = fedoraConnector
                             .getDatastream(pid, ds.getName());
                 } catch (DatastreamNotFoundException e) {
                     result.setValid(false);

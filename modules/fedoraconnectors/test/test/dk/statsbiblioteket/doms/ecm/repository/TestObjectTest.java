@@ -3,6 +3,7 @@ package dk.statsbiblioteket.doms.ecm.repository;
 import junit.framework.TestCase;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.repository.test.TestObject;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -39,7 +40,7 @@ public class TestObjectTest
                      it2.getRelations().get(0).getRelation(),
                      "info:fedora/fedora-system:def/model#hasModel");
         assertEquals("relation target",
-                     Repository.ensureURI(it2.getRelations().get(0).getTo()),
+                     FedoraUtil.ensureURI(it2.getRelations().get(0).getTo()),
                      "info:fedora/demo:dc2mods.cmodel");
 
     }

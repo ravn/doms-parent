@@ -3,9 +3,9 @@ package dk.statsbiblioteket.doms.ecm.repository.test;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -146,7 +146,7 @@ public class TestObject {
             int li = Math.max(index3, Math.max(index1, index2));
             String ns = relationname.substring(0, li+1);
             String ln = relationname.substring(li+1);
-            String relation = "<" + ln + " xmlns=\"" + ns + "\" rdf:resource=\"" + Repository.ensureURI(rel.getTo()) + "\" />\n";
+            String relation = "<" + ln + " xmlns=\"" + ns + "\" rdf:resource=\"" + FedoraUtil.ensureURI(rel.getTo()) + "\" />\n";
             st.append(relation);
         }
         st.append(relsextend);
@@ -221,7 +221,7 @@ public class TestObject {
                         String localname = rel.getLocalName();
                         Node about = rel.getAttributes().getNamedItemNS(Constants.NAMESPACE_RDF, "resource");
                         String to = about.getNodeValue();
-                        that.add(new FedoraConnector.Relation(pid,Repository.ensurePID(to),namespace+localname));
+                        that.add(new FedoraConnector.Relation(pid,FedoraUtil.ensurePID(to),namespace+localname));
                     }
                 }
                 NodeList contents = XpathUtils.xpathQuery(ds,

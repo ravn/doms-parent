@@ -4,14 +4,17 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.ValidationResult;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
 import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.services.validator.ValidatorSubsystem;
 import dk.statsbiblioteket.doms.ecm.services.view.ViewSubsystem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.xml.bind.JAXB;
@@ -24,6 +27,7 @@ import java.io.StringWriter;
  * class contain the JAX-RS annotations to make a REST interface. 
  */
 @Path("/")
+@Service
 public class Webservice {
 
     private static final Log log
@@ -33,14 +37,17 @@ public class Webservice {
     private ViewSubsystem view;
     private TemplateSubsystem temps;
     private ValidatorSubsystem validator;
-
-
-    public Webservice() {
+    private FedoraConnector fedoraConnector;
+    private PidGenerator pidGenerator;
+    
+    public Webservice(TransportBean transportBean) {
         view = new ViewSubsystem();
         temps = new TemplateSubsystem();
         validator = new ValidatorSubsystem();
-
+        fedoraConnector = transportBean.getFedoraConnector();
+        pidGenerator = transportBean.getPidGenerator();
     }
+
 
     /*----------VALIDATE METHODS -------------------*/
     @GET
@@ -50,7 +57,7 @@ public class Webservice {
             @PathParam("objectpid") String objpid
     ) throws EcmException {
         log.trace("Entering validate with objpid='"+objpid+"'");
-        return validator.validate(objpid);
+        return validator.validate(objpid, fedoraConnector);
     }
 
     @GET
@@ -62,7 +69,7 @@ public class Webservice {
     ) throws EcmException {
         log.trace("Entering validate with objpid='"
                   +objpid+"' and cmpid='"+cmpid+"'");
-        return validator.validateAgainst(objpid,cmpid);
+        return validator.validateAgainst(objpid,cmpid,fedoraConnector);
     }
 
 
@@ -73,7 +80,7 @@ public class Webservice {
     public void markObjectAsTemplate(
             @PathParam("objectpid") String objpid,
             @PathParam("cmpid") String cmpid) throws EcmException {
-        temps.markObjectAsTemplate(objpid,cmpid);
+        temps.markObjectAsTemplate(objpid,cmpid,fedoraConnector);
     }
 
     @GET
@@ -83,7 +90,7 @@ public class Webservice {
             @PathParam("cmpid") String cmpid) throws EcmException {
         log.trace("Entering findTemplatesFor with cmpid='"+cmpid+"'");
 
-        return temps.findTemplatesFor(cmpid);
+        return temps.findTemplatesFor(cmpid,fedoraConnector);
     }
 
     @POST
@@ -91,7 +98,7 @@ public class Webservice {
     @Produces("text/plain")
     public String cloneTemplate(
             @PathParam("templatepid") String templatepid) throws EcmException {
-        return temps.cloneTemplate(templatepid);
+        return temps.cloneTemplate(templatepid,fedoraConnector,pidGenerator);
     }
 
 
@@ -102,7 +109,7 @@ public class Webservice {
     @Produces("text/xml")
     public PidList getEntryCMsForAngle(
             @PathParam("viewAngle") String viewAngle) throws EcmException {
-        return view.getEntryCMsForAngle(viewAngle);
+        return view.getEntryCMsForAngle(viewAngle,fedoraConnector);
     }
 
 
@@ -113,7 +120,7 @@ public class Webservice {
             @PathParam("cmpid") String cmpid,
             @DefaultValue("Active") @QueryParam("state") String status)
             throws EcmException {
-        return view.getObjectsForContentModel(cmpid,status);
+        return view.getObjectsForContentModel(cmpid,status,fedoraConnector);
     }
 
     @GET
@@ -123,7 +130,7 @@ public class Webservice {
                                       @DefaultValue("Active")
                                       @QueryParam("state") String state)
             throws EcmException {
-        return view.getEntriesForAngle(viewAngle,state);
+        return view.getEntriesForAngle(viewAngle,state,fedoraConnector);
     }
 
     @GET
@@ -139,7 +146,8 @@ public class Webservice {
             //confuse java
             Document dobundle = view.getViewObjectBundleForObject(
                     objectpid,
-                    viewAngle);
+                    viewAngle,
+                    fedoraConnector);
             try {
                 return DocumentUtils.documentToString(dobundle);
             } catch (TransformerException e) {
@@ -151,7 +159,8 @@ public class Webservice {
         } else {
             PidList list = view.getViewObjectsListForObject(
                     objectpid,
-                    viewAngle);
+                    viewAngle,
+                    fedoraConnector);
             StringWriter writer = new StringWriter();
             JAXB.marshal(list,writer);
             return  writer.toString();
@@ -164,7 +173,8 @@ public class Webservice {
     @Produces("text/xml")
     public PidList getContentModels(@PathParam("objpid") String objpid)
             throws EcmException{
-        return new PidList(Repository.getContentModels(Repository.ensurePID(objpid)));
+        return new PidList(fedoraConnector.getContentModels(FedoraUtil.ensurePID(objpid)));
     }
+
 
 }

@@ -3,8 +3,9 @@ package dk.statsbiblioteket.doms.ecm.webservice;
 
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
+import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.Authentication;
@@ -34,7 +35,7 @@ import javax.servlet.ServletContext;
  */
 public class Initializer
         implements AuthenticationProvider,
-                   ServletContextAware{
+        ServletContextAware{
     private static final String DEFAULT_SERVER = "http://localhost:8080/fedora";
     private String server;
     private String connector;
@@ -43,6 +44,12 @@ public class Initializer
 
     private static final Log LOG = LogFactory.getLog(Initializer.class);
     private static final String DEFAULT_PIDGENERATOR = "dk.statsbiblioteket.doms.ecm.repository.PidGeneratorImpl";
+
+    private TransportBean transporter;
+
+    public Initializer(TransportBean transportBean) {
+        transporter = transportBean;
+    }
 
 
     /**
@@ -65,11 +72,10 @@ public class Initializer
             //correct connector.
             // This call assumes that the methods set*Context have allready been
             //called
-            Repository.initialise(token, createConnector());
-            Repository.setPidGenerator(pidgenerator);
+            FedoraConnector connector =  createConnector(token);
 
             try {
-                boolean authenticated  = Repository.authenticate();
+                boolean authenticated  = connector.authenticate();
                 if (!authenticated){
                     throw new BadCredentialsException("Fedora does not allow authentication call with the given credentials");
                 }
@@ -95,6 +101,12 @@ public class Initializer
             MyAuthentication newauth =
                     new MyAuthentication(username,password,new GrantedAuthority[]{auth});
 
+            transporter.setFedoraConnector(connector);
+            try {
+                transporter.setPidGenerator(getPIDGenerator(pidgenerator));
+            } catch (PIDGeneratorException e) {
+                //TODO
+            }
             return newauth;
 
         } else{
@@ -105,11 +117,13 @@ public class Initializer
     /**
      * Small utility method for creating a new instance of the fedora Connector
      * @return a new FedoraConnector instance
+     * @param token
      */
-    private FedoraConnector createConnector(){
+    private FedoraConnector createConnector(FedoraUserToken token){
         try {
             Class<?> tor = Thread.currentThread().getContextClassLoader().loadClass(connector);
             FedoraConnector conObj = (FedoraConnector) tor.newInstance();
+            conObj.initialise(token);
             return conObj;
             //TODO LOGGING
         } catch (ClassNotFoundException e) {
@@ -124,6 +138,34 @@ public class Initializer
 
 
     }
+
+
+    /**
+     * Get a implementation of this Class
+     * @return
+     * @throws dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException
+     */
+    public static PidGenerator getPIDGenerator(String pidgenerator) throws PIDGeneratorException {
+
+
+        try {
+            Class<?> tor = Thread.currentThread().getContextClassLoader().loadClass(pidgenerator);
+            PidGenerator pidObj = (PidGenerator) tor.newInstance();
+            return pidObj;
+            //TODO LOGGING
+        } catch (ClassNotFoundException e) {
+            throw new Error("PidGenerator class not found",e);
+        } catch (IllegalAccessException e) {
+            throw new Error("Cannot access PidGenerator class",e);
+        } catch (InstantiationException e) {
+            throw new Error("Cannot instantiate PidGenerator class",e);
+        } catch (ClassCastException e){
+            throw new Error("PidGenerator is not of the PidGenerator Interface",e);
+
+        }
+    }
+
+
 
 
     public boolean supports(Class authentication) {

@@ -7,10 +7,12 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentEx
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.repository.test.FedoraTestConnector;
 import dk.statsbiblioteket.doms.ecm.repository.test.TestObject;
 import org.w3c.dom.Document;
 
+import javax.xml.transform.TransformerException;
 import java.util.List;
 
 /**
@@ -55,7 +57,7 @@ public class FedoraTestImplTest
 
     }
 
-    public void testExist() {
+    public void testExist() throws FedoraConnectionException, FedoraIllegalContentException {
         assertTrue("data object not found", connector.exists(o1.getPid()));
         assertTrue("content model not found", connector.exists(cm1.getPid()));
         assertTrue("remember to normalize pids",
@@ -64,7 +66,7 @@ public class FedoraTestImplTest
 
     }
 
-    public void testIsDataObject() {
+    public void testIsDataObject() throws FedoraConnectionException, FedoraIllegalContentException {
         assertTrue("data object not found",
                    connector.isDataObject(o1.getPid()));
         assertTrue("content model found as data object",
@@ -74,8 +76,8 @@ public class FedoraTestImplTest
         assertTrue("found spurious object", !connector.isDataObject("shjkfsd"));
     }
 
-    public void testIsTemplate() {
-        assertTrue("data object not found", connector.isTemplate(o1.getPid()));
+    public void testIsTemplate() throws ObjectNotFoundException, FedoraIllegalContentException, FedoraConnectionException {
+        assertEquals("data object not found", true, connector.isTemplate(o1.getPid()));
         assertTrue("content model not found",
                    !connector.isTemplate(cm1.getPid()));
         assertTrue("remember to normalize pids",
@@ -83,7 +85,7 @@ public class FedoraTestImplTest
         assertTrue("found spurious object", !connector.isTemplate("shjkfsd"));
     }
 
-    public void testIsContentModel() {
+    public void testIsContentModel() throws FedoraConnectionException, FedoraIllegalContentException {
         assertTrue("data object not found",
                    !connector.isContentModel(o1.getPid()));
         assertTrue("content model not found",
@@ -100,7 +102,7 @@ public class FedoraTestImplTest
     }
 
     public void testRelations1()
-            throws ObjectNotFoundException, FedoraConnectionException {
+            throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
 
         connector.addRelation(o1.getPid(),
                               Constants.NAMESPACE_RELATIONS + "TestRelation",
@@ -118,11 +120,11 @@ public class FedoraTestImplTest
 
 
     public void testRelations2()
-            throws ObjectNotFoundException, FedoraConnectionException {
+            throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
 
         connector.addRelation(o1.getPid(),
                               Constants.NAMESPACE_RELATIONS + "TestRelation",
-                              Repository.ensureURI(o2.getPid()));
+                              FedoraUtil.ensureURI(o2.getPid()));
         List<FedoraConnector.Relation> foundrel = connector.getRelations(o1.getPid(),
                                                                          Constants.NAMESPACE_RELATIONS + "TestRelation");
         assertTrue("Found wrong number of relations", foundrel.size() == 1);
@@ -135,7 +137,7 @@ public class FedoraTestImplTest
 
 
     public void testRelations3()
-            throws ObjectNotFoundException, FedoraConnectionException {
+            throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
 
 
         List<FedoraConnector.Relation> foundrel = connector.getRelations(o1.getPid());
@@ -150,7 +152,7 @@ public class FedoraTestImplTest
                    FedoraConnectionException {
 
         connector.getObjectXml(o1.getPid());
-        Document o1doc = connector.getObjectXml(Repository.ensureURI(o1.getPid()));
+        Document o1doc = connector.getObjectXml(FedoraUtil.ensureURI(o1.getPid()));
         TestObject rereado1 = TestObject.parseFromDocument(o1doc);
         assertEquals("Same pid", o1.getPid(), rereado1.getPid());
         assertEquals("same state", o1.getState(), rereado1.getState());
@@ -164,7 +166,7 @@ public class FedoraTestImplTest
 
     public void testDatastreams()
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException, DatastreamNotFoundException {
+            FedoraIllegalContentException, DatastreamNotFoundException, TransformerException {
         String defaultds = "<oai_dc:dc " + "xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\" " + "xmlns:dc=\"http://purl.org/dc/elements/1.1/\"" + ">\n" + "<dc:title>Sample object</dc:title>\n" + "<dc:description>This describes the object</dc:description>\n" + "<dc:creator>Edwin Shin</dc:creator>\n" + "</oai_dc:dc>";
 
 
@@ -189,7 +191,7 @@ public class FedoraTestImplTest
 
 
     public void testGetContentModels()
-            throws ObjectNotFoundException, FedoraConnectionException {
+            throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
 
         PidList cms = connector.getContentModels(o1.getPid());
         assertEquals("Wrong number of content models", 1, cms.size());

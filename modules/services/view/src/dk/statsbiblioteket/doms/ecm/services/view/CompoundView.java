@@ -6,7 +6,6 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionExcept
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
 import org.apache.commons.logging.Log;
@@ -81,6 +80,7 @@ public class CompoundView {
      * an abstract representation of the Compund view for an object.
      *
      * @param pid The pid for an object.
+     * @param fedoraConnector
      * @return The compound content model for the object or content model.
      * @throws FedoraConnectionException     on trouble communicating with
      *                                       Fedora.
@@ -88,7 +88,7 @@ public class CompoundView {
      *                                       information (i.e. non-existing PIDs
      *                                       referred, illegal XML, etc.)
      */
-    public static CompoundView getView(String pid)
+    public static CompoundView getView(String pid, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraConnectionException,
                    FedoraIllegalContentException{
@@ -99,13 +99,13 @@ public class CompoundView {
         // Get starting point
         // TODO: Consider sorting this list, with children before parents?
 
-        if (!Repository.isDataObject(pid)){
+        if (!fedoraConnector.isDataObject(pid)){
             throw new FedoraIllegalContentException("The object '"+ pid +"' is " +
                                                     "not a data object");
         }
 
         // Initialise list of base content models
-        List<String> models = Repository.getContentModels(pid);
+        List<String> models = fedoraConnector.getContentModels(pid);
 
         //Reduce the list to unique content models
         Set<String> pids1 = new TreeSet<String>();
@@ -118,14 +118,14 @@ public class CompoundView {
         for (String p : pids) {
             LOG.trace("Getting view from object " + p);
 
-            if (!Repository.exist(p)) {
+            if (!fedoraConnector.exists(p)) {
                 throw new ObjectNotFoundException("The object '" + p +
                                                   "' was not found");
             }
 
             Document viewXml;
             try {
-                viewXml = Repository
+                viewXml = fedoraConnector
                         .getDatastream(p,
                                        Constants.VIEW_DATASTREAM);
             } catch (DatastreamNotFoundException e) {
@@ -136,7 +136,7 @@ public class CompoundView {
             updateView(model.getView(), viewXml);
 
             // Check if this is the content model for a main object in some view
-            setMainView(p, model.getView());
+            setMainView(p, model.getView(), fedoraConnector);
 
         }
 
@@ -275,16 +275,17 @@ public class CompoundView {
      * Set whether this is a main view, by parsing the relations defining this.
      * @param pid The pid to parse relations for
      * @param views The views in the content model to update.
+     * @param fedoraConnector
      * @throws FedoraConnectionException if relations cannot be retrieved.
      */
     private static void setMainView(
             String pid,
-            Map<String, View> views)
+            Map<String, View> views, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, ObjectNotFoundException,
                    FedoraIllegalContentException {
 
 
-        List<FedoraConnector.Relation> relations = Repository.getRelations(
+        List<FedoraConnector.Relation> relations = fedoraConnector.getRelations(
                 pid, Constants.ENTRY_RELATION);
 
 

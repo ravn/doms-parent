@@ -26,12 +26,19 @@
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <bean class="dk.statsbiblioteket.doms.ecm.webservice.EcmFaultBarrier"/>
-<!--            <bean class="dk.statsbiblioteket.doms.ecm.webservice.FaultBarrier"/>-->
+
         </jaxrs:providers>
     </jaxrs:server>
 
     <bean id="serviceImpl"
-          class="dk.statsbiblioteket.doms.ecm.webservice.Webservice"/>
+          class="dk.statsbiblioteket.doms.ecm.webservice.Webservice">
+        <constructor-arg ref="transportBean"/>
+    </bean>
+
+    <bean id="transportBean"
+          class="dk.statsbiblioteket.doms.ecm.webservice.TransportBean">
+    </bean>
+
 
 
     <security:http auto-config="false">
@@ -54,7 +61,7 @@
     <beans:bean id="customAuthenticationProvider"
                 class="dk.statsbiblioteket.doms.ecm.webservice.Initializer">
         <security:custom-authentication-provider/>
-
+        <constructor-arg ref="transportBean"/>
         <!--<property name="userDetailsService" ref="customUserDetailsService"/>-->
     </beans:bean>
 

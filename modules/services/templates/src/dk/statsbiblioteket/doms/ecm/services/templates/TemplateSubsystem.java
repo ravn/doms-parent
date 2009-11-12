@@ -6,10 +6,11 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeExcep
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -51,38 +52,39 @@ public class TemplateSubsystem {
      * Mark the objpid object as a template for the cmpid object
      * @param objpid the object to mark
      * @param cmpid the content model to make objpid a template for
+     * @param fedoraConnector
      * @throws ObjectNotFoundException if either of the objects do not exist
      * @throws FedoraConnectionException if anything went wrong in the communication
      * @throws ObjectIsWrongTypeException if the object is not a data object or the content model is not a content model
      */
     public void markObjectAsTemplate(
             String objpid,
-            String cmpid)
+            String cmpid, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
                    ObjectIsWrongTypeException, FedoraIllegalContentException {
         LOG.trace("Entering markObjectAsTemplate with params: " + objpid + " and "+cmpid );
         //Working
 
-        if (!Repository.exist(cmpid)){
+        if (!fedoraConnector.exists(cmpid)){
             throw new ObjectNotFoundException("The content model '"+cmpid+
                                               "' does not exist");
         }
-        if (!Repository.exist(objpid)){
+        if (!fedoraConnector.exists(objpid)){
             throw new ObjectNotFoundException("The data object '"+objpid+
                                               "' does not exist");
         }
 
-        if (!Repository.isContentModel(cmpid)){
+        if (!fedoraConnector.isContentModel(cmpid)){
             throw new ObjectIsWrongTypeException("The content model '"+cmpid+
                                                  "' is not a content model");
         }
-        if (!Repository.isDataObject(objpid)){
+        if (!fedoraConnector.isDataObject(objpid)){
             throw new ObjectIsWrongTypeException("The data object '"+objpid+
                                                  "' is not a data object");
         }
 
 
-        boolean added = Repository.addRelation(objpid, Constants.TEMPLATE_REL, cmpid);
+        boolean added = fedoraConnector.addRelation(objpid, Constants.TEMPLATE_REL, cmpid);
         LOG.info("Marked object '"+objpid+"' as template for '"+cmpid+"'");
         if (!added){
             //The object is already a template. Note this in the log, and do no more
@@ -92,7 +94,7 @@ public class TemplateSubsystem {
 
 
 
-    public PidList findTemplatesFor(String cmpid)
+    public PidList findTemplatesFor(String cmpid, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraConnectionException,
                    FedoraIllegalContentException,
@@ -100,15 +102,15 @@ public class TemplateSubsystem {
         //Working
         LOG.trace("Entering findTemplatesFor with param '"+cmpid+"'");
 
-        if (Repository.exist(cmpid)){
-            if (Repository.isContentModel(cmpid)){
+        if (fedoraConnector.exists(cmpid)){
+            if (fedoraConnector.isContentModel(cmpid)){
 
                 List<String> childcms
-                        = Repository.getInheritingContentModels(cmpid);
+                        = fedoraConnector.getInheritingContentModels(cmpid);
 
                 String contentModel
                         = "<"+
-                          Repository.ensureURI(cmpid)+
+                          FedoraUtil.ensureURI(cmpid)+
                           ">\n";
 
                 String query = "select $object\n" +
@@ -119,7 +121,7 @@ public class TemplateSubsystem {
 
                 for (String childcm: childcms){
                     String cm = "<" +
-                                Repository.ensureURI(childcm) +
+                                FedoraUtil.ensureURI(childcm) +
                                 ">\n";
 
                     query = query +
@@ -128,7 +130,7 @@ public class TemplateSubsystem {
                             "> " + cm;
                 }
 
-                return Repository.query(query);
+                return fedoraConnector.query(query);
             } else {
                 throw new ObjectIsWrongTypeException("The pid '" +
                                                      cmpid +
@@ -137,7 +139,7 @@ public class TemplateSubsystem {
         } else {
             throw new ObjectNotFoundException("The pid '" +
                                               cmpid +
-                                              "' is not in the repository");
+                                              "' is not in the fedoraConnector");
         }
 
     }
@@ -145,32 +147,30 @@ public class TemplateSubsystem {
 
 
 
-    public String cloneTemplate(String templatepid)
+    public String cloneTemplate(String templatepid, FedoraConnector fedoraConnector, PidGenerator pidGenerator)
             throws FedoraIllegalContentException,
                    FedoraConnectionException, PIDGeneratorException,
                    ObjectNotFoundException,
                    ObjectIsWrongTypeException {
 
         //working
-        templatepid = Repository.ensurePID(templatepid);
+        templatepid = FedoraUtil.ensurePID(templatepid);
         LOG.trace("Entering cloneTemplate with param '" + templatepid + "'");
 
-        if (!Repository.exist(templatepid)){
+        if (!fedoraConnector.exists(templatepid)){
             throw new ObjectNotFoundException("The object (" + templatepid +
                                               " does not exists");
         }
-        if (!Repository.isTemplate(templatepid)){
+        if (!fedoraConnector.isTemplate(templatepid)){
             throw new ObjectIsWrongTypeException("The pid (" + templatepid +
                                                  ") is not a pid of a template");
         }
 
         // Get the document
-        Document document = Repository.getObjectXml(templatepid);
+        Document document = fedoraConnector.getObjectXml(templatepid);
 
 
-        String newPid;
-        newPid = PidGenerator.getPIDGenerator()
-                .generateNextAvailablePID("clone_");
+        String newPid = pidGenerator.generateNextAvailablePID("clone_");
         LOG.debug("Generated new pid '" + newPid + "'");
 
         try {
@@ -201,12 +201,12 @@ public class TemplateSubsystem {
         }
 
         //reingest the object
-        return Repository.ingestDocument(
+        return fedoraConnector.ingestDocument(
                 document,
                 "Cloned from template '" +
                 templatepid +
                 "' by user '" +
-                Repository.getUser() +
+                fedoraConnector.getUser() +
                 "'");
 
     }
@@ -225,10 +225,10 @@ public class TemplateSubsystem {
 
         LOG.trace("Entering replacepid");
         replateAttribute(doc, FOXML_DIGITAL_OBJECT_PID,
-                         Repository.ensurePID(newpid));
+                         FedoraUtil.ensurePID(newpid));
 
 
-        replateAttribute(doc, RELSEXT_ABOUT,Repository.ensureURI(newpid));
+        replateAttribute(doc, RELSEXT_ABOUT,FedoraUtil.ensureURI(newpid));
 
 
     }

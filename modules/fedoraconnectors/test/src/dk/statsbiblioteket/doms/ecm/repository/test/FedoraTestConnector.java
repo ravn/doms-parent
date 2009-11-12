@@ -3,13 +3,13 @@ package dk.statsbiblioteket.doms.ecm.repository.test;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -42,7 +42,7 @@ public class FedoraTestConnector
 
 
     public boolean exists(String pid) {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         return object != null;
 
     }
@@ -53,7 +53,7 @@ public class FedoraTestConnector
     }
 
     public boolean isTemplate(String pid) {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             return false;
         } else{
@@ -69,7 +69,7 @@ public class FedoraTestConnector
 
 
     public boolean isContentModel(String pid) {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             return false;
         } else{
@@ -105,7 +105,7 @@ public class FedoraTestConnector
                 //of the form $object <somrel> <info:fedora/sometarget>
                 if (token.startsWith("$object")){
                     String[] elements = token.split("\\s");
-                    requiments.put(cutBraces(elements[1]),cutBraces(Repository.ensurePID(elements[2])));
+                    requiments.put(cutBraces(elements[1]),cutBraces(FedoraUtil.ensurePID(elements[2])));
                 }   else {
                     return new PidList();
                 }
@@ -144,17 +144,17 @@ public class FedoraTestConnector
     }
 
     public boolean addRelation(String from, String relation, String to) throws ObjectNotFoundException, FedoraConnectionException {
-        TestObject object = objects.get(Repository.ensurePID(from));
+        TestObject object = objects.get(FedoraUtil.ensurePID(from));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
-            Relation rel = new Relation(from,Repository.ensurePID(to),relation);
+            Relation rel = new Relation(from,FedoraUtil.ensurePID(to),relation);
             return object.add(rel);
         }
     }
 
     public boolean addLiteralRelation(String from, String relation, String value, String datatype) throws ObjectNotFoundException, FedoraConnectionException {
-        TestObject object = objects.get(Repository.ensurePID(from));
+        TestObject object = objects.get(FedoraUtil.ensurePID(from));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
@@ -164,7 +164,7 @@ public class FedoraTestConnector
     }
 
     public Document getObjectXml(String pid) throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
@@ -180,7 +180,7 @@ public class FedoraTestConnector
     }
 
     public List<Relation> getRelations(String pid) throws FedoraConnectionException, ObjectNotFoundException {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
@@ -189,7 +189,7 @@ public class FedoraTestConnector
     }
 
     public List<Relation> getRelations(String pid, String relation) throws FedoraConnectionException, ObjectNotFoundException {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
@@ -206,7 +206,7 @@ public class FedoraTestConnector
     }
 
     public Document getDatastream(String pid, String dsid) throws DatastreamNotFoundException, FedoraConnectionException, FedoraIllegalContentException, ObjectNotFoundException {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{
@@ -245,12 +245,16 @@ public class FedoraTestConnector
         return true;
     }
 
+    public String getUser() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public PidList getInheritingContentModels(String cmpid) throws FedoraConnectionException, ObjectNotFoundException {
         return new PidList();
     }
 
     public List<String> listDatastreams(String pid) throws FedoraConnectionException, ObjectNotFoundException {
-        TestObject object = objects.get(Repository.ensurePID(pid));
+        TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException();
         } else{

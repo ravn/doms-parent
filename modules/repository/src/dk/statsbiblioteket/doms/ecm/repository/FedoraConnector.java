@@ -324,6 +324,8 @@ public interface FedoraConnector {
     public boolean authenticate()
             throws FedoraConnectionException;
 
+    public String getUser();
+
     /**
      * The standard way to represent a relation
      */

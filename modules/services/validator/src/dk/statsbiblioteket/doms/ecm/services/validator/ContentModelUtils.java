@@ -1,6 +1,5 @@
 package dk.statsbiblioteket.doms.ecm.services.validator;
 
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
@@ -8,6 +7,8 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeExcep
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -45,20 +46,20 @@ public class ContentModelUtils {
      * @throws FedoraConnectionException
      * @throws ObjectNotFoundException
      */
-    public static CompoundContentModel getAsCompoundContentModel(String cmpid)
+    public static CompoundContentModel getAsCompoundContentModel(String cmpid, FedoraConnector fedoraConnector)
             throws FedoraIllegalContentException, FedoraConnectionException,
                    ObjectNotFoundException, ObjectIsWrongTypeException {
         LOG.trace("Entering");
         CompoundContentModel model = new CompoundContentModel();
 
 
-        List<String> inherited = Repository.getInheritedContentModels(cmpid);
+        List<String> inherited = fedoraConnector.getInheritedContentModels(cmpid);
 
         for (String oldcm:inherited){
-            updateModel(oldcm,model);
+            updateModel(oldcm,model,fedoraConnector);
         }
 
-        updateModel(cmpid, model);
+        updateModel(cmpid, model,fedoraConnector);
         return model;
     }
 
@@ -71,6 +72,7 @@ public class ContentModelUtils {
      *
      *
      * @param pid The pid for an object
+     * @param fedoraConnector
      * @return The compound content model for the object or content model.
      * @throws FedoraConnectionException     on trouble communicating with
      *                                       Fedora.
@@ -78,7 +80,7 @@ public class ContentModelUtils {
      *                                       information (i.e. non-existing PIDs
      *                                       referred, illegal XML, etc.)
      */
-    public static CompoundContentModel getCompoundContentModel(String pid)
+    public static CompoundContentModel getCompoundContentModel(String pid, FedoraConnector fedoraConnector)
             throws FedoraIllegalContentException, FedoraConnectionException,
                    ObjectNotFoundException, ObjectIsWrongTypeException {
 
@@ -87,13 +89,13 @@ public class ContentModelUtils {
 
 
         //Get pids of all content models
-        List<String> pids = Repository.getContentModels(pid);
+        List<String> pids = fedoraConnector.getContentModels(pid);
 
         LOG.trace("Got base list of pids");
 
         // Update content model with info from all models.
         for (String p: pids){
-            updateModel(p,model);
+            updateModel(p,model,fedoraConnector);
         }
 
         return model;
@@ -109,7 +111,8 @@ public class ContentModelUtils {
      * @throws ObjectNotFoundException
      */
     private static void updateModel(String p,
-                                    CompoundContentModel model
+                                    CompoundContentModel model,
+                                    FedoraConnector fedoraConnector
     )
             throws FedoraConnectionException,
                    FedoraIllegalContentException, ObjectNotFoundException {
@@ -123,7 +126,7 @@ public class ContentModelUtils {
         }
 
         List<String> datastreams;
-        datastreams = Repository.listDatastreams(p);
+        datastreams = fedoraConnector.listDatastreams(p);
 
         for (String def : datastreams) {
             if (def.equals(
@@ -132,7 +135,7 @@ public class ContentModelUtils {
                 Document newOntology = null;
 
                 try {
-                    newOntology = Repository.getDatastream(p,def);
+                    newOntology = fedoraConnector.getDatastream(p,def);
                 } catch (DatastreamNotFoundException e) {
                     throw new FedoraIllegalContentException(
                             "Fedora object does not have datastream that it " +
@@ -146,7 +149,7 @@ public class ContentModelUtils {
                 Document dsCompositeXml;
 
                 try {
-                    dsCompositeXml = Repository.getDatastream(
+                    dsCompositeXml = fedoraConnector.getDatastream(
                             p,def);
                 } catch (DatastreamNotFoundException e) {
                     throw new FedoraIllegalContentException(
@@ -156,7 +159,7 @@ public class ContentModelUtils {
 
 
                 try {
-                    addDatastream(model.getDatastreams(), dsCompositeXml, p);
+                    addDatastream(model.getDatastreams(), dsCompositeXml, p,fedoraConnector);
                 } catch (DatastreamNotFoundException e) {
                     throw new FedoraIllegalContentException("Illegal content" +
                                                             "model",e);
@@ -173,7 +176,7 @@ public class ContentModelUtils {
      * @param newpid The list to add to.
      */
     private static void addPid(List<String> pids, String newpid) {
-        newpid = Repository.ensurePID(newpid);
+        newpid = FedoraUtil.ensurePID(newpid);
         if (!pids.contains(newpid)) {
             pids.add(newpid);
         }
@@ -208,7 +211,8 @@ public class ContentModelUtils {
      */
     private static void addDatastream(List<Datastream> datastreams,
                                       Document dsCompositeXml,
-                                      String pid)
+                                      String pid,
+                                      FedoraConnector fedoraConnector)
             throws FedoraIllegalContentException,
                    FedoraConnectionException,
                    DatastreamNotFoundException,
@@ -266,7 +270,7 @@ public class ContentModelUtils {
 
             // Get schema, if not already set, and add it to the datastream
             if (datastream.getXmlSchema() == null) {
-                addSchemaInformationToDatastream(datastream, dsTypeModel, pid);
+                addSchemaInformationToDatastream(datastream, dsTypeModel, pid, fedoraConnector);
             }
         }
     }
@@ -346,6 +350,7 @@ public class ContentModelUtils {
      * @param datastream  The datastream to add schema information to.
      * @param dsTypeModel The dsTypeModel element to read the information from.
      * @param pid the pid of the current content model
+     * @param fedoraConnector
      * @throws DatastreamNotFoundException
      * @throws FedoraConnectionException
      * @throws FedoraIllegalContentException
@@ -353,7 +358,7 @@ public class ContentModelUtils {
      */
     private static void addSchemaInformationToDatastream(Datastream datastream,
                                                          Element dsTypeModel,
-                                                         String pid)
+                                                         String pid, FedoraConnector fedoraConnector)
             throws
             FedoraIllegalContentException,
             FedoraConnectionException,
@@ -377,8 +382,8 @@ public class ContentModelUtils {
                 if (schemaObject == null || schemaObject.equals("")) {
                     schemaObject = pid;
                 }
-                schemaObject = Repository.ensurePID(schemaObject);
-                Document schema = Repository.getDatastream(
+                schemaObject = FedoraUtil.ensurePID(schemaObject);
+                Document schema = fedoraConnector.getDatastream(
                         schemaObject, schemaDatastream);
 
                 datastream.setXmlSchema(schema);

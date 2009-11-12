@@ -14,9 +14,9 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeExcep
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
-import dk.statsbiblioteket.doms.ecm.repository.Repository;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,10 +66,10 @@ public class FedoraClientConnector
     public boolean addRelation(String from, String relation, String to)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
-        from = Repository.ensurePID(from);
-        to = Repository.ensureURI(to);
+        from = FedoraUtil.ensurePID(from);
+        to = FedoraUtil.ensureURI(to);
         if (!exists(from)) {
-            throw new ObjectNotFoundException("The object '" + from + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + from + "' was not found in the Repository");
         }
         try {
             return getAPIM().addRelationship(from, relation, to, false, null);
@@ -87,10 +87,10 @@ public class FedoraClientConnector
                                       String datatype)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
-        from = Repository.ensurePID(from);
+        from = FedoraUtil.ensurePID(from);
 
         if (!exists(from)) {
-            throw new ObjectNotFoundException("The object '" + from + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + from + "' was not found in the Repository");
         }
         try {
             return getAPIM().addRelationship(from,
@@ -114,9 +114,9 @@ public class FedoraClientConnector
     public List<Relation> getRelations(String pid, String relation)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
         }
         try {
             RelationshipTuple[] relations = getAPIM().getRelationships(pid,
@@ -148,9 +148,9 @@ public class FedoraClientConnector
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException {
 
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
         }
 
         ObjectProfile profile;
@@ -252,9 +252,9 @@ public class FedoraClientConnector
     public PidList getInheritingContentModels(String cmpid)
             throws FedoraConnectionException, ObjectNotFoundException,
                    ObjectIsWrongTypeException, FedoraIllegalContentException {
-        cmpid = Repository.ensureURI(cmpid);
+        cmpid = FedoraUtil.ensureURI(cmpid);
         if (!exists(cmpid)) {
-            throw new ObjectNotFoundException("Object '" + cmpid + "' does not exist in the repository");
+            throw new ObjectNotFoundException("Object '" + cmpid + "' does not exist in the Repository");
         }
         if (!isContentModel(cmpid)) {
             throw new ObjectIsWrongTypeException("Object '" + cmpid + "' is not a content model");
@@ -269,7 +269,7 @@ public class FedoraClientConnector
     public PidList getInheritedContentModels(String cmpid)
             throws FedoraConnectionException, ObjectNotFoundException,
                    ObjectIsWrongTypeException, FedoraIllegalContentException {
-        cmpid = Repository.ensurePID(cmpid);
+        cmpid = FedoraUtil.ensurePID(cmpid);
         return getInheritedContentModelsBreadthFirst(new PidList(cmpid));
     }
 
@@ -285,13 +285,17 @@ public class FedoraClientConnector
         return true;
     }
 
+    public String getUser() {
+        return token.getUsername();
+    }
+
 
     public List<String> listDatastreams(String pid)
             throws FedoraConnectionException, ObjectNotFoundException,
                    FedoraIllegalContentException {
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
         }
 
         try {
@@ -345,10 +349,10 @@ public class FedoraClientConnector
     public Document getObjectXml(String pid)
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException {
-        pid = Repository.ensurePID(pid);
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
         }
 
 
@@ -388,9 +392,9 @@ public class FedoraClientConnector
             throws DatastreamNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException, ObjectNotFoundException {
 
-        pid = Repository.ensurePID(pid);
+        pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the repository");
+            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
         }
 
         MIMETypedStream dsCompositeDatastream;
@@ -457,9 +461,9 @@ public class FedoraClientConnector
 
     public boolean hasContentModel(String pid, String cmpid)
             throws FedoraIllegalContentException, FedoraConnectionException {
-        PidList contentmodels = query("select $object\n" + "from <#ri>\n" + "where\n <" + Repository.ensureURI(
+        PidList contentmodels = query("select $object\n" + "from <#ri>\n" + "where\n <" + FedoraUtil.ensureURI(
                 pid) + "> <" + Constants.HAS_MODEL + "> " + "$object\n");
-        return contentmodels.contains(Repository.ensurePID(cmpid));
+        return contentmodels.contains(FedoraUtil.ensurePID(cmpid));
 
     }
 
@@ -487,7 +491,7 @@ public class FedoraClientConnector
         try {
             while (tupleIterator.hasNext()) {
                 final Map<String, Node> tuple = tupleIterator.next();
-                String subject = Repository.ensurePID(tuple.get("object").toString());
+                String subject = FedoraUtil.ensurePID(tuple.get("object").toString());
                 pidlist.add(subject);
             }
         } catch (TrippiException e) {
