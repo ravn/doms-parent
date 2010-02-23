@@ -42,15 +42,17 @@
     </orderEntry>
     <orderEntry type="library" name="log4j-1.2.15" level="project" />
     <orderEntry type="module-library">
-      <library name="webservice-common">
+      <library name="domsutil-0.0.2#SNAPSHOT">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/webservice-common/jars/webservice-common.jar!/" />
+          <root url="file://$MODULE_DIR$/lib/domsutil-0.0.2#SNAPSHOT/jars" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.2#SNAPSHOT/apidocs/domsutil-0.0.2#SNAPSHOT-doc.zip!/domsutil-0.0.2#SNAPSHOT" />
+        </JAVADOC>
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/webservice-common/src/domsutil-0.0.1#SNAPSHOT-src.zip!/" />
-          <root url="jar://$MODULE_DIR$/lib/webservice-common/src/webservice-common-src.zip!/" />
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.2#SNAPSHOT/src/domsutil-0.0.2#SNAPSHOT-src.zip!/domsutil-0.0.2#SNAPSHOT/modules/webservice-common/src" />
         </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/lib/domsutil-0.0.2#SNAPSHOT/jars" recursive="false" />
       </library>
     </orderEntry>
   </component>
