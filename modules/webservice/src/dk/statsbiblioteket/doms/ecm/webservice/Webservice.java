@@ -2,6 +2,7 @@ package dk.statsbiblioteket.doms.ecm.webservice;
 
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.InitialisationException;
 import dk.statsbiblioteket.doms.ecm.repository.*;
 import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
@@ -77,7 +78,7 @@ public class Webservice {
         //TODO bomb if pidgenerator cannot be made
     }
 
-    private synchronized void initialise(){
+    private synchronized void initialise() throws InitialisationException {
         if (initialised){
             return;
         }
@@ -98,17 +99,15 @@ public class Webservice {
                     FedoraUserToken token = new FedoraUserToken(fedoraserverurl,creds.getUsername(),creds.getPassword());
                     fedoraConnector.initialise(token);
                 } catch (InstantiationException e) {//TODO
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    throw new InitialisationException(e);
                 } catch (IllegalAccessException e) {//TODO
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    throw new InitialisationException(e);
                 }
             }
         } catch (ClassNotFoundException e) {//TODO
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new InitialisationException(e);
         }
-
         initialised = true;
-
     }
 
 
