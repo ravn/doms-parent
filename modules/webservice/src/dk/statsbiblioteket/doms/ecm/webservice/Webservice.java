@@ -88,7 +88,7 @@ public class Webservice {
 
             creds = ExtractCredentials.extract(request);
         } catch (CredentialsException e) {//TODO No credentials supplied
-            throw new WebApplicationException(401);
+            throw new WebApplicationException(e,401);
         }
         try {
             Class<?> fedoraconnectorclass = Class.forName(fedoraconnectorclassstring);
@@ -108,7 +108,7 @@ public class Webservice {
         }
 
         initialised = true;
-        //TODO extract username/password from request and initialise FedoraConnector
+
     }
 
 
