@@ -16,13 +16,17 @@
 
     <!--Project libs used by this module-->
     <dirset id="project.libs" dir="${global.dir}/lib/">
-        <include name="${domsutil.lib}"/>
         <include name="${sbutils.lib}"/>
         <include name="${surveillance.lib}"/>
-        <include name="${jersey.lib}"/>
-        <include name="${jsr311-api.lib}"/>
         <include name="${commons-logging.lib}"/>
+        <include name="${fedoraclient.lib}"/>
     </dirset>
+
+    <dirset id="build.project.libs" dir="${global.dir}/lib/">
+        <include name="${servlet.lib}"/>
+
+    </dirset>
+
 
     <property name="global.dir" value="${basedir}/../../"/>
 
@@ -31,6 +35,7 @@
         <include name="services/view"/>
         <include name="services/validator"/>
         <include name="services/templates"/>
+        <include name="fedoraconnectors/fedoraclient"/>
     </dirset>
 
 </project>

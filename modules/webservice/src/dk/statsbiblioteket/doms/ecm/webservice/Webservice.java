@@ -9,10 +9,7 @@ import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.doms.ecm.services.validator.ValidatorSubsystem;
 import dk.statsbiblioteket.doms.ecm.services.view.ViewSubsystem;
-import dk.statsbiblioteket.doms.webservices.ConfigCollection;
-import dk.statsbiblioteket.doms.webservices.ExtractCredentials;
-import dk.statsbiblioteket.doms.webservices.Credentials;
-import dk.statsbiblioteket.doms.webservices.CredentialsException;
+import dk.statsbiblioteket.doms.webservices.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -20,10 +17,13 @@ import org.w3c.dom.Document;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.TransformerException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 import java.io.StringWriter;
 
@@ -79,17 +79,18 @@ public class Webservice {
     }
 
     private synchronized void initialise() throws InitialisationException {
+/*
         if (initialised){
             return;
         }
+*/
         String fedoraserverurl = ConfigCollection.getProperties().getProperty("fedoraLocation");
         String fedoraconnectorclassstring = ConfigCollection.getProperties().getProperty("fedoraConnector");
         Credentials creds = null;
-        try {
-
-            creds = ExtractCredentials.extract(request);
-        } catch (CredentialsException e) {//TODO No credentials supplied
-            throw new WebApplicationException(e,401);
+        creds = (Credentials) request.getAttribute("Credentials");
+        if (creds == null){
+            log.warn("No credentials found, using empty creds");
+            creds = new Credentials("","");
         }
         try {
             Class<?> fedoraconnectorclass = Class.forName(fedoraconnectorclassstring);
@@ -131,7 +132,7 @@ public class Webservice {
             @PathParam("ecmpid") String cmpid
     ) throws EcmException {
         log.trace("Entering validate with objpid='"
-                  +objpid+"' and cmpid='"+cmpid+"'");
+                +objpid+"' and cmpid='"+cmpid+"'");
         initialise();
         return validator.validateAgainst(objpid,cmpid,fedoraConnector);
     }

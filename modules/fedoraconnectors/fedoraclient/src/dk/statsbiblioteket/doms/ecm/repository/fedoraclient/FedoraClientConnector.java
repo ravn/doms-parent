@@ -483,9 +483,16 @@ public class FedoraClientConnector
         try {
             tupleIterator = getFedoraClient().getTuples(map);
         } catch (IOException e) {
+            if (e.getMessage().startsWith("Request failed [401 Unauthorized]")){
+                throw new FedoraConnectionException(
+                    "IO exception when communication with fedora",
+                    e);
+                //TODO here put proper error because the credentials was not valid
+            } else{
             throw new FedoraConnectionException(
                     "IO exception when communication with fedora",
                     e);
+            }
         }
 
         try {
