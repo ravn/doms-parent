@@ -1,9 +1,30 @@
 <project name="webservice" basedir=".">
 
+
     <property name="global.dir" value="${basedir}/../../"/>
+    <property name="warfilename" value="ecm.war"/>
 
     <!--Contain the normal build tasks, including war-->
-    <import file="${global.dir}/build/build-module.xml"/>
+    <import file="${global.dir}/build/build-webservice-module.xml"/>
+
+    <!--The location of the fedora schemas-->
+    <fileset id="schema.files" dir="${basedir}/data/fedora-return-types">
+        <include name="*.xsd"/>
+    </fileset>
+
+
+
+    <!--Project libs used by this module-->
+    <dirset id="project.libs" dir="${global.dir}/lib/">
+        <include name="${domsutil.lib}"/>
+        <include name="${sbutils.lib}"/>
+        <include name="${surveillance.lib}"/>
+        <include name="${jersey.lib}"/>
+        <include name="${jsr311-api.lib}"/>
+        <include name="${commons-logging.lib}"/>
+    </dirset>
+
+    <property name="global.dir" value="${basedir}/../../"/>
 
     <dirset id="module.dependencies" dir="${global.dir}/modules/">
         <include name="repository"/>
@@ -11,11 +32,6 @@
         <include name="services/validator"/>
         <include name="services/templates"/>
     </dirset>
-
-    <dirset id="project.libs" dir="${global.dir}/lib/">
-        <include name="${commons-logging.lib}"/>
-    </dirset>
-
 
 </project>
 
