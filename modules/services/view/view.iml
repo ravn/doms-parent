@@ -7,9 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="log4j" level="project" />
     <orderEntry type="module" module-name="repository" />
-    <orderEntry type="library" name="log4j-1.2.15" level="project" />
+    <orderEntry type="library" name="commons-loggings-1.1.1" level="project" />
   </component>
 </module>
 

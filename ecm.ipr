@@ -425,14 +425,6 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="log4j-1.2.15">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15/jars/log4j-1.2.15.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.15/jars/commons-logging.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
     <library name="FedoraClient">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.2/jars/xmlpull_1_1_3_4a.jar!/" />
@@ -482,6 +474,17 @@
         <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/fedorasurveyor/src" />
         <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/rest/src" />
         <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/status/src" />
+      </SOURCES>
+    </library>
+    <library name="commons-loggings-1.1.1">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/jars/commons-logging-1.1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/apidocs/commons-logging-1.1.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/src/commons-logging-1.1.1-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
