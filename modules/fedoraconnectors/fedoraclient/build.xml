@@ -1,31 +1,17 @@
-<project name="fedoraclient"  basedir=".">
+<project name="fedoraclient" basedir=".">
 
     <property name="global.dir" value="${basedir}/../../../"/>
 
-    <!--
-       Module specific properties
-    -->
-    <property file="${basedir}/build.properties" />
+    <!--Contain the normal build tasks, including war-->
+    <import file="${global.dir}/build/build-module.xml"/>
 
-  
+    <dirset id="module.dependencies" dir="${global.dir}/modules/">
+        <include name="repository"/>
+    </dirset>
 
-    <fileset id="module.dependencies" dir="${global.dir}/modules">
-        <include name="repository/dist/*.jar"/>
-    </fileset>
-
-
-    <fileset id="project.libs" dir="${global.dir}/lib">
-        <include name="FedoraClient-3.2/jars/*.jar"/>
-    </fileset>
-
-
-
-    <target  name="depends">
-        <ant dir="${global.dir}/modules/repository" inheritAll="false" target="jar"/>
-    </target>
-
-    <import file="${global.dir}/build-includes.xml"/>
-
+    <dirset  id="project.libs" dir="${global.dir}/lib">
+        <include name="${fedoraclient.lib}"/>
+    </dirset>
 
 </project>
 

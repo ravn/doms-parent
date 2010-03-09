@@ -1,35 +1,17 @@
-<project name="validator"  basedir=".">
+<project name="validator" basedir=".">
 
-        <property name="global.dir" value="${basedir}/../../../"/>
+    <property name="global.dir" value="${basedir}/../../../"/>
 
-    <!--
-       Module specific properties
-    -->
-    <property file="${basedir}/build.properties" />
+    <!--Contain the normal build tasks, including war-->
+    <import file="${global.dir}/build/build-module.xml"/>
+
+    <dirset id="module.dependencies" dir="${global.dir}/modules/">
+        <include name="repository"/>
+    </dirset>
+
+    <dirset id="project.libs" dir="${global.dir}/lib/">
+        <include name="${commons-logging.lib}"/>
+    </dirset>
     
-    <fileset id="project.libs" dir="${global.dir}/lib">
-        <include name="log4j-1.2.15/**/*.jar"/>
-    </fileset>
-
-
-    <fileset id="module.dependencies" dir="${global.dir}/modules">
-        <include name="repository/dist/*.jar"/>
-    </fileset>
-
-    <target  name="depends">
-        <ant dir="${global.dir}/modules/repository" inheritAll="false" target="jar"/>
-    </target>
-
-    <import file="${global.dir}/build-includes.xml"/>
-
 
 </project>
-
-
-
-
-
-
-
-
-

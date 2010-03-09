@@ -1,21 +1,14 @@
-<project name="FedoraTestConnector"  basedir=".">
+<project name="fedoraconnector-test" basedir=".">
 
     <property name="global.dir" value="${basedir}/../../../"/>
 
-    <!--
-       Module specific properties
-    -->
-    <property file="${basedir}/build.properties" />
+    <!--Contain the normal build tasks, including war-->
+    <import file="${global.dir}/build/build-module.xml"/>
 
-    <fileset id="module.dependencies" dir="${global.dir}/modules">
-        <include name="repository/dist/*.jar"/>
-    </fileset>
+    <dirset id="module.dependencies" dir="${global.dir}/modules/">
+        <include name="repository"/>
+    </dirset>
 
-    <target  name="depends">
-        <ant dir="${global.dir}/modules/repository" target="jar"/>
-    </target>
-
-    <import file="${global.dir}/build-includes.xml"/>
 
 
 </project>

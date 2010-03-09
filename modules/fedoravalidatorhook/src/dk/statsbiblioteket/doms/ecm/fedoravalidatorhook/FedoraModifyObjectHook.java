@@ -7,12 +7,13 @@ import fedora.server.errors.ModuleInitializationException;
 import fedora.server.errors.ServerInitializationException;
 import fedora.server.management.ManagementModule;
 import fedora.server.proxy.AbstractInvocationHandler;
-import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,8 +40,7 @@ import java.util.Arrays;
 public class FedoraModifyObjectHook extends AbstractInvocationHandler{
 
     /** Logger for this class. */
-    private static Logger LOG =
-            Logger.getLogger(FedoraModifyObjectHook.class.getName());
+    private static Log LOG = LogFactory.getLog(FedoraModifyObjectHook.class);
 
 
     public static final String HOOKEDMETHOD = "modifyObject";

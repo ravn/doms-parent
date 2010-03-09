@@ -469,6 +469,21 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="Surveillance-0.0.3">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/jars/surveillance-status.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/jars/surveillance-rest.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/apidocs/surveillance-0.0.3-doc.zip!/surveillance-0.0.3" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/surveyor/src" />
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/fedorasurveyor/src" />
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/rest/src" />
+        <root url="jar://$PROJECT_DIR$/lib/surveillance-0.0.3/src/surveillance-0.0.3-src.zip!/surveillance-0.0.3/modules/status/src" />
+      </SOURCES>
+    </library>
   </component>
 </project>
 
