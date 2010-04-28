@@ -41,19 +41,19 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="domsutil-0.0.5">
+      <library name="domsutil-0.0.6">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/lib/domsutil-0.0.5/jars" />
+          <root url="file://$MODULE_DIR$/lib/domsutil-0.0.6/jars" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.5/apidocs/domsutil-0.0.5-doc.zip!/domsutil-0.0.5" />
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.6/apidocs/domsutil-0.0.6-doc.zip!/domsutil-0.0.6" />
         </JAVADOC>
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.5/src/domsutil-0.0.5-src.zip!/domsutil-0.0.5/modules/surveyable/surveyable_impl/src" />
-          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.5/src/domsutil-0.0.5-src.zip!/domsutil-0.0.5/modules/webservice-common/src" />
-          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.5/src/domsutil-0.0.5-src.zip!/domsutil-0.0.5/modules/surveyable/surveyable_interface/src" />
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.6/src/domsutil-0.0.6-src.zip!/domsutil-0.0.6/modules/surveyable/surveyable_interface/src" />
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.6/src/domsutil-0.0.6-src.zip!/domsutil-0.0.6/modules/webservice-common/src" />
+          <root url="jar://$MODULE_DIR$/lib/domsutil-0.0.6/src/domsutil-0.0.6-src.zip!/domsutil-0.0.6/modules/surveyable/surveyable_impl/src" />
         </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/lib/domsutil-0.0.5/jars" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib/domsutil-0.0.6/jars" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="library" name="commons-loggings-1.1.1" level="project" />
