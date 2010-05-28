@@ -4,7 +4,7 @@
                   - how bytestreams and java types might be marshalled/demarshalled over the wire
                   - how the storage subsystem is implemented.</comment>
      <param name="decorator1" value="fedora.server.messaging.NotificationInvocationHandler"/>
-+    <param name="decorator2" value="dk.statsbiblioteket.doms.ecm.services.validator.FedoraModifyObjectHook"/>
++    <param name="decorator2" value="dk.statsbiblioteket.doms.ecm.fedoravalidatorhook.FedoraModifyObjectHook"/>
 +    <param name="validator.webservice.location" value="$ECMSERVER/ecm/validate/">
 +       <comment>Specifies the location of the validator webservice invoked by Decorator 4 above.</comment>
 +    </param>
