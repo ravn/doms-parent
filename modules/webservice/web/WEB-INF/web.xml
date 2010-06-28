@@ -26,6 +26,11 @@
         <param-value>dk.statsbiblioteket.doms.ecm.repository.PidGeneratorImpl</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>dk.statsbiblioteket.doms.ecm.repository.pidgenerator.wsdllocation</param-name>
+        <param-value>http://localhost:8080/pidgenerator/pidgenerator/?wsdl</param-value>
+    </context-param>
+
     <listener>
         <listener-class>
             dk.statsbiblioteket.doms.webservices.ConfigContextListener

@@ -1,15 +1,45 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
+import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebserviceService;
+import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebservice;
+import dk.statsbiblioteket.doms.pidgenerator.CommunicationException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
+import dk.statsbiblioteket.doms.webservices.ConfigCollection;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 /**
- * The original nasty pid generator
  */
 public class PidGeneratorImpl extends PidGenerator {
 
+    private PidGeneratorSoapWebservice pidgen;
 
-    private static final int FEDORA_PID_MAX_LENGTH = 64;
-    private AtomicInteger counter = new AtomicInteger(0);
+
+    public PidGeneratorImpl() throws PIDGeneratorException {
+
+        String WSDLLOCATION_STRING
+                = ConfigCollection.getProperties().getProperty(
+                "dk.statsbiblioteket.doms.ecm.repository.pidgenerator.wsdllocation");
+
+        URL WSDLLOCATION = null;
+        try {
+            WSDLLOCATION = new URL(WSDLLOCATION_STRING);
+        } catch (MalformedURLException e) {
+            throw new PIDGeneratorException("Failed to parse the location of the pidgenerator service",e);
+        }
+
+        PidGeneratorSoapWebserviceService service
+                = new PidGeneratorSoapWebserviceService(WSDLLOCATION,
+                                                        new QName(
+                                                                "http://pidgenerator.doms.statsbiblioteket.dk/",
+                                                                "PidGeneratorSoapWebservicePort"));
+        pidgen = service.getPort(PidGeneratorSoapWebservice.class);
+    }
+
     /**
      * Generate the next available PID.
      *
@@ -18,47 +48,14 @@ public class PidGeneratorImpl extends PidGenerator {
      * @return The next available (unique) PID, possibly including (part of) the
      * requested infix.
      */
-    public String generateNextAvailablePID(String infix) {
-/*                  log.trace("Entering generateNextAvailablePID with infix = " + infix);*/
-        // Calling this method should never fail.
+    public String generateNextAvailablePID(String infix)
+            throws PIDGeneratorException {
 
-        if (infix == null) {
-            infix = "";
+        try {
+            return pidgen.generatePidWithInfix(infix);
+        } catch (CommunicationException e) {
+            throw new PIDGeneratorException("Encountered a communication problem with the pidgenerator webservice",e);
         }
-
-        // Implementation note: Due to a length restriction of 64 characters
-        // for Fedora PIDs, any infix longer than approx 50 characters will
-        // be shortened, to ensure space for adding a unique part to the PID.
-        String paddedCounter;
-        String namespace = "demo:";
-        // currentTimeMillis is a long, so max 64 bit,
-        // so hex-version is max 16 chars.
-        int rightLengthOfCurrentTimeMillis = 16;
-        int rightLengthOfUniquifyingCounter = 4;
-        int rightLengthOfUniquifier
-                = rightLengthOfCurrentTimeMillis
-                  + rightLengthOfUniquifyingCounter;
-        int rightLengthOfInfix = Math.min(FEDORA_PID_MAX_LENGTH
-                                          - namespace.length()
-                                          - rightLengthOfUniquifier, infix.length());
-        String uniquifier = Long.toHexString(System.currentTimeMillis());
-
-        while (uniquifier.length() < rightLengthOfCurrentTimeMillis) {
-            uniquifier = '0' + uniquifier;
-        }
-
-        // add counter to make uniquifier unique for several calls within the
-        // same millisecond.
-        // TODO We should consider eliminating the probability of two equal
-        // pids, f.x. be checking against the Fedora repository..
-        paddedCounter = Integer.toString((counter.getAndIncrement() % 10000));
-        while (paddedCounter.length() < rightLengthOfUniquifyingCounter) {
-            paddedCounter = '0' + paddedCounter;
-        }
-        uniquifier += paddedCounter;
-
-/*                  log.trace("Leaving generateNextAvailablePID");*/
-        return namespace + infix.substring(0, rightLengthOfInfix) + uniquifier;
     }
 
 
