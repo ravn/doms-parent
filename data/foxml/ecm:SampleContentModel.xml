@@ -81,11 +81,11 @@
             <foxml:xmlContent>
                 <view:views xmlns:view="http://ecm.sourceforge.net/types/view/0/2/#"
                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                    <view:viewanle name="DEMO">
+                    <view:viewangle name="DEMO">
                         <view:relations>
                             <demo:isPartOfCollection xmlns:demo="http://ecm.sourceforge.net/relations/default/0/1/#"/>
                         </view:relations>
-                    </view:viewanle>
+                    </view:viewangle>
                 </view:views>
             </foxml:xmlContent>
         </foxml:datastreamVersion>
