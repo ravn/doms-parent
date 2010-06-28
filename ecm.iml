@@ -7,7 +7,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="repository" />
     <orderEntry type="library" name="FedoraClient" level="project" />
-    <orderEntry type="library" name="Surveillance-0.0.3" level="project" />
+    <orderEntry type="library" name="domsutils" level="project" />
   </component>
 </module>
 

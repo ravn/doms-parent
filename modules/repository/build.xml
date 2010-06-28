@@ -29,7 +29,14 @@
 
     <property name="global.dir" value="${basedir}/../../"/>
 
+        <property file="${global.dir}/build.properties"/>
+
     <!--Contain the normal build tasks, including war-->
     <import file="${global.dir}/build/build-module.xml"/>
+
+    <!--Project libs used by this module-->
+    <dirset id="project.libs" dir="${global.dir}/lib/">
+        <include name="${domsutils.lib}"/>
+    </dirset>
 
 </project>

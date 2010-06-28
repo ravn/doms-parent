@@ -4,6 +4,8 @@
     <property name="global.dir" value="${basedir}/../../"/>
     <property name="warfilename" value="ecm.war"/>
 
+    <property file="${global.dir}/build.properties"/>
+
     <!--Contain the normal build tasks, including war-->
     <import file="${global.dir}/build/build-webservice-module.xml"/>
 
@@ -17,6 +19,7 @@
     <!--Project libs used by this module-->
     <dirset id="project.libs" dir="${global.dir}/lib/">
         <include name="${sbutils.lib}"/>
+        <include name="${domsutils.lib}"/>
         <include name="${surveillance.lib}"/>
         <include name="${commons-logging.lib}"/>
         <include name="${fedoraclient.lib}"/>

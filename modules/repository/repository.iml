@@ -7,6 +7,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="pidgenerator">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/PidGeneratorInterfaceSnapshot/jars/pidgeneratorInterface.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="domsutils" level="project" />
   </component>
 </module>
 
