@@ -10,7 +10,8 @@
     <orderEntry type="module-library">
       <library name="Fedora Server">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/fedora-server-3.2/jars/classes.zip!/" />
+          <root url="jar://$MODULE_DIR$/lib/fedora-3.4/jars/fcrepo-server-3.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/fedora-3.4/jars/fcrepo-common-3.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

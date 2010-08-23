@@ -1,6 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.fedoravalidatorhook;
 
-import fedora.server.errors.ServerException;
+import org.fcrepo.server.errors.ServerException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,7 +9,7 @@ import fedora.server.errors.ServerException;
  * Time: 1:02:12 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ValidationFailedException extends ServerException{
+public class ValidationFailedException extends ServerException {
     /**
      * Constructs a new ServerException.
      *

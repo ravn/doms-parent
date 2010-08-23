@@ -1,12 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.fedoravalidatorhook;
 
 
-import fedora.common.Constants;
-import fedora.server.Server;
-import fedora.server.errors.ModuleInitializationException;
-import fedora.server.errors.ServerInitializationException;
-import fedora.server.management.ManagementModule;
-import fedora.server.proxy.AbstractInvocationHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,6 +8,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fcrepo.server.proxy.AbstractInvocationHandler;
+import org.fcrepo.server.management.Management;
+import org.fcrepo.server.management.ManagementModule;
+import org.fcrepo.server.Server;
+import org.fcrepo.server.errors.ServerInitializationException;
+import org.fcrepo.server.errors.ModuleInitializationException;
+import org.fcrepo.common.Constants;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,7 +38,7 @@ import java.util.Arrays;
  * This invocationhandler is simple. If hooks the modifyObject method. When the state is set to Active, the validator
  * is invoked. A server exception with the problems is thrown, and the state is not changed.
  */
-public class FedoraModifyObjectHook extends AbstractInvocationHandler{
+public class FedoraModifyObjectHook extends AbstractInvocationHandler {
 
     /** Logger for this class. */
     private static Log LOG = LogFactory.getLog(FedoraModifyObjectHook.class);
@@ -51,6 +52,8 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler{
     private String username;
     private String password;
     private String webservicelocation;
+
+    private Management management;
 
     public void init()  {
         if (initialised){
@@ -93,6 +96,7 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler{
             LOG.info("No validator.webservice.fedora.password specified, using default password: "+ password);
         }
 
+        management = m_manager;
         initialised = true;
 
     }
@@ -112,6 +116,10 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler{
         //If we are here, we have modifyObject
         LOG.info("We are hooking method "+method.getName());
 
+        //args[0] = context
+        //args[1] = pid
+        //args[2] = state
+
         //If the call does not change the state to active, pass through
         String state = (String) args[2];
         if (!(state != null && state.startsWith("A"))){
@@ -123,6 +131,16 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler{
         LOG.info("The method was called with the pid " + pid);
 
         Document result = validate(pid);
+/*
+        Validation validation = management.validate((Context) args[0], pid);
+        if (validation.isValid()){
+            return callMethod(method,args);
+        } else {
+            String problems = reportProblems(docelement);
+            throw new ValidationFailedException(null,problems,null,null,null);
+        }
+*/
+
         Element docelement = result.getDocumentElement();
 
         if (isValid(docelement)){
@@ -229,6 +247,7 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler{
         try {
             return method.invoke(target,args);
         } catch (InvocationTargetException e) {
+
             Throwable thr = e.getTargetException();
             LOG.debug("Rethrowing this exception, and loosing the stacktrace",thr);
             throw thr;
