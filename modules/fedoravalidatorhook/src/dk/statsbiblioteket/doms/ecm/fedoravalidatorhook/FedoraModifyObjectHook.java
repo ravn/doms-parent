@@ -54,29 +54,29 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
     private String webservicelocation;
 
     private Management management;
+    private Server serverModule;
 
     public void init()  {
         if (initialised){
             return;
         }
 
-        Server s_server;
+
         try {
-            s_server = Server.getInstance(new File(Constants.FEDORA_HOME), false);
+            serverModule = Server.getInstance(new File(Constants.FEDORA_HOME), false);
         } catch (ServerInitializationException e) {
             LOG.error("Unable to get access to the server instance, the " +
-                    "Validator will not be started.",e);
+                      "Validator will not be started.",e);
             return;
         } catch (ModuleInitializationException e) {
             LOG.error("Unable to get access to the server instance, the " +
-                    "Validator will not be started.",e);
+                      "Validator will not be started.",e);
             return;
         }
-        ManagementModule m_manager = (ManagementModule) s_server.getModule(
-                "fedora.server.management.Management");
+        ManagementModule m_manager = getManagement();
         if (m_manager == null) {
             LOG.error("Unable to get Management module from server, the " +
-                    "Validator will not start up.");
+                      "Validator will not start up.");
             return;
         }
 
@@ -101,10 +101,27 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
 
     }
 
+    /**
+     * Utility method to get the Management Module from the Server module
+     *
+     * @return the Management module
+     */
+    private ManagementModule getManagement() {
+        ManagementModule module = (ManagementModule) serverModule.getModule(
+                "org.fcrepo.server.management.Management");
+        if (module == null) {
+            module = (ManagementModule) serverModule.getModule(
+                    "fedora.server.management.Management");
+        }
+        return module;
+
+    }
+
+
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable, IOException {
 
         LOG.debug("Entering method invoke in FedoraModifyObjectHook with arguments: method='"
-                +method.getName()+"' and arguments: " + Arrays.toString(args));
+                  +method.getName()+"' and arguments: " + Arrays.toString(args));
         if (!initialised){
             init();
         }
