@@ -1,5 +1,5 @@
 <!--
-  ~ Doms build framework version 1.0.7
+  ~ Doms build framework version 1.0.9
   ~
   ~ $Id$
   ~ $Revision$
@@ -28,7 +28,7 @@
   -->
 
 <project name="macros">
-    <!--Part of doms build framework version 1.0.7-->
+    <!--Part of doms build framework version 1.0.9-->
 
 
     <property name="global.dir" value="${basedir}/.."/>
@@ -45,15 +45,21 @@
 
 
 
-    <path id="rhino.classpath">
+    <path id="script.classpath">
         <fileset dir="${my.basedir}/${rhino.folder}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${my.basedir}/${bsf.folder}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${my.basedir}/${commonslogging.folder}">
             <include name="*.jar"/>
         </fileset>
     </path>
 
     <!--Call the specified target in all the specified dirs-->
     <scriptdef name="dependsloop" language="javascript"
-               classpathref="rhino.classpath"
+               classpathref="script.classpath"
                src="${my.basedir}/dependsforloop.js">
         <attribute name="target"/>
         <attribute name="dependencies"/>
@@ -62,7 +68,7 @@
 
     <!--Create list of files from a dirset-->
     <scriptdef name="convertPath" language="javascript"
-               classpathref="rhino.classpath"
+               classpathref="script.classpath"
                src="${my.basedir}/convertPath.js">
         <attribute name="dirset"/>
         <attribute name="postfix"/>
