@@ -477,6 +477,13 @@
         <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.6/src/domsutil-0.0.6-src.zip!/domsutil-0.0.6/modules/surveyable/surveyable_impl/src" />
       </SOURCES>
     </library>
+    <library name="pidGeneratorInterface">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/PidGeneratorInterfaceSnapshot/jars/pidgeneratorInterface.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
 </project>
 

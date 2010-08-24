@@ -37,6 +37,7 @@
     <!--Project libs used by this module-->
     <dirset id="project.libs" dir="${global.dir}/lib/">
         <include name="${domsutils.lib}"/>
+        <include name="${pidgen.interface.lib}"/>
     </dirset>
 
 </project>
