@@ -57,14 +57,10 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
 
     private boolean initialised = false;
 
-    private String username;
-    private String password;
-    private String webservicelocation;
-
     private Management management;
     private Server serverModule;
 
-    public void init()  {
+    public synchronized void init()  {
         if (initialised){
             return;
         }
@@ -86,22 +82,6 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
             LOG.error("Unable to get Management module from server, the " +
                       "Validator will not start up.");
             return;
-        }
-
-        webservicelocation = m_manager.getParameter("validator.webservice.location");
-        if (webservicelocation == null){
-            webservicelocation = "http://localhost:8080/ecm/validate/";
-            LOG.info("No validator.webservice.location specified, using default location: "+ webservicelocation);
-        }
-        username = m_manager.getParameter("validator.webservice.fedora.username");
-        if (username == null){
-            username = "fedoraAdmin";
-            LOG.info("No validator.webservice.fedora.username specified, using default username: "+ username);
-        }
-        password = m_manager.getParameter("validator.webservice.fedora.password");
-        if (password == null){
-            password = "fedoraAdminPass";
-            LOG.info("No validator.webservice.fedora.password specified, using default password: "+ password);
         }
 
         management = m_manager;
