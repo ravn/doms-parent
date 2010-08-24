@@ -36,7 +36,7 @@ public class PidGeneratorImpl extends PidGenerator {
                 = new PidGeneratorSoapWebserviceService(WSDLLOCATION,
                                                         new QName(
                                                                 "http://pidgenerator.doms.statsbiblioteket.dk/",
-                                                                "PidGeneratorSoapWebservicePort"));
+                                                                "PidGeneratorSoapWebserviceService"));
         pidgen = service.getPort(PidGeneratorSoapWebservice.class);
     }
 
