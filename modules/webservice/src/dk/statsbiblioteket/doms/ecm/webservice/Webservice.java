@@ -7,7 +7,6 @@ import dk.statsbiblioteket.doms.ecm.repository.*;
 import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
-import dk.statsbiblioteket.doms.ecm.services.validator.ValidatorSubsystem;
 import dk.statsbiblioteket.doms.ecm.services.view.ViewSubsystem;
 import dk.statsbiblioteket.doms.webservices.*;
 import org.apache.commons.logging.Log;
@@ -42,7 +41,6 @@ public class Webservice {
 
     private ViewSubsystem view;
     private TemplateSubsystem temps;
-    private ValidatorSubsystem validator;
     private FedoraConnector fedoraConnector;
     private PidGenerator pidGenerator;
 
@@ -54,8 +52,6 @@ public class Webservice {
     public Webservice() {
         view = new ViewSubsystem();
         temps = new TemplateSubsystem();
-        validator = new ValidatorSubsystem();
-
 
         //read the config protoperties from ConfigCollection and initialise pidGenerator
         String pidgeneratorclassString = ConfigCollection.getProperties().getProperty("fedoraPidGenerator");
@@ -110,33 +106,6 @@ public class Webservice {
         }
         initialised = true;
     }
-
-
-    /*----------VALIDATE METHODS -------------------*/
-    @GET
-    @Path("validate/{objectpid}")
-    @Produces("text/xml")
-    public ValidationResult validate(
-            @PathParam("objectpid") String objpid
-    ) throws EcmException {
-        log.trace("Entering validate with objpid='"+objpid+"'");
-        initialise();
-        return validator.validate(objpid, fedoraConnector);
-    }
-
-    @GET
-    @Path("validate/{objectpid}/against/{ecmpid}")
-    @Produces("text/xml")
-    public ValidationResult validateAgainst(
-            @PathParam("objectpid") String objpid,
-            @PathParam("ecmpid") String cmpid
-    ) throws EcmException {
-        log.trace("Entering validate with objpid='"
-                +objpid+"' and cmpid='"+cmpid+"'");
-        initialise();
-        return validator.validateAgainst(objpid,cmpid,fedoraConnector);
-    }
-
 
     /*------------TEMPLATE METHODS---------------------*/
 

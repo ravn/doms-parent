@@ -9,7 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="view" />
     <orderEntry type="module" module-name="templates" />
-    <orderEntry type="module" module-name="validator" />
     <orderEntry type="module" module-name="repository" />
     <orderEntry type="module-library">
       <library name="Jersey">

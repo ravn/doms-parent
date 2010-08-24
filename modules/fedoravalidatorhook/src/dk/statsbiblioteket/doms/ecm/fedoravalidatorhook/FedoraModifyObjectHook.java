@@ -12,6 +12,11 @@ import org.fcrepo.server.proxy.AbstractInvocationHandler;
 import org.fcrepo.server.management.Management;
 import org.fcrepo.server.management.ManagementModule;
 import org.fcrepo.server.Server;
+import org.fcrepo.server.Context;
+import org.fcrepo.server.utilities.DateUtility;
+import static org.fcrepo.server.utilities.StreamUtility.enc;
+import org.fcrepo.server.rest.DefaultSerializer;
+import org.fcrepo.server.storage.types.Validation;
 import org.fcrepo.server.errors.ServerInitializationException;
 import org.fcrepo.server.errors.ModuleInitializationException;
 import org.fcrepo.common.Constants;
@@ -32,6 +37,9 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Date;
 
 
 /**
@@ -146,119 +154,23 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
 
         String pid = args[1].toString();
         LOG.info("The method was called with the pid " + pid);
+        Context context = (Context) args[0];
 
-        Document result = validate(pid);
-/*
-        Validation validation = management.validate((Context) args[0], pid);
-        if (validation.isValid()){
+        Validation result = management.validate(context, pid, null);
+
+        //Element docelement = result.getDocumentElement();
+
+        if (result.isValid()){
             return callMethod(method,args);
         } else {
-            String problems = reportProblems(docelement);
-            throw new ValidationFailedException(null,problems,null,null,null);
-        }
-*/
 
-        Element docelement = result.getDocumentElement();
-
-        if (isValid(docelement)){
-            return callMethod(method,args);
-        } else {
-            String problems = reportProblems(docelement);
+            String problems = objectValidationToXml(result);
             throw new ValidationFailedException(null,problems,null,null,null);
         }
 
     }
 
-    private String reportProblems(Element docelement) throws ValidationFailedException {
-        String report = "<validationErrors>\n";
-        NodeList problems = null;
-        try {
-            problems = xpathQuery(docelement, "/validation/problems/problem");
-        } catch (XPathExpressionException e) {
-            LOG.warn("the validator crashed",e);
-            throw new ValidationFailedException("exceptions","The.validator.crashed",null,null,null);
-        }
-        for (int i =0;i<problems.getLength();i++){
-            String error = problems.item(i).getFirstChild().getNodeValue();
-            report += "<error>" + error + "</error>\n";
-        }
-        report += "</validationErrors>";
-        return report;
 
-    }
-
-    private boolean isValid(Element docelement) throws ValidationFailedException {
-        NodeList validnodes = null;
-        try {
-            validnodes = xpathQuery(docelement, "/validation/@valid");
-        } catch (XPathExpressionException e) {
-            LOG.warn("the validator crashed",e);
-            throw new ValidationFailedException("exceptions","The.validator.crashed",null,null,null);
-        }
-        if (validnodes.getLength() == 1){
-            String value = validnodes.item(0).getNodeValue();
-            return "true".equalsIgnoreCase(value);
-        } else{
-            LOG.warn("the validator crashed");
-            throw new ValidationFailedException("exceptions","The.validator.crashed",null,null,null);
-        }
-
-    }
-
-    private Document validate(String pid) throws IOException, ValidationFailedException {
-        final String login = username;
-        final String password = this.password;
-        Authenticator.setDefault(new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(login, password.toCharArray());
-            }
-        });
-
-        URL validatorurl = new URL(webservicelocation+pid);
-        InputStream reply = null;
-
-        reply = validatorurl.openStream();
-
-        DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = null;
-        try {
-            builder = fac.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            LOG.warn("the validator crashed",e);
-            throw new ValidationFailedException("exceptions","The.validator.crashed",null,null,null);
-
-        }
-
-        Document result = null;
-        try {
-            result = builder.parse(reply);
-        } catch (SAXException e) {
-            LOG.warn("the validator crashed",e);
-            throw new ValidationFailedException("exceptions","The.validator.crashed",null,null,null);
-
-        }
-        return result;
-    }
-
-    /**
-     * Helper method for doing an XPath query using DOMS namespaces.
-     * {@see NameSpaceConstants#DOMS_NAMESPACE_CONTEXT}.
-     *
-     * @param node            The node to start XPath query on.
-     * @param xpathExpression The XPath expression, using default DOMS
-     *                        namespace prefixes.
-     * @return The result, as a node list.
-     *
-     * @throws javax.xml.xpath.XPathExpressionException On trouble parsing or evaluating the
-     *                                  expression.
-     */
-    public NodeList xpathQuery(Node node, String xpathExpression)
-            throws XPathExpressionException {
-        XPath xPath = XPathFactory.newInstance().newXPath();
-
-        return (NodeList) xPath
-                .evaluate(xpathExpression, node, XPathConstants.NODESET);
-    }
 
     private Object callMethod(Method method, Object[] args) throws Throwable {
         try {
@@ -272,5 +184,57 @@ public class FedoraModifyObjectHook extends AbstractInvocationHandler {
         }
 
     }
+
+
+    public String objectValidationToXml(Validation validation) {
+        StringBuilder buffer = new StringBuilder();
+        String pid = validation.getPid();
+        Date date = validation.getAsOfDateTime();
+        String dateString = "";
+        boolean valid = validation.isValid();
+        if (date != null) {
+            dateString = DateUtility.convertDateToString(date);
+        }
+        buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        buffer.append("<validation "
+                      + "pid=\"" + enc(pid) + "\" " +
+                      "valid=\"" + valid + "\">\n");
+        buffer.append("  <asOfDateTime>" + dateString + "</asOfDateTime>\n");
+        buffer.append("  <contentModels>\n");
+        for (String model : validation.getContentModels()) {
+            buffer.append("    <model>");
+            buffer.append(enc(model));
+            buffer.append("</model>\n");
+        }
+        buffer.append("  </contentModels>\n");
+
+        buffer.append("  <problems>\n");
+        for (String problem : validation.getObjectProblems()) {
+            buffer.append("    <problem>");
+            buffer.append(problem);
+            buffer.append("</problem>\n");
+        }
+        buffer.append("  </problems>\n");
+
+        buffer.append("  <datastreamProblems>\n");
+        Map<String, List<String>> dsprobs = validation.getDatastreamProblems();
+        for (String ds : dsprobs.keySet()) {
+            List<String> problems = dsprobs.get(ds);
+            buffer.append("    <datastream");
+            buffer.append(" datastreamID=\"");
+            buffer.append(ds);
+            buffer.append("\">\n");
+            for (String problem : problems) {
+                buffer.append("      <problem>");
+                buffer.append(problem);
+                buffer.append("</problem>\n");
+            }
+            buffer.append("    </datastream>");
+        }
+        buffer.append("  </datastreamProblems>\n");
+        buffer.append("</validation>");
+        return buffer.toString();
+    }
+
 
 }

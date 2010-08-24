@@ -26,14 +26,6 @@
       <maximumStackSize value="32" />
       <properties />
     </buildFile>
-    <buildFile url="file://$PROJECT_DIR$/modules/services/validator/build.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
-      <maximumStackSize value="32" />
-      <properties />
-    </buildFile>
     <buildFile url="file://$PROJECT_DIR$/modules/webservice/build.xml">
       <additionalClassPath />
       <antReference projectDefault="true" />
@@ -358,7 +350,6 @@
       <module fileurl="file://$PROJECT_DIR$/modules/repository/repository.iml" filepath="$PROJECT_DIR$/modules/repository/repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/templates/templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/templates.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/test/test.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/test/test.iml" group="fedoraconnectors" />
-      <module fileurl="file://$PROJECT_DIR$/modules/services/validator/validator.iml" filepath="$PROJECT_DIR$/modules/services/validator/validator.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/view/view.iml" filepath="$PROJECT_DIR$/modules/services/view/view.iml" group="services" />
       <module fileurl="file://$PROJECT_DIR$/modules/webservice/webservice.iml" filepath="$PROJECT_DIR$/modules/webservice/webservice.iml" />
     </modules>
