@@ -1,12 +1,5 @@
 package dk.statsbiblioteket.doms.ecm.repository.fedoraclient;
 
-import fedora.client.FedoraClient;
-import fedora.server.access.FedoraAPIA;
-import fedora.server.management.FedoraAPIM;
-import fedora.server.types.gen.DatastreamDef;
-import fedora.server.types.gen.MIMETypedStream;
-import fedora.server.types.gen.ObjectProfile;
-import fedora.server.types.gen.RelationshipTuple;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
@@ -25,6 +18,13 @@ import org.trippi.TrippiException;
 import org.trippi.TupleIterator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import org.fcrepo.client.FedoraClient;
+import org.fcrepo.server.management.FedoraAPIM;
+import org.fcrepo.server.access.FedoraAPIA;
+import org.fcrepo.server.types.gen.MIMETypedStream;
+import org.fcrepo.server.types.gen.DatastreamDef;
+import org.fcrepo.server.types.gen.ObjectProfile;
+import org.fcrepo.server.types.gen.RelationshipTuple;
 
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
@@ -401,7 +401,6 @@ public class FedoraClientConnector
         byte[] buf;
         try {
             dsCompositeDatastream = getAPIA()
-
                     .getDatastreamDissemination(pid, datastream, null);
             buf = dsCompositeDatastream.getStream();
         } catch (RemoteException e) {
