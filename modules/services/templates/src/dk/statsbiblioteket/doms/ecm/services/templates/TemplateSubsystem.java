@@ -30,19 +30,22 @@ public class TemplateSubsystem {
     private static final Log LOG = LogFactory.getLog(TemplateSubsystem.class);
     private static final String FOXML_DIGITAL_OBJECT_PID = "/foxml:digitalObject/@PID";
     private static final String RELSEXT_ABOUT = "/foxml:digitalObject/foxml:datastream[@ID='RELS-EXT']/"
-                             + "foxml:datastreamVersion[position()=last()]/"
-                         + "foxml:xmlContent/rdf:RDF/"
-                         + "rdf:Description/@rdf:about";
+                                                + "foxml:datastreamVersion[position()=last()]/"
+                                                + "foxml:xmlContent/rdf:RDF/"
+                                                + "rdf:Description/@rdf:about";
     private static final String DCIDENTIFIER = "/foxml:digitalObject/foxml:datastream[@ID='DC']/"
-                             + "foxml:datastreamVersion[position()=last()]/"
-                         + "foxml:xmlContent/oai_dc:dc/dc:identifier";
+                                               + "foxml:datastreamVersion[position()=last()]/"
+                                               + "foxml:xmlContent/oai_dc:dc/dc:identifier";
+    private static final String OAIDC = "/foxml:digitalObject/foxml:datastream[@ID='DC']/"
+                                            + "foxml:datastreamVersion[position()=last()]/"
+                                            + "foxml:xmlContent/oai_dc:dc";
     private static final String ISTEMPLATEFOR = "/foxml:digitalObject/foxml:datastream[@ID='RELS-EXT']/"
-                         + "foxml:datastreamVersion[position()=last()]/"
-    + "foxml:xmlContent/rdf:RDF/"
-    + "rdf:Description/doms:isTemplateFor";
+                                                + "foxml:datastreamVersion[position()=last()]/"
+                                                + "foxml:xmlContent/rdf:RDF/"
+                                                + "rdf:Description/doms:isTemplateFor";
     private static final String DATASTREAM_AUDIT = "/foxml:digitalObject/foxml:datastream[@ID='AUDIT']";
     private static final String DATASTREAM_NEWEST = "/foxml:digitalObject/foxml:datastream/"
-                + "foxml:datastreamVersion[position()=last()]";
+                                                    + "foxml:datastreamVersion[position()=last()]";
     private static final String DATASTREAM_CREATED = "/foxml:digitalObject/foxml:datastream/foxml:datastreamVersion";
     private static final String OBJECTPROPERTY_CREATED = "/foxml:digitalObject/foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/model#createdDate']";
     private static final String OBJECTPROPERTIES_LSTMODIFIED = "/foxml:digitalObject/foxml:objectProperties/foxml:property[@NAME='info:fedora/fedora-system:def/view#lastModifiedDate']";
@@ -187,6 +190,10 @@ public class TemplateSubsystem {
             removeDCidentifier(document);
             LOG.trace("DC identifier removed");
 
+            removeXSI_DC(document);
+            LOG.trace("XSI stuff removed from DC");
+
+
             removeCreated(document);
             LOG.trace("CREATED removed");
 
@@ -209,6 +216,12 @@ public class TemplateSubsystem {
                 fedoraConnector.getUser() +
                 "'");
 
+    }
+
+    private void removeXSI_DC(Document document) throws
+                                                 XPathExpressionException {
+/*        removeExpathList(document, XSI_TAGS1);*/
+        removeAttribute(document,OAIDC,"xsi:schemaLocation");
     }
 
     /** Private helper method for cloneTemplate. In a document, replaces the
@@ -245,11 +258,12 @@ public class TemplateSubsystem {
         NodeList nodes = XpathUtils.
                 xpathQuery(doc,
                            query);
+        if (nodes != null){
+            for (int i=0;i<nodes.getLength();i++){
+                Node node = nodes.item(i);
+                node.getParentNode().removeChild(node);
 
-        for (int i=0;i<nodes.getLength();i++){
-            Node node = nodes.item(i);
-            node.getParentNode().removeChild(node);
-
+            }
         }
     }
 

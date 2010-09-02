@@ -24,6 +24,7 @@
         <include name="${commons-logging.lib}"/>
         <include name="${fedoraclient.lib}"/>
         <include name="${pidgen.interface.lib}"/>
+        <include name="${saxon.lib}"/>
     </dirset>
 
     <dirset id="build.project.libs" dir="${global.dir}/lib/">
