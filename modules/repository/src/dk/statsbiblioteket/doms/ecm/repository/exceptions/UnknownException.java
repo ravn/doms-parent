@@ -9,8 +9,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 @Deprecated
 public class UnknownException extends EcmException{
-    public UnknownException() {
-    }
 
     public UnknownException(String s) {
         super(s);
@@ -20,7 +18,5 @@ public class UnknownException extends EcmException{
         super(s, throwable);
     }
 
-    public UnknownException(Throwable throwable) {
-        super(throwable);
-    }
+   
 }

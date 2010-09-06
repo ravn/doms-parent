@@ -17,8 +17,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  * @see dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException
  */
 public class ObjectIsWrongTypeException extends EcmException{
-    public ObjectIsWrongTypeException() {
-    }
 
     public ObjectIsWrongTypeException(String s) {
         super(s);
@@ -28,7 +26,5 @@ public class ObjectIsWrongTypeException extends EcmException{
         super(s, throwable);
     }
 
-    public ObjectIsWrongTypeException(Throwable throwable) {
-        super(throwable);
-    }
+   
 }

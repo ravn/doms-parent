@@ -1,9 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.services.view;
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
@@ -46,8 +43,9 @@ public class ViewSubsystem {
      * could not be parsed
      */
     public PidList getEntryCMsForAngle(
-            String viewAngle, FedoraConnector fedoraConnector) throws FedoraIllegalContentException,
-                                     FedoraConnectionException {
+            String viewAngle, FedoraConnector fedoraConnector)
+            throws FedoraIllegalContentException,
+                   FedoraConnectionException, InvalidCredentialsException {
         viewAngle = sanitizeLiteral(viewAngle);
 
         //TODO Inheritance?
@@ -100,10 +98,11 @@ public class ViewSubsystem {
      */
     public PidList getObjectsForContentModel(
             String cmpid,
-            String status, FedoraConnector fedoraConnector) throws ObjectNotFoundException,
-                                  ObjectIsWrongTypeException,
-                                  FedoraIllegalContentException,
-                                  FedoraConnectionException {
+            String status, FedoraConnector fedoraConnector)
+            throws ObjectNotFoundException,
+                   ObjectIsWrongTypeException,
+                   FedoraIllegalContentException,
+                   FedoraConnectionException, InvalidCredentialsException {
         LOG.trace("Entering getObjectsForContentModel with params '" +
                   cmpid + "' and '" + status + "'");
         status = sanitizeLiteral(status);
@@ -158,9 +157,11 @@ public class ViewSubsystem {
      * @throws FedoraIllegalContentException
      */
     public PidList getEntriesForAngle(String viewAngle,
-                                      String state, FedoraConnector fedoraConnector) throws
-                                                    FedoraConnectionException,
-                                                    FedoraIllegalContentException{
+                                      String state, FedoraConnector fedoraConnector)
+            throws
+            FedoraConnectionException,
+            FedoraIllegalContentException,
+            InvalidCredentialsException {
 
         Set<String> collector = new HashSet<String>();
         PidList list = getEntryCMsForAngle(viewAngle, fedoraConnector);
@@ -202,7 +203,7 @@ public class ViewSubsystem {
             String viewAngle, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
 
         LOG.trace("Entering getViewObjectsListForObject with params '" +
                   objpid + "' and '" + viewAngle + "'");
@@ -240,9 +241,10 @@ public class ViewSubsystem {
     public Document getViewObjectBundleForObject(
             String objpid,
             String viewAngle, FedoraConnector fedoraConnector) throws
-                              ObjectNotFoundException,
-                              FedoraIllegalContentException,
-                              FedoraConnectionException {
+                                                               ObjectNotFoundException,
+                                                               FedoraIllegalContentException,
+                                                               FedoraConnectionException,
+                                                               InvalidCredentialsException {
 
 
         PidList pidlist = getViewObjectsListForObject(objpid,viewAngle, fedoraConnector);
@@ -280,7 +282,7 @@ public class ViewSubsystem {
                             FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraIllegalContentException,
-                   FedoraConnectionException {
+                   FedoraConnectionException, InvalidCredentialsException {
 
         LOG.trace("Entering appendPids with params "+viewname+" and " + pid);
         pid = sanitizePid(pid);

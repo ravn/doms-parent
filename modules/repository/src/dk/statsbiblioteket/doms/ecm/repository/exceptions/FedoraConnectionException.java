@@ -6,8 +6,9 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  * over whatever connector is chosen
  */
 public class FedoraConnectionException extends EcmException{
-    public FedoraConnectionException() {
-    }
+
+
+
 
     public FedoraConnectionException(String s) {
         super(s);
@@ -17,7 +18,4 @@ public class FedoraConnectionException extends EcmException{
         super(s, throwable);
     }
 
-    public FedoraConnectionException(Throwable throwable) {
-        super(throwable);
-    }
 }

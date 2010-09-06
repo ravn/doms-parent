@@ -9,8 +9,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 public class PIDGeneratorException extends EcmException {
 
-    public PIDGeneratorException() {
-    }
 
     public PIDGeneratorException(String s) {
         super(s);
@@ -20,7 +18,5 @@ public class PIDGeneratorException extends EcmException {
         super(s, throwable);
     }
 
-    public PIDGeneratorException(Throwable throwable) {
-        super(throwable);
-    }
+ 
 }

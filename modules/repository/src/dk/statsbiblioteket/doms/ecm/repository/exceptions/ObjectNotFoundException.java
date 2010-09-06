@@ -6,18 +6,15 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  * correspond to an object in the repository.
  */
 public class ObjectNotFoundException extends EcmException {
-    public ObjectNotFoundException() {
-    }
 
     public ObjectNotFoundException(String s) {
         super(s);
+        statusCode = 404;
     }
 
     public ObjectNotFoundException(String s, Throwable throwable) {
         super(s, throwable);
+        statusCode = 404;
     }
 
-    public ObjectNotFoundException(Throwable throwable) {
-        super(throwable);
-    }
 }

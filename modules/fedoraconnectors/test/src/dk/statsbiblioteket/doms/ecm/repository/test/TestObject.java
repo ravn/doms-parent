@@ -157,7 +157,7 @@ public class TestObject {
         try {
             doc = DocumentUtils.DOCUMENT_BUILDER.parse(new ByteArrayInputStream(st.toString().getBytes()));
         } catch (SAXException e) {
-            throw new FedoraIllegalContentException(e);
+            throw new FedoraIllegalContentException("",e);
         } catch (IOException e) {
             throw new Error(e);
         }

@@ -13,20 +13,28 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 public abstract class EcmException extends Exception {
 
+    protected int statusCode = 500;
+
     public EcmException() {
+        super();
+
     }
 
     public EcmException(String s) {
         super(s);
+
     }
 
     public EcmException(String s, Throwable throwable) {
         super(s, throwable);
+
     }
 
     public EcmException(Throwable throwable) {
         super(throwable);
     }
 
-
+    public int getStatusCode() {
+        return statusCode;
+    }
 }

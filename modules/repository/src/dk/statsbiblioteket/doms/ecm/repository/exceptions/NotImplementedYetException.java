@@ -10,8 +10,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 public class NotImplementedYetException extends RuntimeException {
 
-    public NotImplementedYetException() {
-    }
 
     public NotImplementedYetException(String s) {
         super(s);
@@ -21,7 +19,4 @@ public class NotImplementedYetException extends RuntimeException {
         super(s, throwable);
     }
 
-    public NotImplementedYetException(Throwable throwable) {
-        super(throwable);
-    }
 }

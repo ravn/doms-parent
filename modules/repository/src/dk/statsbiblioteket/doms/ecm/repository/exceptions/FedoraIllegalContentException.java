@@ -10,18 +10,17 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  *
  */
 public class FedoraIllegalContentException extends EcmException {
-    public FedoraIllegalContentException() {
-    }
+
+
+
 
     public FedoraIllegalContentException(String s) {
         super(s);
+
     }
 
     public FedoraIllegalContentException(String s, Throwable throwable) {
         super(s, throwable);
     }
 
-    public FedoraIllegalContentException(Throwable throwable) {
-        super(throwable);
-    }
 }

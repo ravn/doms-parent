@@ -146,7 +146,7 @@ public class FedoraTestConnector
     public boolean addRelation(String from, String relation, String to) throws ObjectNotFoundException, FedoraConnectionException {
         TestObject object = objects.get(FedoraUtil.ensurePID(from));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             Relation rel = new Relation(from,FedoraUtil.ensurePID(to),relation);
             return object.add(rel);
@@ -156,7 +156,7 @@ public class FedoraTestConnector
     public boolean addLiteralRelation(String from, String relation, String value, String datatype) throws ObjectNotFoundException, FedoraConnectionException {
         TestObject object = objects.get(FedoraUtil.ensurePID(from));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             Relation rel = new Relation(from,value,relation);
             return object.add(rel);
@@ -166,7 +166,7 @@ public class FedoraTestConnector
     public Document getObjectXml(String pid) throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             return object.dumpAsDocument();
         }
@@ -182,7 +182,7 @@ public class FedoraTestConnector
     public List<Relation> getRelations(String pid) throws FedoraConnectionException, ObjectNotFoundException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             return object.getRelations();
         }
@@ -191,7 +191,7 @@ public class FedoraTestConnector
     public List<Relation> getRelations(String pid, String relation) throws FedoraConnectionException, ObjectNotFoundException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             List<Relation> rels = object.getRelations();
             List<Relation> returns = new ArrayList<Relation>();
@@ -208,17 +208,17 @@ public class FedoraTestConnector
     public Document getDatastream(String pid, String dsid) throws DatastreamNotFoundException, FedoraConnectionException, FedoraIllegalContentException, ObjectNotFoundException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             String ds = object.get(dsid);
             if (ds == null){
-                throw new DatastreamNotFoundException();
+                throw new DatastreamNotFoundException("");
             } else{
                 ByteArrayInputStream in = new ByteArrayInputStream(ds.getBytes());
                 try {
                     return DocumentUtils.DOCUMENT_BUILDER.parse(in);
                 } catch (SAXException e) {
-                    throw new FedoraIllegalContentException(e);
+                    throw new FedoraIllegalContentException("",e);
                 } catch (IOException e) {
                     throw new Error("Failed to read a string",e);
                 }
@@ -256,7 +256,7 @@ public class FedoraTestConnector
     public List<String> listDatastreams(String pid) throws FedoraConnectionException, ObjectNotFoundException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
-            throw new ObjectNotFoundException();
+            throw new ObjectNotFoundException("");
         } else{
             return new ArrayList<String>(object.getDatastreams().keySet());
         }

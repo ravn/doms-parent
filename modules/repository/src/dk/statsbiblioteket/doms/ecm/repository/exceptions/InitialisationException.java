@@ -9,8 +9,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 public class InitialisationException extends EcmException{
 
-    public InitialisationException() {
-    }
 
     public InitialisationException(String s) {
         super(s);
@@ -20,7 +18,5 @@ public class InitialisationException extends EcmException{
         super(s, throwable);
     }
 
-    public InitialisationException(Throwable throwable) {
-        super(throwable);
-    }
+   
 }

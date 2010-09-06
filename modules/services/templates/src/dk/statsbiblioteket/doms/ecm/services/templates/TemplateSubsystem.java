@@ -1,10 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.services.templates;
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
@@ -64,7 +60,9 @@ public class TemplateSubsystem {
             String objpid,
             String cmpid, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   ObjectIsWrongTypeException, FedoraIllegalContentException {
+                   ObjectIsWrongTypeException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException {
         LOG.trace("Entering markObjectAsTemplate with params: " + objpid + " and "+cmpid );
         //Working
 
@@ -101,7 +99,7 @@ public class TemplateSubsystem {
             throws ObjectNotFoundException,
                    FedoraConnectionException,
                    FedoraIllegalContentException,
-                   ObjectIsWrongTypeException {
+                   ObjectIsWrongTypeException, InvalidCredentialsException {
         //Working
         LOG.trace("Entering findTemplatesFor with param '"+cmpid+"'");
 
@@ -154,7 +152,7 @@ public class TemplateSubsystem {
             throws FedoraIllegalContentException,
                    FedoraConnectionException, PIDGeneratorException,
                    ObjectNotFoundException,
-                   ObjectIsWrongTypeException {
+                   ObjectIsWrongTypeException, InvalidCredentialsException {
 
         //working
         templatepid = FedoraUtil.ensurePID(templatepid);

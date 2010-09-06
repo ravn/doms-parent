@@ -12,8 +12,6 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  * @see dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException
  */
 public class InvalidOntologyException extends FedoraIllegalContentException {
-    public InvalidOntologyException() {
-    }
 
     public InvalidOntologyException(String s) {
         super(s);
@@ -23,7 +21,4 @@ public class InvalidOntologyException extends FedoraIllegalContentException {
         super(s, throwable);
     }
 
-    public InvalidOntologyException(Throwable throwable) {
-        super(throwable);
-    }
 }

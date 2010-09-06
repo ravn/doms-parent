@@ -9,18 +9,15 @@ package dk.statsbiblioteket.doms.ecm.repository.exceptions;
  */
 public class DatastreamNotFoundException extends EcmException{
 
-    public DatastreamNotFoundException() {
-    }
 
     public DatastreamNotFoundException(String s) {
         super(s);
+        statusCode = 404;
     }
 
     public DatastreamNotFoundException(String s, Throwable throwable) {
         super(s, throwable);
+        statusCode = 404;
     }
 
-    public DatastreamNotFoundException(Throwable throwable) {
-        super(throwable);
-    }
 }

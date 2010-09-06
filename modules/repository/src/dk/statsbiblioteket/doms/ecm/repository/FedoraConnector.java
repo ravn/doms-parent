@@ -1,10 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import org.w3c.dom.Document;
 
 import java.util.List;
@@ -50,7 +46,7 @@ public interface FedoraConnector {
      */
     public boolean exists(String pid)
             throws IllegalStateException, FedoraIllegalContentException,
-                   FedoraConnectionException;
+                   FedoraConnectionException, InvalidCredentialsException;
 
 
     /**
@@ -61,7 +57,7 @@ public interface FedoraConnector {
      */
     public boolean isDataObject(String pid)
             throws IllegalStateException, FedoraIllegalContentException,
-                   FedoraConnectionException;
+                   FedoraConnectionException, InvalidCredentialsException;
 
 
     /**
@@ -72,7 +68,9 @@ public interface FedoraConnector {
      */
     public boolean isTemplate(String pid)
             throws IllegalStateException, ObjectNotFoundException,
-                   FedoraConnectionException, FedoraIllegalContentException;
+                   FedoraConnectionException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
 
     /**
@@ -84,7 +82,7 @@ public interface FedoraConnector {
      */
     public boolean isContentModel(String pid)
             throws IllegalStateException, FedoraIllegalContentException,
-                   FedoraConnectionException;
+                   FedoraConnectionException, InvalidCredentialsException;
 
 
     /**
@@ -106,7 +104,7 @@ public interface FedoraConnector {
     public PidList query(String query)
             throws IllegalStateException,
                    FedoraConnectionException,
-                   FedoraIllegalContentException;
+                   FedoraIllegalContentException, InvalidCredentialsException;
 
 
     /**
@@ -125,7 +123,9 @@ public interface FedoraConnector {
      */
     public boolean addRelation(String from, String relation, String to)
             throws IllegalStateException, ObjectNotFoundException,
-                   FedoraConnectionException, FedoraIllegalContentException;
+                   FedoraConnectionException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
     /**
      * Add a literal value as a relation
@@ -148,7 +148,9 @@ public interface FedoraConnector {
                                       String value,
                                       String datatype)
             throws IllegalStateException, ObjectNotFoundException,
-                   FedoraConnectionException, FedoraIllegalContentException;
+                   FedoraConnectionException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
     /**
      * Gets the entire object as a Document
@@ -168,7 +170,7 @@ public interface FedoraConnector {
             throws IllegalStateException,
                    ObjectNotFoundException,
                    FedoraConnectionException,
-                   FedoraIllegalContentException;
+                   FedoraIllegalContentException, InvalidCredentialsException;
 
 
     /**
@@ -189,7 +191,7 @@ public interface FedoraConnector {
     public String ingestDocument(Document newobject, String logmessage)
             throws IllegalStateException,
                    FedoraConnectionException,
-                   FedoraIllegalContentException;
+                   FedoraIllegalContentException, InvalidCredentialsException;
 
     /**
      * Get all relations in the object
@@ -205,7 +207,9 @@ public interface FedoraConnector {
      */
     public List<Relation> getRelations(String pid)
             throws IllegalStateException, FedoraConnectionException,
-                   ObjectNotFoundException, FedoraIllegalContentException;
+                   ObjectNotFoundException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
     /**
      * Get all relations in the object, with the given name
@@ -221,7 +225,9 @@ public interface FedoraConnector {
      */
     public List<Relation> getRelations(String pid, String relation)
             throws IllegalStateException, FedoraConnectionException,
-                   ObjectNotFoundException, FedoraIllegalContentException;
+                   ObjectNotFoundException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
     /**
      * Get the datastream as a Document
@@ -244,7 +250,7 @@ public interface FedoraConnector {
                    DatastreamNotFoundException,
                    FedoraConnectionException,
                    FedoraIllegalContentException,
-                   ObjectNotFoundException;
+                   ObjectNotFoundException, InvalidCredentialsException;
 
     /**
      * Get the content models of the object. This method returns all the
@@ -263,7 +269,9 @@ public interface FedoraConnector {
      */
     public PidList getContentModels(String pid)
             throws IllegalStateException, FedoraConnectionException,
-                   ObjectNotFoundException, FedoraIllegalContentException;
+                   ObjectNotFoundException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
 
     /**
@@ -287,7 +295,7 @@ public interface FedoraConnector {
     public PidList getInheritingContentModels(String cmpid)
             throws IllegalStateException, FedoraConnectionException,
                    ObjectNotFoundException, ObjectIsWrongTypeException,
-                   FedoraIllegalContentException;
+                   FedoraIllegalContentException, InvalidCredentialsException;
 
     /**
      * Get the list of datastreams in the object
@@ -302,7 +310,9 @@ public interface FedoraConnector {
      */
     public List<String> listDatastreams(String pid)
             throws IllegalStateException, FedoraConnectionException,
-                   ObjectNotFoundException, FedoraIllegalContentException;
+                   ObjectNotFoundException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException;
 
 
 
@@ -314,7 +324,8 @@ public interface FedoraConnector {
                                                            FedoraConnectionException,
                                                            ObjectNotFoundException,
                                                            ObjectIsWrongTypeException,
-                                                           FedoraIllegalContentException;
+                                                           FedoraIllegalContentException,
+                                                           InvalidCredentialsException;
 
     /**
      * Test if the credentials given in the constructor is sufficient for the

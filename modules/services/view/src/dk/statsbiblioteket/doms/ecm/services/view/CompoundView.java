@@ -1,10 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.services.view;
 
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
@@ -91,7 +88,7 @@ public class CompoundView {
     public static CompoundView getView(String pid, FedoraConnector fedoraConnector)
             throws ObjectNotFoundException,
                    FedoraConnectionException,
-                   FedoraIllegalContentException{
+                   FedoraIllegalContentException, InvalidCredentialsException {
 
         LOG.trace("Entering getView with string '" + pid + "'");
         CompoundView model = new CompoundView();
@@ -226,7 +223,7 @@ public class CompoundView {
                     viewXml, VIEWS_VIEWANGLE_NAME + name
                              + VIEW_RELATIONS);
         } catch (XPathExpressionException e) {
-            throw new FedoraIllegalContentException(e);
+            throw new FedoraIllegalContentException("XPath expression failed",e);
         }
         for (int l = 0; l < xpathResult.getLength(); l++) {
             Node n = xpathResult.item(l);
@@ -282,7 +279,7 @@ public class CompoundView {
             String pid,
             Map<String, View> views, FedoraConnector fedoraConnector)
             throws FedoraConnectionException, ObjectNotFoundException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
 
 
         List<FedoraConnector.Relation> relations = fedoraConnector.getRelations(
