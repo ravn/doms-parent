@@ -23,7 +23,7 @@ public class PidGeneratorImpl extends PidGenerator {
 
         String WSDLLOCATION_STRING
                 = ConfigCollection.getProperties().getProperty(
-                "dk.statsbiblioteket.doms.ecm.repository.pidgenerator.wsdllocation");
+                "dk.statsbiblioteket.doms.ecm.pidgenerator.client.wsdllocation");
 
         URL WSDLLOCATION = null;
         try {
