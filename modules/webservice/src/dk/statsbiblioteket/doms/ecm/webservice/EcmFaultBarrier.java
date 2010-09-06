@@ -42,7 +42,9 @@ public class EcmFaultBarrier
 
 
         JAXB.marshal(new Cleaned(e), strw);
-        return Response.serverError().entity(
+
+
+        return Response.status(e.getStatusCode()).entity(
                strw.toString()).build();
     }
 
