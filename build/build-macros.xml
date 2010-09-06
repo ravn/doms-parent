@@ -1,5 +1,5 @@
 <!--
-  ~ Doms build framework version 1.0.9
+  ~ Doms build framework version 1.0.10
   ~
   ~ $Id$
   ~ $Revision$
@@ -28,7 +28,7 @@
   -->
 
 <project name="macros">
-    <!--Part of doms build framework version 1.0.9-->
+    <!--Part of doms build framework version 1.0.10-->
 
 
     <property name="global.dir" value="${basedir}/.."/>
@@ -150,6 +150,9 @@
 
             <zip destfile="dist/@{srcpack.zip}">
                 <zipfileset dir="src">
+                    <include name="**/*"/>
+                </zipfileset>
+                <zipfileset dir="tempsrc" erroronmissingdir="false">
                     <include name="**/*"/>
                 </zipfileset>
             </zip>
