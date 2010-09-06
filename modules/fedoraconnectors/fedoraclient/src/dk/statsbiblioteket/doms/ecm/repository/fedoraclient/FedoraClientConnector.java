@@ -1,10 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.repository.fedoraclient;
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.DatastreamNotFoundException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraConnectionException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectIsWrongTypeException;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.ObjectNotFoundException;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
@@ -13,6 +9,7 @@ import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.axis.AxisFault;
 import org.jrdf.graph.Node;
 import org.trippi.TrippiException;
 import org.trippi.TupleIterator;
@@ -25,6 +22,7 @@ import org.fcrepo.server.types.gen.MIMETypedStream;
 import org.fcrepo.server.types.gen.DatastreamDef;
 import org.fcrepo.server.types.gen.ObjectProfile;
 import org.fcrepo.server.types.gen.RelationshipTuple;
+import org.fcrepo.server.errors.authorization.AuthzException;
 
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
@@ -65,7 +63,7 @@ public class FedoraClientConnector
 
     public boolean addRelation(String from, String relation, String to)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
         from = FedoraUtil.ensurePID(from);
         to = FedoraUtil.ensureURI(to);
         if (!exists(from)) {
@@ -74,7 +72,16 @@ public class FedoraClientConnector
         try {
             return getAPIM().addRelationship(from, relation, to, false, null);
         } catch (RemoteException e) {
-
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException(
                     "Something went wrong in the connection with fedora",
                     e);
@@ -86,7 +93,7 @@ public class FedoraClientConnector
                                       String value,
                                       String datatype)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
         from = FedoraUtil.ensurePID(from);
 
         if (!exists(from)) {
@@ -99,6 +106,16 @@ public class FedoraClientConnector
                                              true,
                                              datatype);
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException(
                     "Something went wrong in the connection with fedora",
                     e);
@@ -107,13 +124,13 @@ public class FedoraClientConnector
 
     public List<Relation> getRelations(String pid)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
         return getRelations(pid, null);
     }
 
     public List<Relation> getRelations(String pid, String relation)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
             throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
@@ -131,6 +148,16 @@ public class FedoraClientConnector
             }
             return result;
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException(
                     "Something failed in the communication with Fedora",
                     e);
@@ -146,7 +173,7 @@ public class FedoraClientConnector
 
     public PidList getContentModels(String pid)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
 
         pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
@@ -157,6 +184,16 @@ public class FedoraClientConnector
         try {
             profile = getAPIA().getObjectProfile(pid, null);
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException(
                     "Failed in communication with Fedora",
                     e);
@@ -170,7 +207,7 @@ public class FedoraClientConnector
 
     private PidList getInheritedContentModelsBreadthFirst(PidList contentmodels)
             throws ObjectNotFoundException, FedoraIllegalContentException,
-                   FedoraConnectionException {
+                   FedoraConnectionException, InvalidCredentialsException {
 
 
         /*
@@ -228,7 +265,10 @@ public class FedoraClientConnector
     }
 
     private List<String> getAncestors(String s)
-            throws FedoraIllegalContentException, FedoraConnectionException {
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
         PidList temp = new PidList();
 
         List<Relation> ancestors = null;
@@ -251,7 +291,9 @@ public class FedoraClientConnector
      */
     public PidList getInheritingContentModels(String cmpid)
             throws FedoraConnectionException, ObjectNotFoundException,
-                   ObjectIsWrongTypeException, FedoraIllegalContentException {
+                   ObjectIsWrongTypeException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException {
         cmpid = FedoraUtil.ensureURI(cmpid);
         if (!exists(cmpid)) {
             throw new ObjectNotFoundException("Object '" + cmpid + "' does not exist in the Repository");
@@ -268,7 +310,9 @@ public class FedoraClientConnector
 
     public PidList getInheritedContentModels(String cmpid)
             throws FedoraConnectionException, ObjectNotFoundException,
-                   ObjectIsWrongTypeException, FedoraIllegalContentException {
+                   ObjectIsWrongTypeException,
+                   FedoraIllegalContentException,
+                   InvalidCredentialsException {
         cmpid = FedoraUtil.ensurePID(cmpid);
         return getInheritedContentModelsBreadthFirst(new PidList(cmpid));
     }
@@ -280,7 +324,7 @@ public class FedoraClientConnector
         } catch (ServiceException e) {
             return false;
         } catch (IOException e) {
-            throw new FedoraConnectionException(e);
+            throw new FedoraConnectionException("Fedora exception encountered",e);
         }
         return true;
     }
@@ -292,7 +336,7 @@ public class FedoraClientConnector
 
     public List<String> listDatastreams(String pid)
             throws FedoraConnectionException, ObjectNotFoundException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
             throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
@@ -306,6 +350,16 @@ public class FedoraClientConnector
             }
             return result;
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException("Something failed in the " + "communication with Fedora",
                                                 e);
         }
@@ -316,7 +370,10 @@ public class FedoraClientConnector
     }
 
     public String ingestDocument(Document document, String logmessage)
-            throws FedoraConnectionException, FedoraIllegalContentException {
+            throws
+            FedoraConnectionException,
+            FedoraIllegalContentException,
+            InvalidCredentialsException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             DocumentUtils.DOCUMENT_TRANSFORMER.transform(new DOMSource(document),
@@ -333,6 +390,16 @@ public class FedoraClientConnector
                                     FedoraClient.FOXML1_1.uri,
                                     logmessage);
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException(
                     "The object could not be ingested",
                     e);
@@ -348,7 +415,7 @@ public class FedoraClientConnector
      */
     public Document getObjectXml(String pid)
             throws FedoraConnectionException, FedoraIllegalContentException,
-                   ObjectNotFoundException {
+                   ObjectNotFoundException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
         pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
@@ -361,6 +428,16 @@ public class FedoraClientConnector
             objectXML = getAPIM().getObjectXML(pid);
 
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             throw new FedoraConnectionException("Error getting XML for '" + pid + "' from Fedora",
                                                 e);
         } catch (IOException e) {
@@ -390,7 +467,9 @@ public class FedoraClientConnector
      */
     public Document getDatastream(String pid, String datastream)
             throws DatastreamNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException, ObjectNotFoundException {
+                   FedoraIllegalContentException,
+                   ObjectNotFoundException,
+                   InvalidCredentialsException {
 
         pid = FedoraUtil.ensurePID(pid);
         if (!exists(pid)) {
@@ -404,6 +483,16 @@ public class FedoraClientConnector
                     .getDatastreamDissemination(pid, datastream, null);
             buf = dsCompositeDatastream.getStream();
         } catch (RemoteException e) {
+            if (e instanceof AxisFault) {
+                AxisFault axisFault = (AxisFault) e;
+                if (axisFault.getCause() instanceof AuthzException) {
+                    AuthzException authzException
+                            = (AuthzException) axisFault.getCause();
+                    throw new InvalidCredentialsException(
+                            "The supplied credentials were insufficient for the"
+                            + " task at hand",authzException);
+                }
+            }
             if (e.getMessage().contains(
                     "fedora.server.errors.DatastreamNotFoundException")) {
 
@@ -432,12 +521,18 @@ public class FedoraClientConnector
 
 
     public boolean exists(String pid)
-            throws FedoraIllegalContentException, FedoraConnectionException {
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
         return hasContentModel(pid, Constants.FEDORA_OBJECT_3_0);
     }
 
     public boolean isDataObject(String pid)
-            throws FedoraIllegalContentException, FedoraConnectionException {
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
         boolean cm = hasContentModel(pid, Constants.CONTENT_MODEL_3_0);
         boolean sdef = hasContentModel(pid, Constants.SERVICE_DEFINITION_3_0);
         boolean sdep = hasContentModel(pid, Constants.SERVICE_DEPLOYMENT_3_0);
@@ -447,19 +542,25 @@ public class FedoraClientConnector
 
     public boolean isTemplate(String pid)
             throws ObjectNotFoundException, FedoraConnectionException,
-                   FedoraIllegalContentException {
+                   FedoraIllegalContentException, InvalidCredentialsException {
 
         List<Relation> templaterels = getRelations(pid, Constants.TEMPLATE_REL);
         return templaterels.size() > 0;
     }
 
     public boolean isContentModel(String pid)
-            throws FedoraIllegalContentException, FedoraConnectionException {
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
         return hasContentModel(pid, Constants.CONTENT_MODEL_3_0);
     }
 
     public boolean hasContentModel(String pid, String cmpid)
-            throws FedoraIllegalContentException, FedoraConnectionException {
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
         PidList contentmodels = query("select $object\n" + "from <#ri>\n" + "where\n <" + FedoraUtil.ensureURI(
                 pid) + "> <" + Constants.HAS_MODEL + "> " + "$object\n");
         return contentmodels.contains(FedoraUtil.ensurePID(cmpid));
@@ -468,7 +569,7 @@ public class FedoraClientConnector
 
 
     public PidList query(String query)
-            throws FedoraConnectionException, FedoraIllegalContentException {
+            throws FedoraConnectionException, FedoraIllegalContentException, InvalidCredentialsException {
 
 
         PidList pidlist = new PidList();
