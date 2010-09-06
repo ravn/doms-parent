@@ -54,7 +54,8 @@ public class Webservice {
         temps = new TemplateSubsystem();
 
         //read the config protoperties from ConfigCollection and initialise pidGenerator
-        String pidgeneratorclassString = ConfigCollection.getProperties().getProperty("fedoraPidGenerator");
+        String pidgeneratorclassString = ConfigCollection.getProperties()
+                .getProperty("dk.statsbiblioteket.doms.ecm.pidGenerator.client");
         try {
             Class<?> pidgeneratorClass = Class.forName(pidgeneratorclassString);
             if (PidGenerator.class.isAssignableFrom(pidgeneratorClass)){
@@ -80,8 +81,8 @@ public class Webservice {
             return;
         }
 */
-        String fedoraserverurl = ConfigCollection.getProperties().getProperty("fedoraLocation");
-        String fedoraconnectorclassstring = ConfigCollection.getProperties().getProperty("fedoraConnector");
+        String fedoraserverurl = ConfigCollection.getProperties().getProperty("dk.statsbiblioteket.doms.ecm.fedora.location");
+        String fedoraconnectorclassstring = ConfigCollection.getProperties().getProperty("dk.statsbiblioteket.doms.ecm.fedora.connector");
         Credentials creds = null;
         creds = (Credentials) request.getAttribute("Credentials");
         if (creds == null){
@@ -96,13 +97,13 @@ public class Webservice {
                     FedoraUserToken token = new FedoraUserToken(fedoraserverurl,creds.getUsername(),creds.getPassword());
                     fedoraConnector.initialise(token);
                 } catch (InstantiationException e) {//TODO
-                    throw new InitialisationException(e);
+                    throw new InitialisationException("Initialise failed",e);
                 } catch (IllegalAccessException e) {//TODO
-                    throw new InitialisationException(e);
+                    throw new InitialisationException("Initialise failed",e);
                 }
             }
         } catch (ClassNotFoundException e) {//TODO
-            throw new InitialisationException(e);
+            throw new InitialisationException("Initialise failed",e);
         }
         initialised = true;
     }
