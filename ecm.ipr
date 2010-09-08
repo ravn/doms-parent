@@ -487,12 +487,15 @@
         <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.6/src/domsutil-0.0.6-src.zip!/domsutil-0.0.6/modules/surveyable/surveyable_impl/src" />
       </SOURCES>
     </library>
-    <library name="pidGeneratorInterface">
+    <library name="pidGenerator">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/PidGeneratorInterfaceSnapshot/jars/pidgeneratorInterface.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.1/jars/WSDL_interface.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="file://$PROJECT_DIR$/lib/pidGenerator-0.0.1/jars" />
+        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.1/src/pidGenerator-0.0.1-src.zip!/pidGenerator-0.0.1/modules/WSDL_interface/tempsrc" />
+      </SOURCES>
     </library>
   </component>
 </project>
