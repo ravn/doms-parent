@@ -350,5 +350,32 @@ public class ViewSubsystem {
         }
     }
 
+    public PidList getEntryContentModelsForObjectForViewAngle(String pid,
+                                                              String angle,
+                                                              FedoraConnector fedoraConnector)
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
+        LOG.trace("Entering getEntryContentModelsForObjectForViewAngle with params '" +
+                  pid + "' and '" + angle + "'");
 
+
+        pid = sanitizePid(pid);
+
+        String query = "select $object\n"
+                       + "from <#ri>\n"
+                       + "where\n"
+                       + "$object2 <fedora-model:hasModel> $object\n"
+                       + "and\n"
+                       + "$object2 <mulgara:is> <info:fedora/"+pid+">\n"
+                       + "and\n"
+                       + "$object <"+Constants.ENTRY_RELATION+"> '"+angle+"'";
+
+
+
+        LOG.debug("Using query \n'" + query + "'\n");
+        return fedoraConnector.query(query);
+
+    }
 }

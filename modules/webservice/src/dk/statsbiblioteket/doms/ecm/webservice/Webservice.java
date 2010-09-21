@@ -218,5 +218,16 @@ public class Webservice {
         return new PidList(fedoraConnector.getContentModels(FedoraUtil.ensurePID(objpid)));
     }
 
+    @GET
+    @Path("getEntryContentModelsForObject/{objpid}/forAngle/{viewAngle}")
+    @Produces("text/xml")
+    public PidList getEntryContentModelsForObjectForAngle(@PathParam("objpid") String objpid,
+                                                          @PathParam("viewAngle") String viewAngle)
+            throws EcmException{
+        initialise();
+
+        return new PidList(view.getEntryContentModelsForObjectForViewAngle(FedoraUtil.ensurePID(objpid),viewAngle, fedoraConnector));
+    }
+
 
 }
