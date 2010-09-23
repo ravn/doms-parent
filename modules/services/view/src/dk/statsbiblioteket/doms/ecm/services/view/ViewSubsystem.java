@@ -362,6 +362,7 @@ public class ViewSubsystem {
 
 
         pid = sanitizePid(pid);
+        angle = sanitizeLiteral(angle);
 
         String query = "select $object\n"
                        + "from <#ri>\n"
@@ -378,4 +379,46 @@ public class ViewSubsystem {
         return fedoraConnector.query(query);
 
     }
+
+    public PidList getAllEntryObjectsForCollection(String collectionPid,
+                                                   String entryContentModelPid,
+                                                   String angle,
+                                                   FedoraConnector fedoraConnector)
+            throws
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
+        LOG.trace("Entering getAllEntryObjectsForCollection with params '" +
+                  collectionPid + "' and '" + entryContentModelPid
+                  + "'"+"' and '" + angle+"''");
+
+
+        collectionPid = sanitizePid(collectionPid);
+        entryContentModelPid = sanitizePid(entryContentModelPid);
+        angle = sanitizeLiteral(angle);
+
+        String domsnamespace
+                = "http://doms.statsbiblioteket.dk/relations/default/0/1/#";
+
+        String query = "select $object\n"
+                       + "from <#ri>\n"
+                       + "where\n"
+                       + "$object <fedora-model:hasModel> $cm\n"
+                       + "and\n"
+                       + "$cm <"+Constants.ENTRY_RELATION+"> '"+angle+"'\n"
+                       + "and\n"
+                       + "$object <"+domsnamespace+"isPartOfCollection> <info:fedora/"+collectionPid+">\n"
+                       + "and\n"
+                       + "$cm <mulgara:is> <info:fedora/"+entryContentModelPid+">\n"
+                       + "and\n"
+                       + "$object <fedora-model:state> <fedora-model:Active>";
+
+
+
+        LOG.debug("Using query \n'" + query + "'\n");
+        return fedoraConnector.query(query);
+
+    }
+
+
 }
