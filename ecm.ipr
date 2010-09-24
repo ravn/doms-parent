@@ -346,6 +346,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ecm.iml" filepath="$PROJECT_DIR$/ecm.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/fedoraclient.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/fedoraclient.iml" group="fedoraconnectors" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/fedorarestConnector/fedorarestConnector.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/fedorarestConnector/fedorarestConnector.iml" group="fedoraconnectors" />
       <module fileurl="file://$PROJECT_DIR$/modules/fedoravalidatorhook/fedoravalidatorhook.iml" filepath="$PROJECT_DIR$/modules/fedoravalidatorhook/fedoravalidatorhook.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/repository/repository.iml" filepath="$PROJECT_DIR$/modules/repository/repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/services/templates/templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/templates.iml" group="services" />

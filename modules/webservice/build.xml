@@ -25,6 +25,8 @@
         <include name="${fedoraclient.lib}"/>
         <include name="${pidgen.interface.lib}"/>
         <include name="${saxon.lib}"/>
+        <include name="${jersey.lib}"/>
+        <include name="${jsr311-api.lib}"/>
     </dirset>
 
     <dirset id="build.project.libs" dir="${global.dir}/lib/">
