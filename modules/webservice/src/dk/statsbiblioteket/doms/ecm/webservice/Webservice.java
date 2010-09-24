@@ -27,10 +27,9 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.StringWriter;
 
 
-
 /**
  * This is the Class serving as entry point for the webservice api for ECM. This
- * class contain the JAX-RS annotations to make a REST interface. 
+ * class contain the JAX-RS annotations to make a REST interface.
  */
 @Path("/")
 public class Webservice {
@@ -58,7 +57,7 @@ public class Webservice {
                 .getProperty("dk.statsbiblioteket.doms.ecm.pidGenerator.client");
         try {
             Class<?> pidgeneratorClass = Class.forName(pidgeneratorclassString);
-            if (PidGenerator.class.isAssignableFrom(pidgeneratorClass)){
+            if (PidGenerator.class.isAssignableFrom(pidgeneratorClass)) {
                 try {
                     pidGenerator = (PidGenerator) pidgeneratorClass.newInstance();
                 } catch (InstantiationException e) {
@@ -66,7 +65,7 @@ public class Webservice {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
-            }else{//Class not implementing the correct interface
+            } else {//Class not implementing the correct interface
 
             }
         } catch (ClassNotFoundException e) {
@@ -85,25 +84,25 @@ public class Webservice {
         String fedoraconnectorclassstring = ConfigCollection.getProperties().getProperty("dk.statsbiblioteket.doms.ecm.fedora.connector");
         Credentials creds = null;
         creds = (Credentials) request.getAttribute("Credentials");
-        if (creds == null){
+        if (creds == null) {
             log.warn("No credentials found, using empty creds");
-            creds = new Credentials("","");
+            creds = new Credentials("", "");
         }
         try {
             Class<?> fedoraconnectorclass = Class.forName(fedoraconnectorclassstring);
-            if (FedoraConnector.class.isAssignableFrom(fedoraconnectorclass)){
+            if (FedoraConnector.class.isAssignableFrom(fedoraconnectorclass)) {
                 try {
                     fedoraConnector = (FedoraConnector) fedoraconnectorclass.newInstance();
-                    FedoraUserToken token = new FedoraUserToken(fedoraserverurl,creds.getUsername(),creds.getPassword());
+                    FedoraUserToken token = new FedoraUserToken(fedoraserverurl, creds.getUsername(), creds.getPassword());
                     fedoraConnector.initialise(token);
                 } catch (InstantiationException e) {//TODO
-                    throw new InitialisationException("Initialise failed",e);
+                    throw new InitialisationException("Initialise failed", e);
                 } catch (IllegalAccessException e) {//TODO
-                    throw new InitialisationException("Initialise failed",e);
+                    throw new InitialisationException("Initialise failed", e);
                 }
             }
         } catch (ClassNotFoundException e) {//TODO
-            throw new InitialisationException("Initialise failed",e);
+            throw new InitialisationException("Initialise failed", e);
         }
         initialised = true;
     }
@@ -116,7 +115,7 @@ public class Webservice {
             @PathParam("objectpid") String objpid,
             @PathParam("cmpid") String cmpid) throws EcmException {
         initialise();
-        temps.markObjectAsTemplate(objpid,cmpid,fedoraConnector);
+        temps.markObjectAsTemplate(objpid, cmpid, fedoraConnector);
     }
 
     @GET
@@ -124,9 +123,9 @@ public class Webservice {
     @Produces("text/xml")
     public PidList findTemplatesFor(
             @PathParam("cmpid") String cmpid) throws EcmException {
-        log.trace("Entering findTemplatesFor with cmpid='"+cmpid+"'");
+        log.trace("Entering findTemplatesFor with cmpid='" + cmpid + "'");
         initialise();
-        return temps.findTemplatesFor(cmpid,fedoraConnector);
+        return temps.findTemplatesFor(cmpid, fedoraConnector);
     }
 
     @POST
@@ -135,9 +134,8 @@ public class Webservice {
     public String cloneTemplate(
             @PathParam("templatepid") String templatepid) throws EcmException {
         initialise();
-        return temps.cloneTemplate(templatepid,fedoraConnector,pidGenerator);
+        return temps.cloneTemplate(templatepid, fedoraConnector, pidGenerator);
     }
-
 
 
     /*-----------VIEW METHODS ------------------------*/
@@ -147,7 +145,7 @@ public class Webservice {
     public PidList getEntryCMsForAngle(
             @PathParam("viewAngle") String viewAngle) throws EcmException {
         initialise();
-        return view.getEntryCMsForAngle(viewAngle,fedoraConnector);
+        return view.getEntryCMsForAngle(viewAngle, fedoraConnector);
     }
 
 
@@ -159,7 +157,7 @@ public class Webservice {
             @DefaultValue("Active") @QueryParam("state") String status)
             throws EcmException {
         initialise();
-        return view.getObjectsForContentModel(cmpid,status,fedoraConnector);
+        return view.getObjectsForContentModel(cmpid, status, fedoraConnector);
     }
 
     @GET
@@ -170,7 +168,7 @@ public class Webservice {
                                       @QueryParam("state") String state)
             throws EcmException {
         initialise();
-        return view.getEntriesForAngle(viewAngle,state,fedoraConnector);
+        return view.getEntriesForAngle(viewAngle, state, fedoraConnector);
     }
 
     @GET
@@ -182,7 +180,7 @@ public class Webservice {
             @QueryParam("bundle") @DefaultValue("false") boolean bundle)
             throws EcmException {
         initialise();
-        if (bundle){
+        if (bundle) {
             //Return a string, as the two different return formats
             //confuse java
             Document dobundle = view.getViewObjectBundleForObject(
@@ -203,8 +201,8 @@ public class Webservice {
                     viewAngle,
                     fedoraConnector);
             StringWriter writer = new StringWriter();
-            JAXB.marshal(list,writer);
-            return  writer.toString();
+            JAXB.marshal(list, writer);
+            return writer.toString();
 
         }
     }
@@ -213,7 +211,7 @@ public class Webservice {
     @Path("getContentModelsForObject/{objpid}")
     @Produces("text/xml")
     public PidList getContentModels(@PathParam("objpid") String objpid)
-            throws EcmException{
+            throws EcmException {
         initialise();
         return new PidList(fedoraConnector.getContentModels(FedoraUtil.ensurePID(objpid)));
     }
@@ -223,10 +221,25 @@ public class Webservice {
     @Produces("text/xml")
     public PidList getEntryContentModelsForObjectForAngle(@PathParam("objpid") String objpid,
                                                           @PathParam("viewAngle") String viewAngle)
-            throws EcmException{
+            throws EcmException {
         initialise();
 
-        return new PidList(view.getEntryContentModelsForObjectForViewAngle(FedoraUtil.ensurePID(objpid),viewAngle, fedoraConnector));
+        return new PidList(view.getEntryContentModelsForObjectForViewAngle(FedoraUtil.ensurePID(objpid), viewAngle, fedoraConnector));
+    }
+
+    @GET
+    @Path("getAllEntryObjectsForCollection/{collectionpid}/forAngle/"
+            + "{viewAngle}")
+    @Produces("text/xml")
+    public PidList getAllEntryObjectsForCollection(
+            @PathParam("collectionpid") String collectionPid,
+            @QueryParam("entryContentModel") String entryCMpid,
+            @PathParam("viewAngle") String viewAngle)
+            throws EcmException {
+        initialise();
+
+        return new PidList(view.getAllEntryObjectsForCollection(collectionPid,
+                entryCMpid, viewAngle, fedoraConnector));
     }
 
 
