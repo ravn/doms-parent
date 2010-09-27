@@ -578,6 +578,8 @@ public class FedoraClientConnector
         Map<String, String> map = new HashMap<String, String>();
         map.put("lang", "itql");
         map.put("query", query);
+        map.put("stream","on");
+        map.put("flush", "true");
 
         final TupleIterator tupleIterator;
         try {
