@@ -234,12 +234,13 @@ public class Webservice {
     public PidList getAllEntryObjectsForCollection(
             @PathParam("collectionpid") String collectionPid,
             @QueryParam("entryContentModel") String entryCMpid,
-            @PathParam("viewAngle") String viewAngle)
+            @PathParam("viewAngle") String viewAngle,
+            @QueryParam("state") String state)
             throws EcmException {
         initialise();
 
         return new PidList(view.getAllEntryObjectsForCollection(collectionPid,
-                entryCMpid, viewAngle, fedoraConnector));
+                entryCMpid, viewAngle, state, fedoraConnector));
     }
 
 

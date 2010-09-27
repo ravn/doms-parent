@@ -383,6 +383,7 @@ public class ViewSubsystem {
     public PidList getAllEntryObjectsForCollection(String collectionPid,
                                                    String entryContentModelPid,
                                                    String angle,
+                                                   String state,
                                                    FedoraConnector fedoraConnector)
             throws
             FedoraIllegalContentException,
@@ -396,6 +397,12 @@ public class ViewSubsystem {
         collectionPid = sanitizePid(collectionPid);
         entryContentModelPid = sanitizePid(entryContentModelPid);
         angle = sanitizeLiteral(angle);
+
+        if (state.equals("I")){
+            state = "<fedora-model:Inactive>";
+        } else {
+            state = "<fedora-model:Active>";
+        }
 
         String domsnamespace
                 = "http://doms.statsbiblioteket.dk/relations/default/0/1/#";
@@ -411,7 +418,7 @@ public class ViewSubsystem {
                        + "and\n"
                        + "$cm <mulgara:is> <info:fedora/"+entryContentModelPid+">\n"
                        + "and\n"
-                       + "$object <fedora-model:state> <fedora-model:Active>";
+                       + "$object <fedora-model:state> "+state;
 
 
 
@@ -419,6 +426,35 @@ public class ViewSubsystem {
         return fedoraConnector.query(query);
 
     }
+/*
+
+    public long getLastModifiedOfBundle(String objpid, String viewangle, FedoraConnector fedoraConnector)
+            throws
+            ObjectNotFoundException,
+            FedoraIllegalContentException,
+            FedoraConnectionException,
+            InvalidCredentialsException {
+        PidList pidlist = getViewObjectsListForObject(objpid,
+                                                      viewangle,
+                                                      fedoraConnector);
+        String query = "select $object\n"
+                       + "from <#ri>\n"
+                       + "where\n"
+                       + "$object <fedora-model:hasModel> $cm\n"
+                       + "and\n"
+                       + "$cm <"+Constants.ENTRY_RELATION+"> '"+angle+"'\n"
+                       + "and\n"
+                       + "$object <"+domsnamespace+"isPartOfCollection> <info:fedora/"+collectionPid+">\n"
+                       + "and\n"
+                       + "$cm <mulgara:is> <info:fedora/"+entryContentModelPid+">\n"
+                       + "and\n"
+                       + "$object <fedora-model:state> <fedora-model:Active>";
+        
+        for (String pid : pidlist) {
+
+        }
+    }
+*/
 
     
 
