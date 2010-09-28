@@ -398,7 +398,9 @@ public class ViewSubsystem {
         entryContentModelPid = sanitizePid(entryContentModelPid);
         angle = sanitizeLiteral(angle);
 
-        if (state.equals("I")){
+        if (state == null){
+            state = "<fedora-model:Active>";
+        } else if (state.equals("I")){
             state = "<fedora-model:Inactive>";
         } else {
             state = "<fedora-model:Active>";
