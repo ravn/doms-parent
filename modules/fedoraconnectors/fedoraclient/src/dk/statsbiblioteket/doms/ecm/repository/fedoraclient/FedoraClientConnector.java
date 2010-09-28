@@ -494,7 +494,7 @@ public class FedoraClientConnector
                 }
             }
             if (e.getMessage().contains(
-                    "fedora.server.errors.DatastreamNotFoundException")) {
+                    "DatastreamNotFoundException")) {
 
                 throw new DatastreamNotFoundException(
                         "Error getting datastream'" + datastream + "' from '" + pid + "'",
