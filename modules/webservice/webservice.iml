@@ -13,20 +13,18 @@
     <orderEntry type="module-library">
       <library name="Jersey">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/jars/asm-3.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/jars/jersey-client-1.1.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/jars/jersey-server-1.1.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/jars/jersey-core-1.1.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jsr311-api-1.0/jars/jsr311-api-1.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/servlet-api-2.5-apache-tomcat-6.0.20/jars/servlet-api.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/jars/jersey-server-1.1.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/jars/asm-3.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/jars/jersey-client-1.1.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/jars/jersey-core-1.1.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jsr311-api-1.0/jars/jsr311-api-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/jsr311-api-1.0/src/jsr311-api-1.0-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/src/jersey-client-1.1.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/src/jersey-core-1.1.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jersey-1.1.4/src/jersey-server-1.1.4-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/servlet-api-2.5-apache-tomcat-6.0.20/src/servlet-api-2.5-apache-tomcat-6.0.20-src.zip!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/src/jersey-client-1.1.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/src/jersey-core-1.1.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jersey-1.1.4/src/jersey-server-1.1.4-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/jsr311-api-1.0/src/jsr311-api-1.0-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
