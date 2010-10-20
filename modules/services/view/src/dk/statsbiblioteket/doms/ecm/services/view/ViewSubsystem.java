@@ -380,22 +380,22 @@ public class ViewSubsystem {
 
     }
 
-    public PidList getAllEntryObjectsForCollection(String collectionPid,
-                                                   String entryContentModelPid,
+  /*  public PidList getAllEntryObjectsForCollection(String collectionPid,
                                                    String angle,
                                                    String state,
+                                                   int offset,
+                                                   int limit,
                                                    FedoraConnector fedoraConnector)
             throws
             FedoraIllegalContentException,
             FedoraConnectionException,
             InvalidCredentialsException {
         LOG.trace("Entering getAllEntryObjectsForCollection with params '" +
-                  collectionPid + "' and '" + entryContentModelPid
-                  + "'"+"' and '" + angle+"''");
+                  collectionPid + "' and '" + angle+"' and '"+offset+"' and '"+limit+"'");
 
 
         collectionPid = sanitizePid(collectionPid);
-        entryContentModelPid = sanitizePid(entryContentModelPid);
+
         angle = sanitizeLiteral(angle);
 
         if (state == null){
@@ -409,7 +409,7 @@ public class ViewSubsystem {
         String domsnamespace
                 = "http://doms.statsbiblioteket.dk/relations/default/0/1/#";
 
-        String query = "select $object\n"
+        String query = "select $object $cm $date\n"
                        + "from <#ri>\n"
                        + "where\n"
                        + "$object <fedora-model:hasModel> $cm\n"
@@ -418,47 +418,23 @@ public class ViewSubsystem {
                        + "and\n"
                        + "$object <"+domsnamespace+"isPartOfCollection> <info:fedora/"+collectionPid+">\n"
                        + "and\n"
-                       + "$cm <mulgara:is> <info:fedora/"+entryContentModelPid+">\n"
+                       + "$object <fedora-model:state> "+state+"\n"
                        + "and\n"
-                       + "$object <fedora-model:state> "+state;
-
+                       + "$object <fedora-view:lastModifiedDate> $date \n"
+                       + "order by $date";
+        if (offset != 0){
+            query = query+"\n offset "+offset;
+        }
+        if (limit != 0){
+            query = query + "\n limit "+limit;
+        }
 
 
         LOG.debug("Using query \n'" + query + "'\n");
         return fedoraConnector.query(query);
 
     }
-/*
 
-    public long getLastModifiedOfBundle(String objpid, String viewangle, FedoraConnector fedoraConnector)
-            throws
-            ObjectNotFoundException,
-            FedoraIllegalContentException,
-            FedoraConnectionException,
-            InvalidCredentialsException {
-        PidList pidlist = getViewObjectsListForObject(objpid,
-                                                      viewangle,
-                                                      fedoraConnector);
-        String query = "select $object\n"
-                       + "from <#ri>\n"
-                       + "where\n"
-                       + "$object <fedora-model:hasModel> $cm\n"
-                       + "and\n"
-                       + "$cm <"+Constants.ENTRY_RELATION+"> '"+angle+"'\n"
-                       + "and\n"
-                       + "$object <"+domsnamespace+"isPartOfCollection> <info:fedora/"+collectionPid+">\n"
-                       + "and\n"
-                       + "$cm <mulgara:is> <info:fedora/"+entryContentModelPid+">\n"
-                       + "and\n"
-                       + "$object <fedora-model:state> <fedora-model:Active>";
-        
-        for (String pid : pidlist) {
-
-        }
-    }
 */
-
-    
-
 
 }

@@ -1,29 +1,27 @@
 package dk.statsbiblioteket.doms.ecm.webservice;
 
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
+import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
+import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.InitialisationException;
-import dk.statsbiblioteket.doms.ecm.repository.*;
-import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.doms.ecm.services.templates.TemplateSubsystem;
 import dk.statsbiblioteket.doms.ecm.services.view.ViewSubsystem;
-import dk.statsbiblioteket.doms.webservices.*;
+import dk.statsbiblioteket.doms.webservices.ConfigCollection;
+import dk.statsbiblioteket.doms.webservices.Credentials;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.TransformerException;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-
 import java.io.StringWriter;
 
 
@@ -227,21 +225,22 @@ public class Webservice {
         return new PidList(view.getEntryContentModelsForObjectForViewAngle(FedoraUtil.ensurePID(objpid), viewAngle, fedoraConnector));
     }
 
-    @GET
+    /*@GET
     @Path("getAllEntryObjectsForCollection/{collectionpid}/forAngle/"
             + "{viewAngle}")
     @Produces("text/xml")
     public PidList getAllEntryObjectsForCollection(
             @PathParam("collectionpid") String collectionPid,
-            @QueryParam("entryContentModel") String entryCMpid,
             @PathParam("viewAngle") String viewAngle,
-            @QueryParam("state") String state)
+            @QueryParam("state") String state,
+            @QueryParam("offset") int offset,
+            @QueryParam("limit") int limit)
             throws EcmException {
         initialise();
 
         return new PidList(view.getAllEntryObjectsForCollection(collectionPid,
                 entryCMpid, viewAngle, state, fedoraConnector));
     }
-
+*/
 
 }
