@@ -1,28 +1,29 @@
 package dk.statsbiblioteket.doms.ecm.repository.fedoraclient;
 
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
+import dk.statsbiblioteket.doms.ecm.repository.PidList;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
-import dk.statsbiblioteket.doms.ecm.repository.PidList;
+import org.apache.axis.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.axis.AxisFault;
+import org.fcrepo.client.FedoraClient;
+import org.fcrepo.server.access.FedoraAPIA;
+import org.fcrepo.server.errors.LowlevelStorageException;
+import org.fcrepo.server.errors.authorization.AuthzException;
+import org.fcrepo.server.management.FedoraAPIM;
+import org.fcrepo.server.types.gen.DatastreamDef;
+import org.fcrepo.server.types.gen.MIMETypedStream;
+import org.fcrepo.server.types.gen.ObjectProfile;
+import org.fcrepo.server.types.gen.RelationshipTuple;
 import org.jrdf.graph.Node;
 import org.trippi.TrippiException;
 import org.trippi.TupleIterator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import org.fcrepo.client.FedoraClient;
-import org.fcrepo.server.management.FedoraAPIM;
-import org.fcrepo.server.access.FedoraAPIA;
-import org.fcrepo.server.types.gen.MIMETypedStream;
-import org.fcrepo.server.types.gen.DatastreamDef;
-import org.fcrepo.server.types.gen.ObjectProfile;
-import org.fcrepo.server.types.gen.RelationshipTuple;
-import org.fcrepo.server.errors.authorization.AuthzException;
 
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
@@ -49,6 +50,8 @@ public class FedoraClientConnector
 
     //Do not get this directly, use the accessor
     private FedoraClient client;
+    private FedoraAPIM apiM;
+    private FedoraAPIA apiA;
 
     //noargs constructor, as required
     public FedoraClientConnector() {
@@ -58,6 +61,9 @@ public class FedoraClientConnector
 
     public void initialise(FedoraUserToken token) {
         this.token = token;
+        apiA = null;
+        apiM = null;
+        client = null;
     }
 
 
@@ -66,9 +72,6 @@ public class FedoraClientConnector
                    FedoraIllegalContentException, InvalidCredentialsException {
         from = FedoraUtil.ensurePID(from);
         to = FedoraUtil.ensureURI(to);
-        if (!exists(from)) {
-            throw new ObjectNotFoundException("The object '" + from + "' was not found in the Repository");
-        }
         try {
             return getAPIM().addRelationship(from, relation, to, false, null);
         } catch (RemoteException e) {
@@ -81,6 +84,12 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+from+"' was not found",axisFault.getCause());
+                }
+
             }
             throw new FedoraConnectionException(
                     "Something went wrong in the connection with fedora",
@@ -96,9 +105,7 @@ public class FedoraClientConnector
                    FedoraIllegalContentException, InvalidCredentialsException {
         from = FedoraUtil.ensurePID(from);
 
-        if (!exists(from)) {
-            throw new ObjectNotFoundException("The object '" + from + "' was not found in the Repository");
-        }
+     
         try {
             return getAPIM().addRelationship(from,
                                              relation,
@@ -114,6 +121,11 @@ public class FedoraClientConnector
                     throw new InvalidCredentialsException(
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
+                }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+from+"' was not found",axisFault.getCause());
                 }
             }
             throw new FedoraConnectionException(
@@ -132,9 +144,6 @@ public class FedoraClientConnector
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
-        if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
-        }
         try {
             RelationshipTuple[] relations = getAPIM().getRelationships(pid,
                                                                        relation);
@@ -157,6 +166,11 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",axisFault.getCause());
+                }
             }
             throw new FedoraConnectionException(
                     "Something failed in the communication with Fedora",
@@ -176,9 +190,6 @@ public class FedoraClientConnector
                    FedoraIllegalContentException, InvalidCredentialsException {
 
         pid = FedoraUtil.ensurePID(pid);
-        if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
-        }
 
         ObjectProfile profile;
         try {
@@ -193,6 +204,12 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",axisFault.getCause());
+                }
+
             }
             throw new FedoraConnectionException(
                     "Failed in communication with Fedora",
@@ -201,12 +218,14 @@ public class FedoraClientConnector
 
         String[] models = profile.getObjModels();
         PidList localmodels = new PidList(Arrays.asList(models));
-        return getInheritedContentModelsBreadthFirst(localmodels);
+        return localmodels;
+        //TODO Do we really want to perform this breath first search? I mean, we have all the inherited content models in the objects, per definition already. 
+        //return getInheritedContentModelsBreadthFirst(localmodels);
     }
 
 
     private PidList getInheritedContentModelsBreadthFirst(PidList contentmodels)
-            throws ObjectNotFoundException, FedoraIllegalContentException,
+            throws FedoraIllegalContentException,
                    FedoraConnectionException, InvalidCredentialsException {
 
 
@@ -290,17 +309,18 @@ public class FedoraClientConnector
      * @return an empty list
      */
     public PidList getInheritingContentModels(String cmpid)
-            throws FedoraConnectionException, ObjectNotFoundException,
-                   ObjectIsWrongTypeException,
+            throws FedoraConnectionException,
                    FedoraIllegalContentException,
                    InvalidCredentialsException {
         cmpid = FedoraUtil.ensureURI(cmpid);
+/*
         if (!exists(cmpid)) {
             throw new ObjectNotFoundException("Object '" + cmpid + "' does not exist in the Repository");
         }
         if (!isContentModel(cmpid)) {
             throw new ObjectIsWrongTypeException("Object '" + cmpid + "' is not a content model");
         }
+*/
 
         PidList descendants = query("select $object \n" + "from <#ri>\n" + "where \n" + "walk(\n" + "$object <" + Constants.RELATION_EXTENDS_MODEL + "> <" + cmpid + ">\n" + "and\n" + "$object <" + Constants.RELATION_EXTENDS_MODEL + "> $temp\n" + ");");
         return descendants;
@@ -309,7 +329,7 @@ public class FedoraClientConnector
 
 
     public PidList getInheritedContentModels(String cmpid)
-            throws FedoraConnectionException, ObjectNotFoundException,
+            throws FedoraConnectionException,
                    ObjectIsWrongTypeException,
                    FedoraIllegalContentException,
                    InvalidCredentialsException {
@@ -338,9 +358,6 @@ public class FedoraClientConnector
             throws FedoraConnectionException, ObjectNotFoundException,
                    FedoraIllegalContentException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
-        if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
-        }
 
         try {
             DatastreamDef[] datastreams = getAPIA().listDatastreams(pid, null);
@@ -359,6 +376,12 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",axisFault.getCause());
+                }
+
             }
             throw new FedoraConnectionException("Something failed in the " + "communication with Fedora",
                                                 e);
@@ -417,10 +440,6 @@ public class FedoraClientConnector
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
-        pid = FedoraUtil.ensurePID(pid);
-        if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
-        }
 
 
         byte[] objectXML;
@@ -437,6 +456,12 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",lowlevelStorageException);
+                }
+
             }
             throw new FedoraConnectionException("Error getting XML for '" + pid + "' from Fedora",
                                                 e);
@@ -472,9 +497,6 @@ public class FedoraClientConnector
                    InvalidCredentialsException {
 
         pid = FedoraUtil.ensurePID(pid);
-        if (!exists(pid)) {
-            throw new ObjectNotFoundException("The object '" + pid + "' was not found in the Repository");
-        }
 
         MIMETypedStream dsCompositeDatastream;
         byte[] buf;
@@ -492,6 +514,12 @@ public class FedoraClientConnector
                             "The supplied credentials were insufficient for the"
                             + " task at hand",authzException);
                 }
+                if (axisFault.getCause() instanceof LowlevelStorageException) {
+                    LowlevelStorageException lowlevelStorageException
+                            = (LowlevelStorageException) axisFault.getCause();
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",axisFault.getCause());
+                }
+
             }
             if (e.getMessage().contains(
                     "DatastreamNotFoundException")) {
@@ -656,7 +684,11 @@ public class FedoraClientConnector
      */
     private FedoraAPIM getAPIM() throws FedoraConnectionException {
         try {
-            return getFedoraClient().getAPIM();
+            if (apiM == null){
+                apiM = getFedoraClient().getAPIM();
+            }
+            return apiM;
+
         } catch (ServiceException e) {
             throw new FedoraConnectionException("Error connecting to Fedora",
                                                 e);
@@ -674,9 +706,12 @@ public class FedoraClientConnector
      *          on trouble connecting to Fedora.
      */
     private FedoraAPIA getAPIA() throws FedoraConnectionException {
-        FedoraAPIA fedoraAPIA;
+
         try {
-            fedoraAPIA = getFedoraClient().getAPIA();
+            if (apiA == null){
+                apiA = getFedoraClient().getAPIA();
+            }
+            return apiA;
         } catch (IOException e) {
             throw new FedoraConnectionException("Error connecting to Fedora",
                                                 e);
@@ -684,6 +719,5 @@ public class FedoraClientConnector
             throw new FedoraConnectionException("Error connecting to Fedora",
                                                 e);
         }
-        return fedoraAPIA;
     }
 }

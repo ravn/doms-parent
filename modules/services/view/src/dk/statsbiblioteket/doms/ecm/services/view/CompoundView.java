@@ -95,11 +95,13 @@ public class CompoundView {
 
         // Get starting point
         // TODO: Consider sorting this list, with children before parents?
+/*
 
         if (!fedoraConnector.isDataObject(pid)){
             throw new FedoraIllegalContentException("The object '"+ pid +"' is " +
                                                     "not a data object");
         }
+*/
 
         // Initialise list of base content models
         List<String> models = fedoraConnector.getContentModels(pid);
@@ -115,11 +117,6 @@ public class CompoundView {
         for (String p : pids) {
             LOG.trace("Getting view from object " + p);
 
-            if (!fedoraConnector.exists(p)) {
-                throw new ObjectNotFoundException("The object '" + p +
-                                                  "' was not found");
-            }
-
             Document viewXml;
             try {
                 viewXml = fedoraConnector
@@ -127,6 +124,9 @@ public class CompoundView {
                                        Constants.VIEW_DATASTREAM);
             } catch (DatastreamNotFoundException e) {
                 LOG.warn("No VIEW datastream in content model '" + p + "'");
+                continue;
+            } catch (ObjectNotFoundException e){
+                LOG.warn("Object '"+p+"' is declared as a content model for object '"+pid+"' but does not exist",e);
                 continue;
             }
             LOG.trace("Entering updateView for content model " + p);

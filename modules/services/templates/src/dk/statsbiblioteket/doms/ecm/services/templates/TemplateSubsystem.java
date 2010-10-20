@@ -33,8 +33,8 @@ public class TemplateSubsystem {
                                                + "foxml:datastreamVersion[position()=last()]/"
                                                + "foxml:xmlContent/oai_dc:dc/dc:identifier";
     private static final String OAIDC = "/foxml:digitalObject/foxml:datastream[@ID='DC']/"
-                                            + "foxml:datastreamVersion[position()=last()]/"
-                                            + "foxml:xmlContent/oai_dc:dc";
+                                        + "foxml:datastreamVersion[position()=last()]/"
+                                        + "foxml:xmlContent/oai_dc:dc";
     private static final String ISTEMPLATEFOR = "/foxml:digitalObject/foxml:datastream[@ID='RELS-EXT']/"
                                                 + "foxml:datastreamVersion[position()=last()]/"
                                                 + "foxml:xmlContent/rdf:RDF/"
@@ -66,14 +66,6 @@ public class TemplateSubsystem {
         LOG.trace("Entering markObjectAsTemplate with params: " + objpid + " and "+cmpid );
         //Working
 
-        if (!fedoraConnector.exists(cmpid)){
-            throw new ObjectNotFoundException("The content model '"+cmpid+
-                                              "' does not exist");
-        }
-        if (!fedoraConnector.exists(objpid)){
-            throw new ObjectNotFoundException("The data object '"+objpid+
-                                              "' does not exist");
-        }
 
         if (!fedoraConnector.isContentModel(cmpid)){
             throw new ObjectIsWrongTypeException("The content model '"+cmpid+
@@ -96,52 +88,40 @@ public class TemplateSubsystem {
 
 
     public PidList findTemplatesFor(String cmpid, FedoraConnector fedoraConnector)
-            throws ObjectNotFoundException,
-                   FedoraConnectionException,
+            throws FedoraConnectionException,
                    FedoraIllegalContentException,
-                   ObjectIsWrongTypeException, InvalidCredentialsException {
+                   InvalidCredentialsException,
+                   ObjectNotFoundException,
+                   ObjectIsWrongTypeException {
         //Working
         LOG.trace("Entering findTemplatesFor with param '"+cmpid+"'");
 
-        if (fedoraConnector.exists(cmpid)){
-            if (fedoraConnector.isContentModel(cmpid)){
+        List<String> childcms
+                = fedoraConnector.getInheritingContentModels(cmpid);
 
-                List<String> childcms
-                        = fedoraConnector.getInheritingContentModels(cmpid);
+        String contentModel
+                = "<"+
+                  FedoraUtil.ensureURI(cmpid)+
+                  ">\n";
 
-                String contentModel
-                        = "<"+
-                          FedoraUtil.ensureURI(cmpid)+
-                          ">\n";
+        String query = "select $object\n" +
+                       "from <#ri>\n" +
+                       "where\n" +
+                       " $object <" + Constants.TEMPLATE_REL + "> " +
+                       contentModel;
 
-                String query = "select $object\n" +
-                               "from <#ri>\n" +
-                               "where\n" +
-                               " $object <" + Constants.TEMPLATE_REL + "> " +
-                               contentModel;
+        for (String childcm: childcms){
+            String cm = "<" +
+                        FedoraUtil.ensureURI(childcm) +
+                        ">\n";
 
-                for (String childcm: childcms){
-                    String cm = "<" +
-                                FedoraUtil.ensureURI(childcm) +
-                                ">\n";
-
-                    query = query +
-                            "or $object <" +
-                            Constants.TEMPLATE_REL +
-                            "> " + cm;
-                }
-
-                return fedoraConnector.query(query);
-            } else {
-                throw new ObjectIsWrongTypeException("The pid '" +
-                                                     cmpid +
-                                                     "' is not a content model");
-            }
-        } else {
-            throw new ObjectNotFoundException("The pid '" +
-                                              cmpid +
-                                              "' is not in the fedoraConnector");
+            query = query +
+                    "or $object <" +
+                    Constants.TEMPLATE_REL +
+                    "> " + cm;
         }
+
+        return fedoraConnector.query(query);
 
     }
 
@@ -158,10 +138,7 @@ public class TemplateSubsystem {
         templatepid = FedoraUtil.ensurePID(templatepid);
         LOG.trace("Entering cloneTemplate with param '" + templatepid + "'");
 
-        if (!fedoraConnector.exists(templatepid)){
-            throw new ObjectNotFoundException("The object (" + templatepid +
-                                              " does not exists");
-        }
+
         if (!fedoraConnector.isTemplate(templatepid)){
             throw new ObjectIsWrongTypeException("The pid (" + templatepid +
                                                  ") is not a pid of a template");

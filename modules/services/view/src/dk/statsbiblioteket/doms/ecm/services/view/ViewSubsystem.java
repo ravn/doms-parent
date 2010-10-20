@@ -111,15 +111,6 @@ public class ViewSubsystem {
         //TODO why do we sanitize?
 
 
-
-        if (!fedoraConnector.exists(cmpid)){
-            throw new ObjectNotFoundException("The pid '" + cmpid +
-                                              "' is not in the repository");
-        }
-        if (!fedoraConnector.isContentModel(cmpid)){
-            throw new ObjectIsWrongTypeException("The pid '" + cmpid +
-                                                 "' is not a content model");
-        }
         String contentModel = "<" + FedoraUtil.ensureURI(cmpid) + ">";
 
         List<String> childcms = fedoraConnector.getInheritingContentModels(cmpid);
@@ -207,6 +198,7 @@ public class ViewSubsystem {
 
         LOG.trace("Entering getViewObjectsListForObject with params '" +
                   objpid + "' and '" + viewAngle + "'");
+/*
 
         if (!fedoraConnector.exists(objpid)){
             throw new ObjectNotFoundException("The data object '" + objpid +
@@ -216,6 +208,7 @@ public class ViewSubsystem {
             throw new ObjectNotFoundException("The data object '" + objpid +
                                               "' is not a data object");
         }
+*/
 
         PidList includedPids = new PidList();
 
