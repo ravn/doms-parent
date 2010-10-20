@@ -490,12 +490,11 @@
     </library>
     <library name="pidGenerator">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.1/jars/WSDL_interface.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.2/jars/WSDL_interface.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://$PROJECT_DIR$/lib/pidGenerator-0.0.1/jars" />
-        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.1/src/pidGenerator-0.0.1-src.zip!/pidGenerator-0.0.1/modules/WSDL_interface/tempsrc" />
+        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.2/src/WSDL_interface-src.zip!/" />
       </SOURCES>
     </library>
     <library name="jersey">
