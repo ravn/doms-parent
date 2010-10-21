@@ -24,6 +24,8 @@ public class ViewSubsystem {
     private static final Log LOG = LogFactory.getLog(ViewSubsystem.class);
 
 
+
+
     /**
      * Nessesary no-args constructor
      */

@@ -149,4 +149,31 @@ public class PidList implements List<String> {
     public List<String> subList(int fromIndex, int toIndex) {
         return pids.subList(fromIndex, toIndex);
     }
+
+
+    /**
+     * Returns a string representation of this collection.  The string
+     * representation consists of a list of the collection's elements in the
+     * order they are returned by its iterator, enclosed in square brackets
+     * (<tt>"[]"</tt>).  Adjacent elements are separated by the characters
+     * <tt>", "</tt> (comma and space).  Elements are converted to strings as
+     * by {@link String#valueOf(Object)}.
+     *
+     * @return a string representation of this collection
+     */
+    public String toString() {
+        Iterator<String> i = iterator();
+        if (! i.hasNext())
+            return "[]";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (;;) {
+            String e = i.next();
+            if (! i.hasNext())
+                return sb.append(']').toString();
+            sb.append(", ");
+        }
+    }
+
 }

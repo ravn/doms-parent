@@ -1,9 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.webservice;
 
-import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraUserToken;
-import dk.statsbiblioteket.doms.ecm.repository.PidGenerator;
-import dk.statsbiblioteket.doms.ecm.repository.PidList;
+import dk.statsbiblioteket.doms.ecm.repository.*;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.EcmException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.InitialisationException;
@@ -91,6 +88,7 @@ public class Webservice {
             if (FedoraConnector.class.isAssignableFrom(fedoraconnectorclass)) {
                 try {
                     fedoraConnector = (FedoraConnector) fedoraconnectorclass.newInstance();
+                    fedoraConnector = new CachingConnector(fedoraConnector);
                     FedoraUserToken token = new FedoraUserToken(fedoraserverurl, creds.getUsername(), creds.getPassword());
                     fedoraConnector.initialise(token);
                 } catch (InstantiationException e) {//TODO

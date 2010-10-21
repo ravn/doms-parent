@@ -2,8 +2,11 @@
 
     <property name="global.dir" value="${basedir}/../../../"/>
 
+    <property file="${global.dir}/build.properties"/>
+
     <!--Contain the normal build tasks, including war-->
     <import file="${global.dir}/build/build-module.xml"/>
+
 
 
     <dirset id="module.dependencies" dir="${global.dir}/modules/">
@@ -12,6 +15,7 @@
 
     <dirset id="project.libs" dir="${global.dir}/lib/">
         <include name="${commons-logging.lib}"/>
+        <include name="${sbutils.lib}"/>
     </dirset>
     
 </project>

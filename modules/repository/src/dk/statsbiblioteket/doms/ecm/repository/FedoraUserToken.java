@@ -48,4 +48,35 @@ public class FedoraUserToken {
         return password;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FedoraUserToken)) {
+            return false;
+        }
+
+        FedoraUserToken that = (FedoraUserToken) o;
+
+        if (!password.equals(that.password)) {
+            return false;
+        }
+        if (!serverurl.equals(that.serverurl)) {
+            return false;
+        }
+        if (!username.equals(that.username)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = serverurl.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
+    }
 }

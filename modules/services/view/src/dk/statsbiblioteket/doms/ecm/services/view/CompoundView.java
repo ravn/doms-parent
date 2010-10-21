@@ -5,6 +5,7 @@ import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
+import dk.statsbiblioteket.util.caching.TimeSensitiveCache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -36,6 +37,12 @@ public class CompoundView {
     /** The view defined by the model. */
     Map<String, View> view;
 
+
+    private static TimeSensitiveCache<String,CompoundView> longTermStorage
+            = new TimeSensitiveCache<String,CompoundView>(1000*60*30,true,20);//TODO
+
+    private static TimeSensitiveCache<String,CompoundView> shortTermStorage
+            = new TimeSensitiveCache<String,CompoundView>(1000*60*3,true,20);//TODO
 
     private static final String VIEWS_VIEWANGLE = "/view:views/view:viewangle";
     private static final String NAME_ATTRIBUTE = "name";
@@ -90,8 +97,18 @@ public class CompoundView {
                    FedoraConnectionException,
                    FedoraIllegalContentException, InvalidCredentialsException {
 
+
+
         LOG.trace("Entering getView with string '" + pid + "'");
-        CompoundView model = new CompoundView();
+
+        CompoundView model = shortTermStorage.get(pid);
+        if (model != null){
+            return model;
+        }
+
+        model = new CompoundView();
+
+
 
         // Get starting point
         // TODO: Consider sorting this list, with children before parents?
@@ -106,11 +123,20 @@ public class CompoundView {
         // Initialise list of base content models
         List<String> models = fedoraConnector.getContentModels(pid);
 
+
+
+
+
         //Reduce the list to unique content models
         Set<String> pids1 = new TreeSet<String>();
         pids1.addAll(models);
 
         List<String> pids = new ArrayList<String>(pids1);
+        model = longTermStorage.get(pids.toString());
+        if (model != null){
+            return model;
+        }
+
 
 
         // Update content model with info from all models.
@@ -134,13 +160,16 @@ public class CompoundView {
 
             // Check if this is the content model for a main object in some view
             setMainView(p, model.getView(), fedoraConnector);
-
         }
+        longTermStorage.put(pids.toString(),model);
+        shortTermStorage.put(pid,model);
 
         LOG.trace("Got all views, returning");
         model.pids = pids;
         return model;
     }
+
+
 
 
     /**
