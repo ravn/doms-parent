@@ -168,7 +168,7 @@ public class CachingConnector implements FedoraConnector{
                                                         ObjectNotFoundException,
                                                         FedoraIllegalContentException,
                                                         InvalidCredentialsException {
-        List<Relation> relations = getRelations(pid, relation);
+        List<Relation> relations = getRelations(pid);
         List<Relation> result = new ArrayList<Relation>();
         for (Relation relation1 : relations) {
             if (relation1.getRelation().equals(relation)){
@@ -187,7 +187,7 @@ public class CachingConnector implements FedoraConnector{
                                                            InvalidCredentialsException {
         Document doc = myCaches.getDatastreamContents(pid, dsid);
         if (doc != null){
-            return null;
+            return doc;
         }
         doc =  connector.getDatastream(pid, dsid);
         myCaches.storeDatastreamContents(pid,dsid,doc);

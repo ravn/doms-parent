@@ -38,6 +38,7 @@
     <dirset id="project.libs" dir="${global.dir}/lib/">
         <include name="${domsutils.lib}"/>
         <include name="${pidgen.interface.lib}"/>
+        <include name="${sbutils.lib}"/>
     </dirset>
 
 </project>

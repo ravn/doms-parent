@@ -1,5 +1,6 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
+import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.util.caching.TimeSensitiveCache;
 import org.w3c.dom.Document;
 
@@ -13,6 +14,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Caches {
+
+
 
 
     private TimeSensitiveCache<String,List<FedoraConnector.Relation>> relations
@@ -29,7 +32,9 @@ public class Caches {
 
     public void storeRelations(String pid,
                                List<FedoraConnector.Relation> relations) {
-        this.relations.put(pid,relations);
+        if (pidProtection(pid)){
+            this.relations.put(pid,relations);
+        }
 
     }
     public List<FedoraConnector.Relation> getRelations(String pid) {
@@ -43,13 +48,17 @@ public class Caches {
     }
 
     public void storeObjectXML(String pid, Document doc) {
-        objectXML.put(pid,doc);
+        if (pidProtection(pid)){
+            objectXML.put(pid,doc);
+        }
     }
 
 
 
     public void storeDatastreamContents(String pid, String dsid, Document doc) {
-        datastreamContents.put(mergeStrings(pid,dsid),doc);
+        if (pidProtection(pid)){
+            datastreamContents.put(mergeStrings(pid,dsid),doc);
+        }
     }
 
     public Document getDatastreamContents(String pid, String dsid) {
@@ -71,4 +80,12 @@ public class Caches {
         return result;
     }
 
+
+    private boolean pidProtection(String pid){
+        pid = FedoraUtil.ensurePID(pid);
+        if (pid.startsWith("doms:")){
+            return true;
+        }
+        return false;
+    }
 }

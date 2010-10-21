@@ -106,7 +106,7 @@ public class CompoundView {
             return model;
         }
 
-        model = new CompoundView();
+
 
 
 
@@ -137,7 +137,7 @@ public class CompoundView {
             return model;
         }
 
-
+        model = new CompoundView();
 
         // Update content model with info from all models.
         for (String p : pids) {
