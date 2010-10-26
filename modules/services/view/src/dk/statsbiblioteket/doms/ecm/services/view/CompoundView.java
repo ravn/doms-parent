@@ -41,9 +41,6 @@ public class CompoundView {
     private static TimeSensitiveCache<String,CompoundView> longTermStorage
             = new TimeSensitiveCache<String,CompoundView>(1000*60*30,true,20);//TODO
 
-    private static TimeSensitiveCache<String,CompoundView> shortTermStorage
-            = new TimeSensitiveCache<String,CompoundView>(1000*60*3,true,20);//TODO
-
     private static final String VIEWS_VIEWANGLE = "/view:views/view:viewangle";
     private static final String NAME_ATTRIBUTE = "name";
     private static final String VIEWS_VIEWANGLE_NAME = VIEWS_VIEWANGLE+"[@name='";
@@ -101,10 +98,7 @@ public class CompoundView {
 
         LOG.trace("Entering getView with string '" + pid + "'");
 
-        CompoundView model = shortTermStorage.get(pid);
-        if (model != null){
-            return model;
-        }
+
 
 
 
@@ -131,8 +125,8 @@ public class CompoundView {
         Set<String> pids1 = new TreeSet<String>();
         pids1.addAll(models);
 
-        List<String> pids = new ArrayList<String>(pids1);
-        model = longTermStorage.get(pids.toString());
+        ArrayList<String> pids = new ArrayList<String>(pids1);
+        CompoundView model = longTermStorage.get(pids.toString());
         if (model != null){
             return model;
         }
@@ -162,7 +156,6 @@ public class CompoundView {
             setMainView(p, model.getView(), fedoraConnector);
         }
         longTermStorage.put(pids.toString(),model);
-        shortTermStorage.put(pid,model);
 
         LOG.trace("Got all views, returning");
         model.pids = pids;
