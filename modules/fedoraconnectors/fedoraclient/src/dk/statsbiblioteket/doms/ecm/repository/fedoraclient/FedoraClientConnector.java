@@ -207,7 +207,7 @@ public class FedoraClientConnector
                 if (axisFault.getCause() instanceof LowlevelStorageException) {
                     LowlevelStorageException lowlevelStorageException
                             = (LowlevelStorageException) axisFault.getCause();
-                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",axisFault.getCause());
+                    throw new ObjectNotFoundException("The object '"+pid+"' was not found",lowlevelStorageException);
                 }
 
             }
