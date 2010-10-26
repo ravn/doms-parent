@@ -483,17 +483,17 @@
     </library>
     <library name="domsutils">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/jars/webservice-common.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/jars/surveyable_interface.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/jars/surveyable_impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/jars/surveyable_interface.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/jars/surveyable_impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/jars/webservice-common.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/apidocs/domsutil-0.0.10-doc.zip!/domsutil-0.0.10" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/apidocs/domsutil-0.0.11-doc.zip!/domsutil-0.0.11" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/src/domsutil-0.0.10-src.zip!/domsutil-0.0.10/modules/webservice-common/src" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/src/domsutil-0.0.10-src.zip!/domsutil-0.0.10/modules/surveyable/surveyable_impl/src" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.10/src/domsutil-0.0.10-src.zip!/domsutil-0.0.10/modules/surveyable/surveyable_interface/src" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/src/surveyable_impl-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/src/surveyable_interface-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.11/src/webservice-common-src.zip!/" />
       </SOURCES>
     </library>
     <library name="pidGenerator">
@@ -528,13 +528,13 @@
         <root url="jar://$PROJECT_DIR$/lib/jsr311-api-1.0/src/jsr311-api-1.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="sbutils">
+    <library name="sbutil">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/sbutils-0.5.2#SNAPSHOT/jars/sbutil-0.5.2#SNAPSHOT.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/sbutil-0.5.2/jars/sbutil-0.5.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/sbutils-0.5.2#SNAPSHOT/src/sbutil-0.5.2#SNAPSHOT-src.zip!/sbutil-0.5.2#SNAPSHOT/src" />
+        <root url="jar://$PROJECT_DIR$/lib/sbutil-0.5.2/src/sbutil-0.5.2-src.zip!/sbutil-0.5.2/src" />
       </SOURCES>
     </library>
   </component>

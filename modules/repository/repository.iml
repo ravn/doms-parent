@@ -9,7 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="domsutils" level="project" />
     <orderEntry type="library" name="pidGenerator" level="project" />
-    <orderEntry type="library" name="sbutils" level="project" />
+    <orderEntry type="library" name="sbutil" level="project" />
   </component>
 </module>
 

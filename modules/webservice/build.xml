@@ -18,7 +18,7 @@
 
     <!--Project libs used by this module-->
     <dirset id="project.libs" dir="${global.dir}/lib/">
-        <include name="${sbutils.lib}"/>
+        <include name="${sbutil.lib}"/>
         <include name="${domsutils.lib}"/>
         <include name="${surveillance.lib}"/>
         <include name="${commons-logging.lib}"/>
