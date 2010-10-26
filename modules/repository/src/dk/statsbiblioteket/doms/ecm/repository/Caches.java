@@ -1,6 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.doms.webservices.ConfigCollection;
 import dk.statsbiblioteket.util.caching.TimeSensitiveCache;
 import org.w3c.dom.Document;
 
@@ -15,15 +16,32 @@ import java.util.List;
  */
 public class Caches {
 
+    private TimeSensitiveCache<String,List<FedoraConnector.Relation>> relations;
+
+    private TimeSensitiveCache<String,Document> objectXML;
+
+    private  TimeSensitiveCache<String,Document> datastreamContents;
 
 
 
-    private TimeSensitiveCache<String,List<FedoraConnector.Relation>> relations
-            = new TimeSensitiveCache<String,List<FedoraConnector.Relation>>(1000*60*3,true,20);
-    private TimeSensitiveCache<String,Document> objectXML
-            = new TimeSensitiveCache<String,Document>(1000*60*30,true,20);
-    private  TimeSensitiveCache<String,Document> datastreamContents
-            = new TimeSensitiveCache<String,Document>(1000*60*30,true,20);
+    public Caches() {
+
+        long lifetime
+                = Long.parseLong(ConfigCollection.getProperties().getProperty(
+                "dk.statsbiblioteket.doms.ecm.connectors.fedora.usercache.lifetime",
+                "" + 1000 * 60 * 10));
+        int size
+                = Integer.parseInt(ConfigCollection.getProperties().getProperty(
+                "dk.statsbiblioteket.doms.ecm.connectors.fedora.usercache.size",
+                "" + 20));
+
+
+        relations = new TimeSensitiveCache<String,List<FedoraConnector.Relation>>(lifetime,true,size);
+        objectXML = new TimeSensitiveCache<String,Document>(lifetime,true,size);
+        datastreamContents
+                = new TimeSensitiveCache<String,Document>(lifetime,true,size*10);//TODO size?
+    }
+
 
 
     public void removeRelations(String from) {
@@ -48,9 +66,9 @@ public class Caches {
     }
 
     public void storeObjectXML(String pid, Document doc) {
-        if (pidProtection(pid)){
-            objectXML.put(pid,doc);
-        }
+        //if (pidProtection(pid)){
+        objectXML.put(pid,doc);
+
     }
 
 

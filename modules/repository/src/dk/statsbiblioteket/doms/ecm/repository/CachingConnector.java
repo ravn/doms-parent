@@ -2,6 +2,7 @@ package dk.statsbiblioteket.doms.ecm.repository;
 
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.doms.webservices.ConfigCollection;
 import dk.statsbiblioteket.util.caching.TimeSensitiveCache;
 import org.w3c.dom.Document;
 
@@ -23,19 +24,19 @@ public class CachingConnector implements FedoraConnector{
      * The static contentmodel caches. These should not be protected, so we do
      * not care about specific user creds here
      */
-    private static TimeSensitiveCache<String,PidList> inheritedContentModels
-            = new TimeSensitiveCache<String,PidList>(1000*60*30,true,20);
-    private static TimeSensitiveCache<String,PidList> inheritingContentModels
-            = new TimeSensitiveCache<String,PidList>(1000*60*30,true,20);
-    private static TimeSensitiveCache<String,PidList> contentModels
-            = new TimeSensitiveCache<String,PidList>(1000*60*30,true,200);
+    private static TimeSensitiveCache<String,PidList> inheritedContentModels;
+
+    private static TimeSensitiveCache<String,PidList> inheritingContentModels;
+
+    private static TimeSensitiveCache<String,PidList> contentModels;
+
 
     /**
      * This is the blob of user specific caches. Note that this is itself a cache
      * so it will be garbage collected
      */
-    private static TimeSensitiveCache<FedoraUserToken,Caches> userspecificCaches
-            = new TimeSensitiveCache<FedoraUserToken,Caches>(1000*60*30,true,20);
+    private static TimeSensitiveCache<FedoraUserToken,Caches> userspecificCaches;
+
 
     /**
      * My specific cache.
@@ -43,7 +44,32 @@ public class CachingConnector implements FedoraConnector{
     private Caches myCaches;
 
 
+
     public CachingConnector(FedoraConnector connector) {
+        long lifetime
+                = Long.parseLong(ConfigCollection.getProperties().getProperty(
+                "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.lifetime",
+                "" + 1000 * 60 * 10));
+        int size
+                = Integer.parseInt(ConfigCollection.getProperties().getProperty(
+                "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.size",
+                "" + 20));
+
+
+        if (inheritedContentModels == null){
+            inheritedContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
+        }
+        if (inheritingContentModels == null){
+            inheritingContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
+        }
+        if (contentModels == null){
+            contentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size*2);
+        }
+        if (userspecificCaches == null){
+            userspecificCaches = new TimeSensitiveCache<FedoraUserToken,Caches>(lifetime,true,size);
+        }
+
+
         this.connector = connector;
     }
 

@@ -31,6 +31,28 @@
         <param-value>http://localhost:8080/pidgenerator/pidGenerator/?wsdl</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>dk.statsbiblioteket.doms.ecm.connectors.fedora.usercache.lifetime</param-name>
+        <param-value>600000</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>dk.statsbiblioteket.doms.ecm.connectors.fedora.usercache.size</param-name>
+        <param-value>20</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.lifetime</param-name>
+        <param-value>600000</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.size</param-name>
+        <param-value>20</param-value>
+    </context-param>
+
+
+
     <listener>
         <listener-class>
             dk.statsbiblioteket.doms.webservices.ConfigContextListener
