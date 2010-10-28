@@ -7,6 +7,7 @@ import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.util.xml.DOM;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -145,7 +146,8 @@ public class TemplateSubsystem {
         }
 
         // Get the document
-        Document document = fedoraConnector.getObjectXml(templatepid);
+        String contents = fedoraConnector.getObjectXml(templatepid);
+        Document document = DOM.stringToDOM(contents, true);
 
 
         String newPid = pidGenerator.generateNextAvailablePID("clone_");

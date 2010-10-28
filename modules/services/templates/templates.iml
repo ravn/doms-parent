@@ -9,6 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="repository" />
     <orderEntry type="library" name="commons-loggings-1.1.1" level="project" />
+    <orderEntry type="library" name="sbutil" level="project" />
   </component>
 </module>
 

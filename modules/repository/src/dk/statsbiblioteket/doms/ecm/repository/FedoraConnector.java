@@ -153,9 +153,9 @@ public interface FedoraConnector {
                    InvalidCredentialsException;
 
     /**
-     * Gets the entire object as a Document
+     * Gets the entire object as a String
      * @param pid the pid of the object
-     * @return the object as a Document
+     * @return the object as a String
      * @throws FedoraConnectionException
      * if there is a problem with the communication with Fedora
      * @throws ObjectNotFoundException if the object
@@ -166,7 +166,7 @@ public interface FedoraConnector {
      * @see #initialise(FedoraUserToken)
 
      */
-    public Document getObjectXml(String pid)
+    public String getObjectXml(String pid)
             throws IllegalStateException,
                    ObjectNotFoundException,
                    FedoraConnectionException,

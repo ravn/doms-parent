@@ -163,7 +163,7 @@ public class FedoraTestConnector
         }
     }
 
-    public Document getObjectXml(String pid) throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
+    public String getObjectXml(String pid) throws ObjectNotFoundException, FedoraConnectionException, FedoraIllegalContentException {
         TestObject object = objects.get(FedoraUtil.ensurePID(pid));
         if (object == null){
             throw new ObjectNotFoundException("");

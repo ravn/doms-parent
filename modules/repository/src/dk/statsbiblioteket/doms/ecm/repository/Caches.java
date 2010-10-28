@@ -18,7 +18,7 @@ public class Caches {
 
     private TimeSensitiveCache<String,List<FedoraConnector.Relation>> relations;
 
-    private TimeSensitiveCache<String,Document> objectXML;
+    private TimeSensitiveCache<String,String> objectXML;
 
     private  TimeSensitiveCache<String,Document> datastreamContents;
 
@@ -37,7 +37,7 @@ public class Caches {
 
 
         relations = new TimeSensitiveCache<String,List<FedoraConnector.Relation>>(lifetime,true,size);
-        objectXML = new TimeSensitiveCache<String,Document>(lifetime,true,size);
+        objectXML = new TimeSensitiveCache<String,String>(lifetime,true,size);
         datastreamContents
                 = new TimeSensitiveCache<String,Document>(lifetime,true,size*10);//TODO size?
     }
@@ -61,11 +61,11 @@ public class Caches {
 
 
 
-    public Document getObjectXML(String pid) {
+    public String getObjectXML(String pid) {
         return objectXML.get(pid);
     }
 
-    public void storeObjectXML(String pid, Document doc) {
+    public void storeObjectXML(String pid, String doc) {
         //if (pidProtection(pid)){
         objectXML.put(pid,doc);
 

@@ -436,7 +436,7 @@ public class FedoraClientConnector
      *            PID, or as a Fedora URI.
      * @return The object parsed in a DOM.
      */
-    public Document getObjectXml(String pid)
+    public String getObjectXml(String pid)
             throws FedoraConnectionException, FedoraIllegalContentException,
                    ObjectNotFoundException, InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
@@ -469,18 +469,8 @@ public class FedoraClientConnector
             throw new FedoraConnectionException("Error getting XML for '" + pid + "' from Fedora",
                                                 e);
         }
-
-
-        try {
-            return DocumentUtils.DOCUMENT_BUILDER.parse(new ByteArrayInputStream(
-                    objectXML));
-        } catch (SAXException e) {
-            throw new FedoraIllegalContentException("Error parsing XML for '" + pid + "' from Fedora",
-                                                    e);
-        } catch (IOException e) {
-            throw new Error("IOTrouble reading from byte array stream, " + "this should never happen",
-                            e);
-        }
+        String result = new String(objectXML);
+        return result;
     }
 
     /**

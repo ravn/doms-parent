@@ -1,11 +1,13 @@
 package dk.statsbiblioteket.doms.ecm.services.view;
 
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
+
 import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
 import dk.statsbiblioteket.doms.ecm.repository.PidList;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.*;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
+import dk.statsbiblioteket.util.xml.DOM;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -259,7 +261,7 @@ public class ViewSubsystem {
 
         for (String pid: pidlist){
             //Get the object as a document
-            Document objectdoc = fedoraConnector.getObjectXml(pid);
+            Document objectdoc = DOM.stringToDOM(fedoraConnector.getObjectXml(pid),true);
 
             //add it to the bundle we are creating
             Element objectdocelement = objectdoc.getDocumentElement();

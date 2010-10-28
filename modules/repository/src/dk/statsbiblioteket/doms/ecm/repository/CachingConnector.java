@@ -147,14 +147,14 @@ public class CachingConnector implements FedoraConnector{
         return connector.addLiteralRelation(from, relation, value, datatype);
     }
 
-    public Document getObjectXml(String pid) throws
+    public String getObjectXml(String pid) throws
                                              IllegalStateException,
                                              ObjectNotFoundException,
                                              FedoraConnectionException,
                                              FedoraIllegalContentException,
                                              InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
-        Document doc = myCaches.getObjectXML(pid);
+        String doc = myCaches.getObjectXML(pid);
         if (doc != null){
             return doc;
         }
