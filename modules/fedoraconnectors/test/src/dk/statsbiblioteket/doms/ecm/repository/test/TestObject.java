@@ -1,23 +1,20 @@
 package dk.statsbiblioteket.doms.ecm.repository.test;
 
+import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
 import dk.statsbiblioteket.doms.ecm.repository.utils.Constants;
 import dk.statsbiblioteket.doms.ecm.repository.utils.DocumentUtils;
-import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
-import dk.statsbiblioteket.doms.ecm.repository.exceptions.FedoraIllegalContentException;
-import dk.statsbiblioteket.doms.ecm.repository.FedoraConnector;
+import dk.statsbiblioteket.doms.ecm.repository.utils.XpathUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.transform.TransformerException;
-import java.util.*;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.StringWriter;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.util.*;
 
 /**
  * TODO abr forgot to document this class
@@ -121,7 +118,7 @@ public class TestObject {
     private String objectend = "\n" +
             "</foxml:digitalObject>";
 
-    public Document dumpAsDocument() throws FedoraIllegalContentException {
+    public String dumpAsDocument() throws FedoraIllegalContentException {
 
         StringWriter st = new StringWriter();
         st.append(objectheader.replace("REPLACEPIDHERE", pid).replace("REPLACESTATEHERE", state));
@@ -153,17 +150,7 @@ public class TestObject {
 
         st.append(objectend);
 
-        Document doc = null;
-        try {
-            doc = DocumentUtils.DOCUMENT_BUILDER.parse(new ByteArrayInputStream(st.toString().getBytes()));
-        } catch (SAXException e) {
-            throw new FedoraIllegalContentException("",e);
-        } catch (IOException e) {
-            throw new Error(e);
-        }
-
-        return doc;
-
+        return st.toString();
     }
 
     public static TestObject parseFromDocument(Document source){
