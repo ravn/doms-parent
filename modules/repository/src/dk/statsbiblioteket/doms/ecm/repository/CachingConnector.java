@@ -46,31 +46,33 @@ public class CachingConnector implements FedoraConnector{
 
 
     public CachingConnector(FedoraConnector connector) {
-        long lifetime
-                = Long.parseLong(ConfigCollection.getProperties().getProperty(
-                "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.lifetime",
-                "" + 1000 * 60 * 10));
-        int size
-                = Integer.parseInt(ConfigCollection.getProperties().getProperty(
-                "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.size",
-                "" + 20));
+        synchronized (CachingConnector.class){
+            long lifetime
+                    = Long.parseLong(ConfigCollection.getProperties().getProperty(
+                    "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.lifetime",
+                    "" + 1000 * 60 * 10));
+            int size
+                    = Integer.parseInt(ConfigCollection.getProperties().getProperty(
+                    "dk.statsbiblioteket.doms.ecm.connectors.fedora.generalcache.size",
+                    "" + 20));
 
 
-        if (inheritedContentModels == null){
-            inheritedContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
-        }
-        if (inheritingContentModels == null){
-            inheritingContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
-        }
-        if (contentModels == null){
-            contentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size*2);
-        }
-        if (userspecificCaches == null){
-            userspecificCaches = new TimeSensitiveCache<FedoraUserToken,Caches>(lifetime,true,size);
-        }
+            if (inheritedContentModels == null){
+                inheritedContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
+            }
+            if (inheritingContentModels == null){
+                inheritingContentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size);
+            }
+            if (contentModels == null){
+                contentModels = new TimeSensitiveCache<String,PidList>(lifetime,true,size*2);
+            }
+            if (userspecificCaches == null){
+                userspecificCaches = new TimeSensitiveCache<FedoraUserToken,Caches>(lifetime,true,size);
+            }
 
 
-        this.connector = connector;
+            this.connector = connector;
+        }
     }
 
     public void initialise(FedoraUserToken token) {
@@ -148,11 +150,11 @@ public class CachingConnector implements FedoraConnector{
     }
 
     public String getObjectXml(String pid) throws
-                                             IllegalStateException,
-                                             ObjectNotFoundException,
-                                             FedoraConnectionException,
-                                             FedoraIllegalContentException,
-                                             InvalidCredentialsException {
+                                           IllegalStateException,
+                                           ObjectNotFoundException,
+                                           FedoraConnectionException,
+                                           FedoraIllegalContentException,
+                                           InvalidCredentialsException {
         pid = FedoraUtil.ensurePID(pid);
         String doc = myCaches.getObjectXML(pid);
         if (doc != null){
