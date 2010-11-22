@@ -10,10 +10,7 @@ import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
 import dk.statsbiblioteket.util.xml.DOM;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.List;
@@ -129,7 +126,7 @@ public class TemplateSubsystem {
 
 
 
-    public String cloneTemplate(String templatepid, FedoraConnector fedoraConnector, PidGenerator pidGenerator)
+    public String cloneTemplate(String templatepid, List<String> oldIDs, FedoraConnector fedoraConnector, PidGenerator pidGenerator)
             throws FedoraIllegalContentException,
                    FedoraConnectionException, PIDGeneratorException,
                    ObjectNotFoundException,
@@ -167,6 +164,9 @@ public class TemplateSubsystem {
             removeDCidentifier(document);
             LOG.trace("DC identifier removed");
 
+            addOldIdentifiers(document, oldIDs);
+            LOG.trace("Added old identifiers");
+
             removeXSI_DC(document);
             LOG.trace("XSI stuff removed from DC");
 
@@ -193,6 +193,28 @@ public class TemplateSubsystem {
                 fedoraConnector.getUser() +
                 "'");
 
+    }
+
+    private void addOldIdentifiers(Document document, List<String> oldIDs)
+            throws XPathExpressionException {
+        if (!oldIDs.isEmpty()){
+
+            Node dcNode = XpathUtils.xpathQuerySingle(
+                    document,
+                    OAIDC);
+            if (dcNode!= null){
+                String namespace = dcNode.getNamespaceURI();
+                String prefix = dcNode.getPrefix();
+
+                for (String oldID : oldIDs) {
+                    Element element = document.createElementNS(namespace,
+                                                               prefix
+                                                               + ":identifier");
+                    element.setTextContent(oldID);
+                    dcNode.appendChild(element);
+                }
+            }
+        }
     }
 
     private void removeXSI_DC(Document document) throws

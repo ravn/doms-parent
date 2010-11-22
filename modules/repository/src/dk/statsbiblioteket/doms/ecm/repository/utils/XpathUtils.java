@@ -108,4 +108,24 @@ public class XpathUtils {
         return (NodeList) xPath
                 .evaluate(xpathExpression, node, XPathConstants.NODESET);
     }
+
+      /**
+     * Helper method for doing an XPath query using ECM namespaces.
+     *
+     * @param node            The node to start XPath query on.
+     * @param xpathExpression The XPath expression, using default DOMS
+     *                        namespace prefixes.
+     * @return The result, as a node
+     *
+     * @throws XPathExpressionException On trouble parsing or evaluating the
+     *                                  expression.
+     */
+    public static Node xpathQuerySingle(Node node, String xpathExpression)
+            throws XPathExpressionException {
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        xPath.setNamespaceContext(ECM_NAMESPACE_CONTEXT);
+
+        return (Node) xPath
+                .evaluate(xpathExpression, node, XPathConstants.NODE);
+    }
 }

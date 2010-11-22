@@ -20,6 +20,7 @@ import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.TransformerException;
 import java.io.StringWriter;
+import java.util.List;
 
 
 /**
@@ -128,9 +129,10 @@ public class Webservice {
     @Path("clone/{templatepid}")
     @Produces("text/plain")
     public String cloneTemplate(
-            @PathParam("templatepid") String templatepid) throws EcmException {
+            @PathParam("templatepid") String templatepid,
+            @QueryParam("oldID") List<String> oldIDs) throws EcmException {
         initialise();
-        return temps.cloneTemplate(templatepid, fedoraConnector, pidGenerator);
+        return temps.cloneTemplate(templatepid, oldIDs, fedoraConnector, pidGenerator);
     }
 
 
