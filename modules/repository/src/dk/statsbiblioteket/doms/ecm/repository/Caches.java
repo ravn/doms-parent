@@ -1,7 +1,7 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
 import dk.statsbiblioteket.doms.ecm.repository.utils.FedoraUtil;
-import dk.statsbiblioteket.doms.webservices.ConfigCollection;
+import dk.statsbiblioteket.doms.webservices.configuration.ConfigCollection;
 import dk.statsbiblioteket.util.caching.TimeSensitiveCache;
 import org.w3c.dom.Document;
 

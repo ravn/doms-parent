@@ -1,16 +1,14 @@
 package dk.statsbiblioteket.doms.ecm.repository;
 
-import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebserviceService;
-import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebservice;
-import dk.statsbiblioteket.doms.pidgenerator.CommunicationException;
 import dk.statsbiblioteket.doms.ecm.repository.exceptions.PIDGeneratorException;
-import dk.statsbiblioteket.doms.webservices.ConfigCollection;
+import dk.statsbiblioteket.doms.pidgenerator.CommunicationException;
+import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebservice;
+import dk.statsbiblioteket.doms.pidgenerator.PidGeneratorSoapWebserviceService;
+import dk.statsbiblioteket.doms.webservices.configuration.ConfigCollection;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  */

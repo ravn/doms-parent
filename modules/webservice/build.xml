@@ -27,6 +27,7 @@
         <include name="${saxon.lib}"/>
         <include name="${jersey.lib}"/>
         <include name="${jsr311-api.lib}"/>
+        <include name="${log4j.lib}"/>
     </dirset>
 
     <dirset id="build.project.libs" dir="${global.dir}/lib/">
