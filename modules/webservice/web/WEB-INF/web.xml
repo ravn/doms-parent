@@ -116,7 +116,7 @@
                 dk.statsbiblioteket.doms.surveillance.logappender.LoggerName
         </param-name>
         <param-value>
-            DomsECM2
+            DomsECM
         </param-value>
     </context-param>
 
