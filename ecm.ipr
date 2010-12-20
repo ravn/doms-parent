@@ -491,17 +491,17 @@
     </library>
     <library name="domsutils">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/jars/surveyable_interface.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/jars/surveyable_impl.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/jars/webservice-common.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/jars/surveyable_interface.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/jars/surveyable_impl.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/jars/webservice-common.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/apidocs/domsutil-0.0.13-doc.zip!/domsutil-0.0.13" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/apidocs/domsutil-0.0.14-doc.zip!/domsutil-0.0.14" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/src/surveyable_impl-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/src/surveyable_interface-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.13/src/webservice-common-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/src/surveyable_impl-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/src/surveyable_interface-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.14/src/webservice-common-src.zip!/" />
       </SOURCES>
     </library>
     <library name="pidGenerator">

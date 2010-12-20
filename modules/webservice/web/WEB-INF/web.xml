@@ -104,10 +104,23 @@
             dk.statsbiblioteket.doms.domsutil.surveyable.surveyables
         </param-name>
         <param-value>
-            dk.statsbiblioteket.doms.ecm.webservice.EcmSurveyable;
+            dk.statsbiblioteket.doms.domsutil.surveyable.RunningSurveyable;
             dk.statsbiblioteket.doms.domsutil.surveillance.logappender.CachingLogRegistry
         </param-value>
     </context-param>
+
+    <context-param>
+        <description>The name of the service for surveillance purposes
+        </description>
+        <param-name>
+                dk.statsbiblioteket.doms.surveillance.logappender.LoggerName
+        </param-name>
+        <param-value>
+            DomsECM2
+        </param-value>
+    </context-param>
+
+
 
 
 
