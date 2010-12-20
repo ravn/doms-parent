@@ -20,7 +20,6 @@
     <dirset id="project.libs" dir="${global.dir}/lib/">
         <include name="${sbutil.lib}"/>
         <include name="${domsutils.lib}"/>
-        <include name="${surveillance.lib}"/>
         <include name="${commons-logging.lib}"/>
         <include name="${fedoraclient.lib}"/>
         <include name="${pidgen.interface.lib}"/>
