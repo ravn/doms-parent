@@ -90,7 +90,7 @@
         </servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>dk.statsbiblioteket.doms.domsutil.surveyable.SurveyableWebservice</param-value>
+            <param-value>dk.statsbiblioteket.doms.domsutil.surveyable</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
