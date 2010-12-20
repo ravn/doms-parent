@@ -42,7 +42,7 @@ import dk.statsbiblioteket.doms.domsutil.surveyable.Surveyable;
         reviewers = "jrg") */
 public class EcmSurveyable implements Surveyable {
     /** The name this status reports. */
-    private static final String SURVEYABLE_NAME = "ECM";
+    private static final String SURVEYABLE_NAME = "DomsECM";
 
     /** Log for this class. */
     private final Log log = LogFactory.getLog(getClass());
