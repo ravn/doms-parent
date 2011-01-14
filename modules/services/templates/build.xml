@@ -9,7 +9,7 @@
         <include name="repository"/>
     </dirset>
 
-    <dirset id="project.libs" dir="${global.dir}/lib/">
+    <dirset id="build.project.libs" dir="${global.dir}/lib/">
         <include name="${commons-logging.lib}"/>
         <include name="${sbutil.lib}"/>
     </dirset>

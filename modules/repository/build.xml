@@ -35,7 +35,7 @@
     <import file="${global.dir}/build/build-module.xml"/>
 
     <!--Project libs used by this module-->
-    <dirset id="project.libs" dir="${global.dir}/lib/">
+    <dirset id="build.project.libs" dir="${global.dir}/lib/">
         <include name="${domsutils.lib}"/>
         <include name="${pidgen.interface.lib}"/>
         <include name="${sbutil.lib}"/>
