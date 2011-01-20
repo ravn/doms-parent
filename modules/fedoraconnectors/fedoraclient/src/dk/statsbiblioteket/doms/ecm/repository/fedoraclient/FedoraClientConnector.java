@@ -70,7 +70,7 @@ public class FedoraClientConnector
     public boolean addRelation(String from, String relation, String to)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException, InvalidCredentialsException {
-        from = FedoraUtil.ensurePID(from);
+        from = FedoraUtil.ensureURI(from);
         to = FedoraUtil.ensureURI(to);
         try {
             return getAPIM().addRelationship(from, relation, to, false, null);
@@ -103,7 +103,7 @@ public class FedoraClientConnector
                                       String datatype)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException, InvalidCredentialsException {
-        from = FedoraUtil.ensurePID(from);
+        from = FedoraUtil.ensureURI(from);
 
      
         try {
@@ -143,7 +143,7 @@ public class FedoraClientConnector
     public List<Relation> getRelations(String pid, String relation)
             throws ObjectNotFoundException, FedoraConnectionException,
                    FedoraIllegalContentException, InvalidCredentialsException {
-        pid = FedoraUtil.ensurePID(pid);
+        pid = FedoraUtil.ensureURI(pid);
         try {
             RelationshipTuple[] relations = getAPIM().getRelationships(pid,
                                                                        relation);
