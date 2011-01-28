@@ -517,17 +517,17 @@
     </library>
     <library name="domsutils">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/jars/surveyable_interface.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/jars/surveyable_impl.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/jars/webservice-common.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/webservice-common-0.0.16.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/surveyable_interface-0.0.16.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/surveillance-logappender-0.0.16.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/apidocs/domsutil-0.0.16-doc.zip!/domsutil-0.0.16" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/apidocs/domsutil-0.0.17-doc.zip!/domsutil-0.0.17" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/src/surveyable_impl-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/src/surveyable_interface-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.16/src/webservice-common-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/surveillance-logappender-0.0.16-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/webservice-common-0.0.16-src.zip!/" />
+        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/surveyable_interface-0.0.16-src.zip!/" />
       </SOURCES>
     </library>
     <library name="pidGenerator">
