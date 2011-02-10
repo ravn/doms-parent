@@ -45,6 +45,7 @@
         <dependency>
             <groupId>dk.statsbiblioteket.doms.domsutil</groupId>
             <artifactId>bundle</artifactId>
+<type>pom</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>

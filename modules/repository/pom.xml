@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>dk.statsbiblioteket.doms.pidgenerator</groupId>
-            <artifactId>WSDL_interface</artifactId>
+            <artifactId>pidgenerator_interface</artifactId>
             <version>0.0.6#SNAPSHOT</version>
         </dependency>
         <dependency>
