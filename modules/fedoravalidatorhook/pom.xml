@@ -10,13 +10,12 @@
         <version>0.0.14#SNAPSHOT</version>
     </parent>
 
-    <artifactId>fedoravalidatorhook</artifactId>
+    <artifactId>ecm-fedoravalidatorhook</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.fcrepo</groupId>
             <artifactId>fcrepo-server</artifactId>
-            <version>3.4.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
