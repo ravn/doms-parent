@@ -30,7 +30,7 @@
     <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_interface:0.0.17" level="project" />
     <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_impl:0.0.17" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
-    <orderEntry type="library" name="Maven: net.sourceforge.saxon:saxon:9.1.0.8" level="project" />
+    <orderEntry type="library" name="Maven: net.sourceforge.saxon:saxon:dom:9.1.0.8" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-server:1.3" level="project" />
     <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.1" level="project" />
