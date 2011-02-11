@@ -65,6 +65,7 @@
                 <groupId>dk.statsbiblioteket.doms.domsutil</groupId>
                 <artifactId>domsutil-bundle</artifactId>
                 <version>${domsutil.version}</version>
+                <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.fcrepo</groupId>
