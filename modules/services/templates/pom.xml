@@ -6,12 +6,11 @@
 
     <parent>
         <groupId>dk.statsbiblioteket.doms.ecm</groupId>
-        <artifactId>services</artifactId>
+        <artifactId>ecm-services</artifactId>
         <version>0.0.14#SNAPSHOT</version>
     </parent>
 
-    <groupId>dk.statsbiblioteket.doms.ecm</groupId>
-    <artifactId>templates</artifactId>
+    <artifactId>ecm-templates</artifactId>
 
     
 </project>

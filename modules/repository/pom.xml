@@ -11,16 +11,15 @@
     </parent>
 
     <groupId>dk.statsbiblioteket.doms.ecm</groupId>
-    <artifactId>repository</artifactId>
+    <artifactId>ecm-repository</artifactId>
     <dependencies>
         <dependency>
             <groupId>dk.statsbiblioteket.doms.pidgenerator</groupId>
-            <artifactId>pidgenerator_interface</artifactId>
-            <version>0.0.6#SNAPSHOT</version>
+            <artifactId>pidgenerator-interface</artifactId>
         </dependency>
         <dependency>
             <groupId>dk.statsbiblioteket.doms.domsutil</groupId>
-            <artifactId>webservice-common</artifactId>
+            <artifactId>domsutil-webservice-common</artifactId>
         </dependency>
     </dependencies>
 

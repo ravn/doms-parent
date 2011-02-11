@@ -11,13 +11,13 @@
     </parent>
 
     <groupId>dk.statsbiblioteket.doms.ecm</groupId>
-    <artifactId>fedoraconnectors</artifactId>
+    <artifactId>ecm-fedoraconnectors</artifactId>
     <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
             <groupId>dk.statsbiblioteket.doms.ecm</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>ecm-repository</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
