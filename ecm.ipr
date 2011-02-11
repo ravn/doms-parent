@@ -6,12 +6,12 @@
   <component name="ArtifactManager">
     <artifact type="war" name="webservice:war">
       <output-path>$PROJECT_DIR$/modules/webservice/target</output-path>
-      <root id="archive" name="ecm-webservice-0.0.14#SNAPSHOT.war">
+      <root id="archive" name="ecm-service-0.0.14#SNAPSHOT.war">
         <element id="artifact" artifact-name="webservice:war exploded" />
       </root>
     </artifact>
     <artifact type="exploded-war" name="webservice:war exploded">
-      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-webservice-0.0.14#SNAPSHOT</output-path>
+      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-service-0.0.14#SNAPSHOT</output-path>
       <root id="root">
         <element id="javaee-facet-resources" facet="webservice/web/Web" />
         <element id="directory" name="WEB-INF">

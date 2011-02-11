@@ -10,7 +10,7 @@
         <version>0.0.14#SNAPSHOT</version>
     </parent>
 
-    <artifactId>ecm-webservice</artifactId>
+    <artifactId>ecm-service</artifactId>
     <packaging>war</packaging>
 
     <build>
