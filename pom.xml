@@ -30,7 +30,7 @@
 <parent>
     <groupId>org.sbforge</groupId>
     <artifactId>SBForge-parent</artifactId>
-    <version>RELEASE</version>
+    <version>5</version>
 </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -66,7 +66,7 @@
 
  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <fcrepo.version>3.4.2-SNAPSHOT</fcrepo.version>
+    <fcrepo.version>3.4.2</fcrepo.version>
     <sbutil.version>0.5.2</sbutil.version>
     <domsutil.version>0.0.17</domsutil.version>
     <pidgenerator.version>0.0.6#SNAPSHOT</pidgenerator.version>
@@ -89,19 +89,6 @@
     </dependencies>
 
 
-    <repositories>
-        <repository>
-            <id>sbforge-public</id>
-            <name>SBForge public repository</name>
-            <url>https://sbforge.org/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 
 <build>
