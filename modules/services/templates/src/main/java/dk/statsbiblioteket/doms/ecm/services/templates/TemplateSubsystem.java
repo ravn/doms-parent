@@ -197,7 +197,8 @@ public class TemplateSubsystem {
 
     private void addOldIdentifiers(Document document, List<String> oldIDs)
             throws XPathExpressionException {
-        if (!oldIDs.isEmpty()){
+
+        if (oldIDs != null && !oldIDs.isEmpty()){
 
             Node dcNode = XpathUtils.xpathQuerySingle(
                     document,
