@@ -1,0 +1,121 @@
+<!--
+  ~ $Id$
+  ~ $Revision$
+  ~ $Date$
+  ~ $Author$
+  ~
+  ~ The DOMS project.
+  ~ Copyright (C) 2007-2011  The State and University Library
+  ~
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<project>
+
+<parent>
+    <groupId>org.sbforge</groupId>
+    <artifactId>SBForge-parent</artifactId>
+    <version>RELEASE</version>
+</parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dk.statsbiblioteket.doms</groupId>
+    <artifactId>doms</artifactId>
+    <version>0.1.0#SNAPSHOT</version>
+    <name>DOMS Project</name>
+
+
+    <packaging>pom</packaging>
+
+    <organization>
+        <name>State and University Library</name>
+        <url>http://www.statsbiblioteket.dk</url>
+
+    </organization>
+
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <comments>Copyright (c) 2011 State and University Library</comments>
+        </license>
+    </licenses>
+
+  <scm>
+    <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/trunk</connection>
+    <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/trunk</developerConnection>
+    <url>http://doms.svn.sourceforge.net/viewvc/doms/trunk</url>
+  </scm>
+
+
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <fcrepo.version>3.4.2-SNAPSHOT</fcrepo.version>
+    <sbutil.version>0.5.2</sbutil.version>
+    <domsutil.version>0.0.17</domsutil.version>
+    <pidgenerator.version>0.0.6#SNAPSHOT</pidgenerator.version>
+    <ecm.version>0.0.14#SNAPSHOT</ecm.version>
+    <updatetracker.version>0.0.11#SNAPSHOT</updatetracker.version>
+  </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>dk.statsbiblioteket.sbutil</groupId>
+            <artifactId>sbutil</artifactId>
+<version>0.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+<version>1.1.1</version>
+        </dependency>
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>sbforge-public</id>
+            <name>SBForge public repository</name>
+            <url>https://sbforge.org/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <debug>true</debug>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
