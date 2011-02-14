@@ -30,13 +30,13 @@
 <parent>
     <groupId>org.sbforge</groupId>
     <artifactId>SBForge-parent</artifactId>
-    <version>RELEASE</version>
+    <version>5</version>
 </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.statsbiblioteket.doms</groupId>
     <artifactId>doms</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>DOMS Project</name>
 
 
@@ -58,15 +58,15 @@
     </licenses>
 
   <scm>
-    <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</connection>
-    <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</developerConnection>
-    <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/trunk</url>
+    <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.0</connection>
+    <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.0</developerConnection>
+    <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/tags/doms-0.1.0</url>
   </scm>
 
 
  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <fcrepo.version>3.4.2-SNAPSHOT</fcrepo.version>
+    <fcrepo.version>3.4.2</fcrepo.version>
     <sbutil.version>0.5.2</sbutil.version>
     <domsutil.version>0.0.17</domsutil.version>
     <pidgenerator.version>0.0.6#SNAPSHOT</pidgenerator.version>
@@ -89,19 +89,6 @@
     </dependencies>
 
 
-    <repositories>
-        <repository>
-            <id>sbforge-public</id>
-            <name>SBForge public repository</name>
-            <url>https://sbforge.org/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 
 <build>
