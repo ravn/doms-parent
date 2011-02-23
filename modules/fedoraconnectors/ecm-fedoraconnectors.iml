@@ -9,11 +9,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="repository" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.6#SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="ecm-repository" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.7" level="project" />
     <orderEntry type="library" name="Maven: dk.statsbiblioteket.sbutil:sbutil:0.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
-    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.17" level="project" />
+    <orderEntry type="library" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.20" level="project" />
   </component>
 </module>
 

@@ -4,47 +4,47 @@
     <defaultAnt bundledAnt="true" />
   </component>
   <component name="ArtifactManager">
-    <artifact type="war" name="webservice:war">
+    <artifact type="war" name="ecm-service:war">
       <output-path>$PROJECT_DIR$/modules/webservice/target</output-path>
-      <root id="archive" name="ecm-service-0.0.14#SNAPSHOT.war">
-        <element id="artifact" artifact-name="webservice:war exploded" />
+      <root id="archive" name="ecm-service-0.0.14-SNAPSHOT.war">
+        <element id="artifact" artifact-name="ecm-service:war exploded" />
       </root>
     </artifact>
-    <artifact type="exploded-war" name="webservice:war exploded">
-      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-service-0.0.14#SNAPSHOT</output-path>
+    <artifact type="exploded-war" name="ecm-service:war exploded">
+      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-service-0.0.14-SNAPSHOT</output-path>
       <root id="root">
-        <element id="javaee-facet-resources" facet="webservice/web/Web" />
+        <element id="javaee-facet-resources" facet="ecm-service/web/Web" />
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
-            <element id="module-output" name="webservice" />
+            <element id="module-output" name="ecm-service" />
           </element>
           <element id="directory" name="lib">
             <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
             <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
-            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-logappender:0.0.17" />
-            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.17" />
+            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-logappender:0.0.20" />
+            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.20" />
             <element id="library" level="project" name="Maven: dk.statsbiblioteket.sbutil:sbutil:0.5.2" />
             <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
-            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_interface:0.0.17" />
-            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_impl:0.0.17" />
+            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-surveyable-interface:0.0.20" />
+            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-surveyable-impl:0.0.20" />
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.3" />
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.3" />
             <element id="library" level="project" name="Maven: asm:asm:3.1" />
-            <element id="archive" name="ecm-view-0.0.14#SNAPSHOT.jar">
-              <element id="module-output" name="view" />
+            <element id="archive" name="ecm-view-0.0.14-SNAPSHOT.jar">
+              <element id="module-output" name="ecm-view" />
             </element>
-            <element id="archive" name="ecm-repository-0.0.14#SNAPSHOT.jar">
-              <element id="module-output" name="repository" />
+            <element id="archive" name="ecm-repository-0.0.14-SNAPSHOT.jar">
+              <element id="module-output" name="ecm-repository" />
             </element>
-            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.6#SNAPSHOT" />
-            <element id="archive" name="ecm-templates-0.0.14#SNAPSHOT.jar">
-              <element id="module-output" name="templates" />
+            <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.7" />
+            <element id="archive" name="ecm-templates-0.0.14-SNAPSHOT.jar">
+              <element id="module-output" name="ecm-templates" />
             </element>
-            <element id="archive" name="ecm-fedoraclient-0.0.14#SNAPSHOT.jar">
-              <element id="module-output" name="fedoraclient" />
+            <element id="archive" name="ecm-fedoraclient-0.0.14-SNAPSHOT.jar">
+              <element id="module-output" name="ecm-fedoraclient" />
             </element>
-            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-client-admin:3.4.2-SNAPSHOT" />
-            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-server:3.4.2-SNAPSHOT" />
+            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-client-admin:3.4.2" />
+            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-server:3.4.2" />
             <element id="library" level="project" name="Maven: axis:axis-wsdl4j:1.3" />
             <element id="library" level="project" name="Maven: com.google.collections:google-collections:1.0-rc2" />
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.0.3.1" />
@@ -76,7 +76,6 @@
             <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0" />
             <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
             <element id="library" level="project" name="Maven: javax.xml:jaxrpc-api:1.1" />
-            <element id="library" level="project" name="Maven: javax.xml.soap:saaj-api:1.3" />
             <element id="library" level="project" name="Maven: jaxen:jaxen:1.1.1" />
             <element id="library" level="project" name="Maven: jdom:jdom:1.0" />
             <element id="library" level="project" name="Maven: org.apache.abdera:abdera-core:0.4.0-incubating" />
@@ -121,6 +120,7 @@
             <element id="library" level="project" name="Maven: howl:howl-logger:0.1.11" />
             <element id="library" level="project" name="Maven: junit:junit:4.5" />
             <element id="library" level="project" name="Maven: javax.mail:mail:1.4.1" />
+            <element id="library" level="project" name="Maven: javax.xml.soap:saaj-api:1.3" />
             <element id="library" level="project" name="Maven: joda-time:joda-time:1.5.2" />
             <element id="library" level="project" name="Maven: jotm:jotm:2.0.10" />
             <element id="library" level="project" name="Maven: jotm:jotm_jrmp_stubs:2.0.10" />
@@ -154,10 +154,9 @@
             <element id="library" level="project" name="Maven: org.fcrepo:mptstore:0.9.4" />
             <element id="library" level="project" name="Maven: org.fcrepo:trippi-mulgara:1.4.3" />
             <element id="library" level="project" name="Maven: jotm:jotm_iiop_stubs:2.0.10" />
-            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-common:3.4.2-SNAPSHOT" />
-            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-generate:3.4.2-SNAPSHOT" />
+            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-common:3.4.2" />
+            <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-generate:3.4.2" />
             <element id="library" level="project" name="Maven: org.fcrepo:sunxacml:melcoe:1.2" />
-            <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.5.10" />
             <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.5.10" />
             <element id="library" level="project" name="Maven: org.springframework:spring-beans:2.5.6" />
             <element id="library" level="project" name="Maven: org.springframework:spring-core:2.5.6" />
@@ -166,8 +165,6 @@
             <element id="library" level="project" name="Maven: org.fcrepo:Tidy:1.0" />
             <element id="library" level="project" name="Maven: org.fcrepo:tt-bytecode:1.0" />
             <element id="library" level="project" name="Maven: org.slf4j:jul-to-slf4j:1.5.10" />
-            <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:0.9.18" />
-            <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:0.9.18" />
             <element id="library" level="project" name="Maven: owlapi:owlapi:3.0.0-patched" />
             <element id="library" level="project" name="Maven: batik:batik-swing:1.6-1" />
             <element id="library" level="project" name="Maven: batik:batik-bridge:1.6-1" />
@@ -192,52 +189,6 @@
       </root>
     </artifact>
   </component>
-  <component name="BuildJarProjectSettings">
-    <option name="BUILD_JARS_ON_MAKE" value="false" />
-  </component>
-  <component name="ClassPatternConfiguration">
-    <testPatterns />
-  </component>
-  <component name="CodeStyleProjectProfileManger">
-    <option name="PROJECT_PROFILE" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-  </component>
-  <component name="CodeStyleSettingsManager">
-    <option name="PER_PROJECT_SETTINGS">
-      <value>
-        <ADDITIONAL_INDENT_OPTIONS fileType="java">
-          <option name="INDENT_SIZE" value="4" />
-          <option name="CONTINUATION_INDENT_SIZE" value="8" />
-          <option name="TAB_SIZE" value="4" />
-          <option name="USE_TAB_CHARACTER" value="false" />
-          <option name="SMART_TABS" value="false" />
-          <option name="LABEL_INDENT_SIZE" value="0" />
-          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
-          <option name="USE_RELATIVE_INDENTS" value="false" />
-        </ADDITIONAL_INDENT_OPTIONS>
-        <ADDITIONAL_INDENT_OPTIONS fileType="jsp">
-          <option name="INDENT_SIZE" value="4" />
-          <option name="CONTINUATION_INDENT_SIZE" value="8" />
-          <option name="TAB_SIZE" value="4" />
-          <option name="USE_TAB_CHARACTER" value="false" />
-          <option name="SMART_TABS" value="false" />
-          <option name="LABEL_INDENT_SIZE" value="0" />
-          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
-          <option name="USE_RELATIVE_INDENTS" value="false" />
-        </ADDITIONAL_INDENT_OPTIONS>
-        <ADDITIONAL_INDENT_OPTIONS fileType="xml">
-          <option name="INDENT_SIZE" value="4" />
-          <option name="CONTINUATION_INDENT_SIZE" value="8" />
-          <option name="TAB_SIZE" value="4" />
-          <option name="USE_TAB_CHARACTER" value="false" />
-          <option name="SMART_TABS" value="false" />
-          <option name="LABEL_INDENT_SIZE" value="0" />
-          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
-          <option name="USE_RELATIVE_INDENTS" value="false" />
-        </ADDITIONAL_INDENT_OPTIONS>
-      </value>
-    </option>
-  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions>
@@ -254,35 +205,55 @@
       <entry name="?*.html" />
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
+      <entry name="?*.ftl" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
-    <copyright>
-      <option name="notice" value="&amp;#36;Id&amp;#36;&#10;&amp;#36;Revision&amp;#36;&#10;&amp;#36;Date&amp;#36;&#10;&amp;#36;Author&amp;#36;&#10;&#10;The DOMS project.&#10;Copyright (C) 2007-&amp;#36;today.year  The State and University Library&#10;&#10;Licensed to the Apache Software Foundation (ASF) under one&#10;or more contributor license agreements.  See the NOTICE file&#10;distributed with this work for additional information&#10;regarding copyright ownership.  The ASF licenses this file&#10;to you under the Apache License, Version 2.0 (the&#10;&quot;License&quot;); you may not use this file except in compliance&#10;with the License.  You may obtain a copy of the License at&#10;&#10;http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing,&#10;software distributed under the License is distributed on an&#10;&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY&#10;KIND, either express or implied.  See the License for the&#10;specific language governing permissions and limitations&#10;under the License." />
-      <option name="keyword" value="Copyright" />
-      <option name="allowReplaceKeyword" value="" />
-      <option name="myName" value="Apache 2.0" />
-      <option name="myLocal" value="true" />
-    </copyright>
     <module2copyright />
   </component>
-  <component name="DependenciesAnalyzeManager">
-    <option name="myForwardDirection" value="false" />
+  <component name="CoverageDataManager" choice="3" />
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules />
+    <ui_properties />
   </component>
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
-  </component>
-  <component name="EclipseCompilerSettings">
-    <option name="GENERATE_NO_WARNINGS" value="true" />
-    <option name="DEPRECATION" value="false" />
-  </component>
-  <component name="EclipseEmbeddedCompilerSettings">
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="true" />
-    <option name="DEPRECATION" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
@@ -290,52 +261,12 @@
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
-      <facet-type id="Spring">
-        <modules>
-          <module name="ecm">
-            <files>
-              <file url="file://$PROJECT_DIR$/classes/net/sourceforge/ecm/webservice/cxf.xml" />
-            </files>
-          </module>
-        </modules>
-      </facet-type>
       <facet-type id="web">
         <modules>
-          <module name="webservice" />
+          <module name="ecm-service" />
         </modules>
       </facet-type>
     </autodetection-disabled>
-  </component>
-  <component name="IdProvider" IDEtalkID="C1FA27D47163AD385BBEE41F2449DCF4" />
-  <component name="JUnitClassTemplateConfiguration">
-    <option name="DONT_SHOW_TEMPLATE_DIALOG_IF_ONLY_ONE_TEMPLATE" value="false" />
-    <option name="DONT_SHOW_METHODS_DIALOG_IF_ONLY_ONE_METHOD" value="false" />
-    <option name="LAST_TEMPLATE_NAME" />
-    <option name="TEST_TEMPLATES">
-      <value>
-        <list size="0" />
-      </value>
-    </option>
-  </component>
-  <component name="JUnitMethodTemplateConfiguration">
-    <option name="DONT_SHOW_TEMPLATE_DIALOG_IF_ONLY_ONE_TEMPLATE" value="false" />
-    <option name="DONT_SHOW_METHODS_DIALOG_IF_ONLY_ONE_METHOD" value="false" />
-    <option name="LAST_TEMPLATE_NAME" />
-    <option name="TEST_TEMPLATES">
-      <value>
-        <list size="0" />
-      </value>
-    </option>
-  </component>
-  <component name="JUnitTestConfiguration">
-    <option name="IS_AUTO_TEST_CLASS_RENAME_ENABLED" value="true" />
-    <option name="IS_AUTO_TEST_CLASS_MOVE_ENABLED" value="true" />
-    <option name="IS_AUTO_TEST_CLASS_REFACTORING_ENABLED" value="true" />
-    <option name="IS_AUTO_TEST_METHODS_RENAME_ENABLED" value="true" />
-    <option name="IS_UNTESTED_METHOD_ICON_ENABLED" value="true" />
-    <option name="IS_GET_METHOD_ICONS_ENABLED" value="true" />
-    <option name="IS_SET_METHOD_ICONS_ENABLED" value="true" />
-    <option name="IS_UNIT_TEST_ENABLED" value="true" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.6" />
@@ -363,6 +294,10 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+  </component>
+  <component name="ModuleEditorState">
+    <option name="LAST_EDITED_MODULE_NAME" />
+    <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -485,191 +420,150 @@
       </item>
     </group>
   </component>
-  <component name="ProjectDetails">
-    <option name="projectName" value="ecm" />
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state />
+    </entry>
   </component>
-  <component name="ProjectDictionaryState">
-    <dictionary name="abr">
-      <words>
-        <w>logappender</w>
-      </words>
-    </dictionary>
-  </component>
-  <component name="ProjectKey">
-    <option name="state" value="https://doms.svn.sourceforge.net/svnroot/doms/ecm/trunk/ecm.ipr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ecm.iml" filepath="$PROJECT_DIR$/ecm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/fedoraclient.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/fedoraclient.iml" group="fedoraconnectors" />
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/fedoraconnectors.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/fedoraconnectors.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/fedoravalidatorhook/fedoravalidatorhook.iml" filepath="$PROJECT_DIR$/modules/fedoravalidatorhook/fedoravalidatorhook.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/repository/repository.iml" filepath="$PROJECT_DIR$/modules/repository/repository.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/services/services.iml" filepath="$PROJECT_DIR$/modules/services/services.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/services/templates/templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/templates.iml" group="services" />
-      <module fileurl="file://$PROJECT_DIR$/modules/services/view/view.iml" filepath="$PROJECT_DIR$/modules/services/view/view.iml" group="services" />
-      <module fileurl="file://$PROJECT_DIR$/modules/webservice/webservice.iml" filepath="$PROJECT_DIR$/modules/webservice/webservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/ecm-fedoraclient.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/ecm-fedoraclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoraconnectors/ecm-fedoraconnectors.iml" filepath="$PROJECT_DIR$/modules/fedoraconnectors/ecm-fedoraconnectors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/fedoravalidatorhook/ecm-fedoravalidatorhook.iml" filepath="$PROJECT_DIR$/modules/fedoravalidatorhook/ecm-fedoravalidatorhook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/repository/ecm-repository.iml" filepath="$PROJECT_DIR$/modules/repository/ecm-repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/webservice/ecm-service.iml" filepath="$PROJECT_DIR$/modules/webservice/ecm-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/ecm-services.iml" filepath="$PROJECT_DIR$/modules/services/ecm-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/templates/ecm-templates.iml" filepath="$PROJECT_DIR$/modules/services/templates/ecm-templates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/services/view/ecm-view.iml" filepath="$PROJECT_DIR$/modules/services/view/ecm-view.iml" />
     </modules>
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+    <output url="file://$PROJECT_DIR$/classes" />
   </component>
-  <component name="ResourceManagerContainer">
-    <option name="myResourceBundles">
-      <value>
-        <list size="0" />
-      </value>
-    </option>
+  <component name="RunManager">
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <list size="0" />
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
   </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnBranchConfigurationManager">
-    <option name="myConfigurationMap">
-      <map>
-        <entry key="$PROJECT_DIR$">
-          <value>
-            <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://gforge.statsbiblioteket.dk/svn/ecm/branches">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                  <entry key="https://gforge.statsbiblioteket.dk/svn/ecm/tags">
-                    <value>
-                      <list />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-              <option name="branchUrls">
-                <list>
-                  <option value="https://gforge.statsbiblioteket.dk/svn/ecm/branches" />
-                  <option value="https://gforge.statsbiblioteket.dk/svn/ecm/tags" />
-                </list>
-              </option>
-              <option name="trunkUrl" value="https://gforge.statsbiblioteket.dk/svn/ecm/trunk" />
-            </SvnBranchConfiguration>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="myVersion" value="124" />
     <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="commons-loggings-1.1.1">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/jars/commons-logging-1.1.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/apidocs/commons-logging-1.1.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1/src/commons-logging-1.1.1-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="domsutils">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/webservice-common-0.0.16.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/surveyable_interface-0.0.16.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/jars/surveillance-logappender-0.0.16.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/apidocs/domsutil-0.0.17-doc.zip!/domsutil-0.0.17" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/surveillance-logappender-0.0.16-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/webservice-common-0.0.16-src.zip!/" />
-        <root url="jar://$PROJECT_DIR$/lib/domsutil-0.0.17/src/surveyable_interface-0.0.16-src.zip!/" />
-      </SOURCES>
-    </library>
-    <library name="FedoraClient">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-gvt-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-xml-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/xercesImpl-2.9.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/mail-1.4.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/commons-discovery-0.2.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-gui-util-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/axis-1.3-PATCHED.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-script-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/fcrepo-common-3.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-css-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/jhbasic-2.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/commons-codec-1.3.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/openrdf-sesame-onejar-2.2.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-swing-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/activation-1.1.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/saaj-api-1.3.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/sunxacml-1.2-melcoe.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-awt-util-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-svg-dom-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/commons-pool-1.2.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/xpp3_min-1.1.3.4.O.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/java-getopt-1.0.13.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/commons-httpclient-3.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/trippi-core-1.4.3.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-bridge-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/wsdl4j-1.5.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-dom-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/jai_core-1.1.2_01.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-util-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/jaxrpc-api-1.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/fcrepo-client-admin-3.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-ext-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/fcrepo-server-3.4-cli-loader-main.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/batik-parser-1.6-1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/mulgara-core-2.1.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/jai_codec-1.1.2_01.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/fcrepo-server-3.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/fcrepo-server-3.4-utilities-main.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/xmlpull-1.1.3.4a.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/slf4j-api-1.5.10.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/logback-classic-0.9.18.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/jars/logback-core-0.9.18.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-security/fcrepo-security-jaas/src/main/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-client/fcrepo-client-messaging/src/main/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-generate/src/main/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-integrationtest/src/test/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-client/fcrepo-client-admin/stubwrappers" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-common/src/main/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-server/src/main/java" />
-        <root url="jar://$PROJECT_DIR$/lib/FedoraClient-3.4/src/fcrepo-src-3.4.zip!/fcrepo-src-3.4/fcrepo-client/fcrepo-client-admin/src/main/java" />
-      </SOURCES>
-    </library>
-    <library name="jersey">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/jars/asm-3.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/jars/jersey-core-1.1.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/jars/jersey-server-1.1.4.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/jars/jersey-client-1.1.4.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/src/jersey-core-1.1.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/src/jersey-server-1.1.4-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jersey-1.1.4/src/jersey-client-1.1.4-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="jsr-311">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/jsr311-api-1.0/jars/jsr311-api-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/jsr311-api-1.0/src/jsr311-api-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: antlr:antlr:2.7.5">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.5/antlr-2.7.5.jar!/" />
@@ -1187,72 +1081,85 @@
         <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.2/commons-pool-1.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-logappender:0.0.17">
+    <library name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-logappender:0.0.20">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-logappender/0.0.17/domsutil-logappender-0.0.17.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-logappender/0.0.20/domsutil-logappender-0.0.20.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-logappender/0.0.17/domsutil-logappender-0.0.17-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-logappender/0.0.20/domsutil-logappender-0.0.20-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-logappender/0.0.17/domsutil-logappender-0.0.17-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-logappender/0.0.20/domsutil-logappender-0.0.20-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_impl:0.0.17">
+    <library name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-surveyable-impl:0.0.20">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_impl/0.0.17/domsutil-surveyable_impl-0.0.17.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-impl/0.0.20/domsutil-surveyable-impl-0.0.20.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_impl/0.0.17/domsutil-surveyable_impl-0.0.17-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-impl/0.0.20/domsutil-surveyable-impl-0.0.20-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_impl/0.0.17/domsutil-surveyable_impl-0.0.17-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-impl/0.0.20/domsutil-surveyable-impl-0.0.20-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-surveyable_interface:0.0.17">
+    <library name="Maven: dk.statsbiblioteket.doms.domsutil.surveyable:domsutil-surveyable-interface:0.0.20">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_interface/0.0.17/domsutil-surveyable_interface-0.0.17.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-interface/0.0.20/domsutil-surveyable-interface-0.0.20.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_interface/0.0.17/domsutil-surveyable_interface-0.0.17-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-interface/0.0.20/domsutil-surveyable-interface-0.0.20-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-surveyable_interface/0.0.17/domsutil-surveyable_interface-0.0.17-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/surveyable/domsutil-surveyable-interface/0.0.20/domsutil-surveyable-interface-0.0.20-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.17">
+    <library name="Maven: dk.statsbiblioteket.doms.domsutil:domsutil-webservice-common:0.0.20">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.17/domsutil-webservice-common-0.0.17.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.20/domsutil-webservice-common-0.0.20.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.17/domsutil-webservice-common-0.0.17-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.20/domsutil-webservice-common-0.0.20-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.17/domsutil-webservice-common-0.0.17-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/domsutil/domsutil-webservice-common/0.0.20/domsutil-webservice-common-0.0.20-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.ecm:repository:0.0.14#SNAPSHOT">
+    <library name="Maven: dk.statsbiblioteket.doms.ecm:ecm-fedoraclient:0.0.14#SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/repository/0.0.14#SNAPSHOT/repository-0.0.14#SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-fedoraclient/0.0.14#SNAPSHOT/ecm-fedoraclient-0.0.14#SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-fedoraclient/0.0.14#SNAPSHOT/ecm-fedoraclient-0.0.14#SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/modules/fedoraconnectors/fedoraclient/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-fedoraclient/0.0.14#SNAPSHOT/ecm-fedoraclient-0.0.14#SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: dk.statsbiblioteket.doms.ecm:ecm-repository:0.0.14#SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14#SNAPSHOT/ecm-repository-0.0.14#SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
         <root url="jar://$PROJECT_DIR$/modules/repository/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/repository/0.0.14#SNAPSHOT/repository-0.0.14#SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14#SNAPSHOT/ecm-repository-0.0.14#SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/modules/repository/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/repository/0.0.14#SNAPSHOT/repository-0.0.14#SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14#SNAPSHOT/ecm-repository-0.0.14#SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.6#SNAPSHOT">
+    <library name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.7">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.6#SNAPSHOT/pidgenerator-interface-0.0.6#SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.7/pidgenerator-interface-0.0.7.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.6#SNAPSHOT/pidgenerator-interface-0.0.6#SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.7/pidgenerator-interface-0.0.7-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.6#SNAPSHOT/pidgenerator-interface-0.0.6#SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/pidgenerator/pidgenerator-interface/0.0.7/pidgenerator-interface-0.0.7-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: dk.statsbiblioteket.sbutil:sbutil:0.5.2">
@@ -1904,48 +1811,48 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/emory-util-remote/2.1/emory-util-remote-2.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.fcrepo:fcrepo-client-admin:3.4.2-SNAPSHOT">
+    <library name="Maven: org.fcrepo:fcrepo-client-admin:3.4.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2-SNAPSHOT/fcrepo-client-admin-3.4.2-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2/fcrepo-client-admin-3.4.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2-SNAPSHOT/fcrepo-client-admin-3.4.2-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2/fcrepo-client-admin-3.4.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2-SNAPSHOT/fcrepo-client-admin-3.4.2-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-client-admin/3.4.2/fcrepo-client-admin-3.4.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.fcrepo:fcrepo-common:3.4.2-SNAPSHOT">
+    <library name="Maven: org.fcrepo:fcrepo-common:3.4.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2-SNAPSHOT/fcrepo-common-3.4.2-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2/fcrepo-common-3.4.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2-SNAPSHOT/fcrepo-common-3.4.2-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2/fcrepo-common-3.4.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2-SNAPSHOT/fcrepo-common-3.4.2-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-common/3.4.2/fcrepo-common-3.4.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.fcrepo:fcrepo-generate:3.4.2-SNAPSHOT">
+    <library name="Maven: org.fcrepo:fcrepo-generate:3.4.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2-SNAPSHOT/fcrepo-generate-3.4.2-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2/fcrepo-generate-3.4.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2-SNAPSHOT/fcrepo-generate-3.4.2-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2/fcrepo-generate-3.4.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2-SNAPSHOT/fcrepo-generate-3.4.2-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-generate/3.4.2/fcrepo-generate-3.4.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.fcrepo:fcrepo-server:3.4.2-SNAPSHOT">
+    <library name="Maven: org.fcrepo:fcrepo-server:3.4.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2-SNAPSHOT/fcrepo-server-3.4.2-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2/fcrepo-server-3.4.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2-SNAPSHOT/fcrepo-server-3.4.2-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2/fcrepo-server-3.4.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2-SNAPSHOT/fcrepo-server-3.4.2-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/fcrepo/fcrepo-server/3.4.2/fcrepo-server-3.4.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.fcrepo:jai_codec:1.1.2_01">
@@ -2430,35 +2337,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="pidGenerator">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.2/jars/WSDL_interface.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/pidGenerator-0.0.2/src/WSDL_interface-src.zip!/" />
-      </SOURCES>
-    </library>
-    <library name="sbutil">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/sbutil-0.5.2/jars/sbutil-0.5.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/sbutil-0.5.2/src/sbutil-0.5.2-src.zip!/sbutil-0.5.2/src" />
-      </SOURCES>
-    </library>
-    <library name="Servlet-api-2.5">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.5-apache-tomcat-6.0.20/jars/servlet-api.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.5-apache-tomcat-6.0.20/apidocs/servlet-api-2.5-apache-tomcat-6.0.20-apidocs.zip!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.5-apache-tomcat-6.0.20/src/servlet-api-2.5-apache-tomcat-6.0.20-src.zip!/" />
       </SOURCES>
     </library>
   </component>

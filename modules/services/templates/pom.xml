@@ -7,7 +7,7 @@
     <parent>
         <groupId>dk.statsbiblioteket.doms.ecm</groupId>
         <artifactId>ecm-services</artifactId>
-        <version>0.0.14#SNAPSHOT</version>
+        <version>0.0.14-SNAPSHOT</version>
     </parent>
 
     <artifactId>ecm-templates</artifactId>
