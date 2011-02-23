@@ -6,12 +6,12 @@
   <component name="ArtifactManager">
     <artifact type="war" name="ecm-service:war">
       <output-path>$PROJECT_DIR$/modules/webservice/target</output-path>
-      <root id="archive" name="ecm-service-0.0.14-SNAPSHOT.war">
+      <root id="archive" name="ecm-service-0.0.15.war">
         <element id="artifact" artifact-name="ecm-service:war exploded" />
       </root>
     </artifact>
     <artifact type="exploded-war" name="ecm-service:war exploded">
-      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-service-0.0.14-SNAPSHOT</output-path>
+      <output-path>$PROJECT_DIR$/modules/webservice/target/ecm-service-0.0.15</output-path>
       <root id="root">
         <element id="javaee-facet-resources" facet="ecm-service/web/Web" />
         <element id="directory" name="WEB-INF">
@@ -30,17 +30,17 @@
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.3" />
             <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.3" />
             <element id="library" level="project" name="Maven: asm:asm:3.1" />
-            <element id="archive" name="ecm-view-0.0.14-SNAPSHOT.jar">
+            <element id="archive" name="ecm-view-0.0.15.jar">
               <element id="module-output" name="ecm-view" />
             </element>
-            <element id="archive" name="ecm-repository-0.0.14-SNAPSHOT.jar">
+            <element id="archive" name="ecm-repository-0.0.15.jar">
               <element id="module-output" name="ecm-repository" />
             </element>
             <element id="library" level="project" name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.7" />
-            <element id="archive" name="ecm-templates-0.0.14-SNAPSHOT.jar">
+            <element id="archive" name="ecm-templates-0.0.15.jar">
               <element id="module-output" name="ecm-templates" />
             </element>
-            <element id="archive" name="ecm-fedoraclient-0.0.14-SNAPSHOT.jar">
+            <element id="archive" name="ecm-fedoraclient-0.0.15.jar">
               <element id="module-output" name="ecm-fedoraclient" />
             </element>
             <element id="library" level="project" name="Maven: org.fcrepo:fcrepo-client-admin:3.4.2" />
@@ -1149,6 +1149,32 @@
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/modules/repository/pom-sources.jar!/" />
         <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14#SNAPSHOT/ecm-repository-0.0.14#SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: dk.statsbiblioteket.doms.ecm:ecm-repository:0.0.14-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14-SNAPSHOT/ecm-repository-0.0.14-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/modules/repository/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14-SNAPSHOT/ecm-repository-0.0.14-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/modules/repository/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-repository/0.0.14-SNAPSHOT/ecm-repository-0.0.14-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: dk.statsbiblioteket.doms.ecm:ecm-templates:0.0.14-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-templates/0.0.14-SNAPSHOT/ecm-templates-0.0.14-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/modules/services/templates/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-templates/0.0.14-SNAPSHOT/ecm-templates-0.0.14-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/modules/services/templates/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/dk/statsbiblioteket/doms/ecm/ecm-templates/0.0.14-SNAPSHOT/ecm-templates-0.0.14-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: dk.statsbiblioteket.doms.pidgenerator:pidgenerator-interface:0.0.7">
