@@ -25,7 +25,7 @@
   ~ under the License.
   -->
 
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>dk.statsbiblioteket.doms</groupId>
@@ -35,7 +35,7 @@
 
     <groupId>dk.statsbiblioteket.doms.ecm</groupId>
     <artifactId>ecm</artifactId>
-    <version>0.0.14-SNAPSHOT</version>
+    <version>0.0.15</version>
     <name>ECM project</name>
 
     <packaging>pom</packaging>
@@ -141,4 +141,10 @@
         </dependencies>
     </dependencyManagement>
 
+
+  <scm>
+    <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/release-0.0.15</connection>
+    <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/release-0.0.15</developerConnection>
+    <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/tags/release-0.0.15</url>
+  </scm>
 </project>
