@@ -56,12 +56,6 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <fcrepo.version>3.4.2</fcrepo.version>
-        <sbutil.version>0.5.2</sbutil.version>
-        <domsutil.version>0.0.17</domsutil.version>
-        <pidgenerator.version>0.0.6#SNAPSHOT</pidgenerator.version>
-        <ecm.version>0.0.14#SNAPSHOT</ecm.version>
-        <updatetracker.version>0.0.11#SNAPSHOT</updatetracker.version>
     </properties>
 
     <distributionManagement>
