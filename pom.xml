@@ -31,7 +31,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.statsbiblioteket.doms</groupId>
     <artifactId>doms</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
     <name>DOMS Project</name>
     <packaging>pom</packaging>
 
@@ -49,9 +49,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.0</connection>
-        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.0</developerConnection>
-        <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/tags/doms-0.1.0</url>
+        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.2</connection>
+        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.2</developerConnection>
+        <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/tags/doms-0.1.2</url>
     </scm>
 
     <properties>
@@ -79,6 +79,32 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+		<version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+		<version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
