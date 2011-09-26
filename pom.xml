@@ -31,7 +31,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.statsbiblioteket.doms</groupId>
     <artifactId>doms</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4-SNAPSHOT</version>
     <name>DOMS Project</name>
     <packaging>pom</packaging>
 
@@ -49,9 +49,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.3</connection>
-        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/tags/doms-0.1.3</developerConnection>
-        <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/tags/doms-0.1.3</url>
+        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</connection>
+        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</developerConnection>
+        <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/trunk</url>
     </scm>
 
     <properties>
