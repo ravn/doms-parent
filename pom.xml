@@ -49,9 +49,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</connection>
-        <developerConnection>scm:svn:https://doms.svn.sourceforge.net/svnroot/doms/doms/trunk</developerConnection>
-        <url>http://doms.svn.sourceforge.net/viewvc/doms/doms/trunk</url>
+        <connection>scm:git:git://github.com/statsbiblioteket/doms-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:statsbiblioteket/doms-parent.git</developerConnection>
+        <url>https://github.com/statsbiblioteket/doms-parent</url>
     </scm>
 
     <properties>
