@@ -77,6 +77,19 @@
         -->
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>sbforge-nexus</id>
+            <url>https://sbforge.org/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
