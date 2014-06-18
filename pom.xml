@@ -31,7 +31,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.statsbiblioteket.doms</groupId>
     <artifactId>doms</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <name>DOMS Project</name>
     <packaging>pom</packaging>
 
@@ -52,7 +52,8 @@
         <connection>scm:git:git://github.com/statsbiblioteket/doms-parent.git</connection>
         <developerConnection>scm:git:git@github.com:statsbiblioteket/doms-parent.git</developerConnection>
         <url>https://github.com/statsbiblioteket/doms-parent</url>
-    </scm>
+      <tag>doms-1.1</tag>
+  </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
