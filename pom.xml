@@ -315,7 +315,7 @@
         <dependency>
             <groupId>dk.statsbiblioteket.sbutil</groupId>
             <artifactId>sbutil-common</artifactId>
-            <version>0.5.13</version>
+            <version>0.5.29</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
