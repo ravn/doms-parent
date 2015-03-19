@@ -62,12 +62,12 @@
     <distributionManagement>
         <repository>
             <id>sbforge-nexus</id>
-            <name>SBForgeb Nexus Repo manager</name>
+            <name>SBForge Nexus Repo manager</name>
             <url>https://sbforge.org/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>sbforge-nexus</id>
-            <name>SBForgeb Nexus Repo manager</name>
+            <name>SBForge Nexus Repo manager</name>
             <url>https://sbforge.org/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
         <!--  Site deployment not implemented yet
