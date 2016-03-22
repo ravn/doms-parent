@@ -29,7 +29,7 @@
 
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>dk.statsbiblioteket.doms</groupId>
+    <groupId>dk.statsbiblioteket.doms.repo.https_3A_2F_2Fgithub_2Ecom_2Fravn_2Fdoms_2Dparent_2Egit</groupId>
     <artifactId>doms</artifactId>
     <version>1.0</version>
     <name>DOMS Project</name>
@@ -58,6 +58,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+<!--
     <distributionManagement>
         <repository>
             <id>sbforge-nexus</id>
@@ -69,12 +70,12 @@
             <name>SBForgeb Nexus Repo manager</name>
             <url>https://sbforge.org/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
-        <!--  Site deployment not implemented yet
+        <!- -  Site deployment not implemented yet
         <site>
             <id>sbforge-nexus</id>
             <url>dav:http://sbforge.org/content/sites/site/</url>
         </site>
-        -->
+        - ->
     </distributionManagement>
 
     <repositories>
@@ -89,6 +90,7 @@
             </snapshots>
         </repository>
     </repositories>
+-->
 
     <build>
         <plugins>
@@ -308,7 +310,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>dk.statsbiblioteket.sbutil</groupId>
+	    <groupId>dk.statsbiblioteket.sbutil.repo.https_3A_2F_2Fgithub_2Ecom_2Fravn_2Fsbutil_2Egit</groupId>
             <artifactId>sbutil-common</artifactId>
             <version>0.5.13</version>
         </dependency>
